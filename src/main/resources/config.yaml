@@ -3,7 +3,8 @@ https:
   port: "8081"
   
 blackboard:
-  baseUri: "https://canvas.instructure.com/api/v1"
+  baseUri: "https://blackboard.poc.nexturn.com/learn/api/public"
+  tokenUri: "https://blackboard.poc.nexturn.com/learn/api/public/v1"
 
 sf:
   username: "aurosmit.sahoo@nexturn.comauro.edu"
