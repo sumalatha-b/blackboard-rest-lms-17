@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:blackboard="http://www.mulesoft.org/schema/mule/blackboard" xmlns:moodle="http://www.mulesoft.org/schema/mule/moodle"
+	xmlns:moodle-access-token="http://www.mulesoft.org/schema/mule/moodle-access-token"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/moodle-access-token http://www.mulesoft.org/schema/mule/moodle-access-token/current/mule-moodle-access-token.xsd
+http://www.mulesoft.org/schema/mule/moodle http://www.mulesoft.org/schema/mule/moodle/current/mule-moodle.xsd
+http://www.mulesoft.org/schema/mule/blackboard http://www.mulesoft.org/schema/mule/blackboard/current/mule-blackboard.xsd">
+
+	<sub-flow name="accesstoken_Flow" doc:id="882a51ef-aefd-47b1-8a55-f51e0274c4e2" >
+		<logger level="INFO" doc:name="Token Flow Started  Logger" doc:id="211b5ca3-4b74-4731-953e-82730a9b0ff0" message="Token Flow Started "/>
+		<blackboard:post-oauth2-token doc:name="Token - AccessToken" doc:id="c0599652-6408-4426-b497-d57a168494c9" correlationIdHeader="#[correlationId]" config-ref="Token_Blackboard_Config" target="blackboardToken">
+			<blackboard:post-oauth2-token-body ><![CDATA[#[%dw 2.0
+output application/x-www-form-urlencoded
+---
+{
+	grant_type: "client_credentials"
+}]]]></blackboard:post-oauth2-token-body>
+		</blackboard:post-oauth2-token>
+		<logger level="INFO" doc:name="Token Flow Ended Logger" doc:id="ae62b100-c0ac-4e82-a11e-3d413547a292" message="Token Flow Ended  "/>
+	</sub-flow>
+</mule>

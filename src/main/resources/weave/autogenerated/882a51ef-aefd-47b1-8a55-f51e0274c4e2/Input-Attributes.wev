@@ -1,0 +1,33 @@
+%dw 2.0
+
+type auto_882a51ef_aefd_47b1_8a55_f51e0274c4e2_Input_Attributes = {|
+  clientCertificate?: {|
+    publicKey?: {|  |}, 
+    "type"?: String, 
+    encoded?: Binary
+  |}, 
+  headers: {| correlationId?: String |}, 
+  listenerPath: String, 
+  method: String, 
+  queryParams: {|
+    courseId?: String, 
+    "type"?: String, 
+    since?: String, 
+    until?: String, 
+    offset?: Number, 
+    includePermissions?: Boolean, 
+    limit?: Number, 
+    sort?: String, 
+    fields?: String
+  |}, 
+  queryString: String, 
+  relativePath: String, 
+  remoteAddress: String, 
+  requestPath: String, 
+  requestUri: String, 
+  scheme: String, 
+  uriParams: {|  |}, 
+  version: String, 
+  localAddress: String
+|}
+

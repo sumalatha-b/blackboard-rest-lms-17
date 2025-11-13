@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:moodle="http://www.mulesoft.org/schema/mule/moodle"
+<mule xmlns:blackboard="http://www.mulesoft.org/schema/mule/blackboard"
+	xmlns:moodle="http://www.mulesoft.org/schema/mule/moodle"
 	xmlns:moodle-access-token="http://www.mulesoft.org/schema/mule/moodle-access-token"
-	xmlns:canvas="http://www.mulesoft.org/schema/mule/canvas"
-	xmlns:canvas-rest-lms="http://www.mulesoft.org/schema/mule/canvas-rest-lms" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
-	xmlns:tls="http://www.mulesoft.org/schema/mule/tls"
-	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+	xmlns:canvas="http://www.mulesoft.org/schema/mule/canvas" xmlns:canvas-rest-lms="http://www.mulesoft.org/schema/mule/canvas-rest-lms"
+	xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
+	xmlns:tls="http://www.mulesoft.org/schema/mule/tls" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
 http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd 
 http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd 
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
@@ -13,7 +13,8 @@ http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mu
 http://www.mulesoft.org/schema/mule/canvas-rest-lms http://www.mulesoft.org/schema/mule/canvas-rest-lms/current/mule-canvas-rest-lms.xsd
 http://www.mulesoft.org/schema/mule/canvas http://www.mulesoft.org/schema/mule/canvas/current/mule-canvas.xsd
 http://www.mulesoft.org/schema/mule/moodle-access-token http://www.mulesoft.org/schema/mule/moodle-access-token/current/mule-moodle-access-token.xsd
-http://www.mulesoft.org/schema/mule/moodle http://www.mulesoft.org/schema/mule/moodle/current/mule-moodle.xsd">
+http://www.mulesoft.org/schema/mule/moodle http://www.mulesoft.org/schema/mule/moodle/current/mule-moodle.xsd
+http://www.mulesoft.org/schema/mule/blackboard http://www.mulesoft.org/schema/mule/blackboard/current/mule-blackboard.xsd">
 <salesforce:sfdc-config name="Salesforce_Config" doc:name="Salesforce Config" doc:id="57ac21b4-aed7-497b-b683-b4a8f0681b10" >
 		<salesforce:basic-connection username="${sf.username}" password="${sf.password}" securityToken="${sf.securityToken}"/>
 	</salesforce:sfdc-config>
@@ -22,9 +23,15 @@ http://www.mulesoft.org/schema/mule/moodle http://www.mulesoft.org/schema/mule/m
 <http:listener-config name="blackboard-rest-api-httpListenerConfig">
         <http:listener-connection host="${https.host}" port="${https.port}" protocol="HTTPS">
 			<tls:context >
-				<tls:key-store type="jks" path="Client-Keystore.jks" keyPassword="Mule1234" password="Mule1234" />
+				<tls:key-store type="jks" path="Client-Keystore.jks" keyPassword="Mule12345" password="Mule12345" />
 			</tls:context>
 		</http:listener-connection>
     </http:listener-config>
     <apikit:config name="blackboard-rest-api-config" api="blackboard-rest-api.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+	<blackboard:config name="Token_Blackboard_Config" doc:name="Blackboard Config" doc:id="31e6d35a-767a-4453-bed9-fa8d597745ca" >
+		<blackboard:authorization-connection baseUri="https://blackboard.poc.nexturn.com/learn/api/public/v1" authorizationHeader='Basic MThhZjI0MjUtYjRmMi00N2NhLWE3NzMtZTMyYTYwNGU1Zjk2OllZUjhObWh0SGlIRVgzNzVjT1lrMFBxc1FvN3ZQRDZi' />
+	</blackboard:config>
+	<blackboard:config name="Blackboard_Config" doc:name="Blackboard Config" doc:id="8bcec14d-6fe5-403d-9a84-dd95cdc615c0" >
+		<blackboard:authorization-connection authorizationHeader='#["Bearer " ++ vars.blackboardToken.access_token]' />
+	</blackboard:config>
 </mule>

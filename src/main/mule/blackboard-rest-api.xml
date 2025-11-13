@@ -626,7 +626,8 @@ output application/json
         </ee:transform>
     </flow>
     <flow name="get:\v1\calendars\items:blackboard-rest-api-config">
-        <ee:transform doc:name="Transform Message">
+        <flow-ref doc:name="Flow Reference" doc:id="ec742344-1ebe-4aa1-87e9-71ccb7ac86ee" name="accesstoken_Flow"/>
+		<ee:transform doc:name="Transform Message">
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
