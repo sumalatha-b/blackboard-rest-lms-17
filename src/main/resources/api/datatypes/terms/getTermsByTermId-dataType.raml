@@ -1,0 +1,45 @@
+#%RAML 1.0 DataType
+type: object
+properties:
+  id:
+    type: string
+    required: true
+    example: "string"
+  externalId:
+    type: string
+    required: true
+    example: "string"
+  dataSourceId:
+    type: string
+    required: true
+    example: "string"
+  name:
+    type: string
+    required: true
+    example: "string"
+  description:
+    type: string
+    required: true
+    example: "<!-- {\"bbMLEditorVersion\":1} --><div data-bbid=\"...\"> ... </div>"
+  availability:
+    type: object
+    required: true
+    properties:
+      available:
+        type: string
+        example: "Yes"
+      duration:
+        type: object
+        properties:
+          type:
+            type: string
+            example: "Continuous"
+          start:
+            type: datetime
+            example: 2025-09-16T05:49:40.252Z
+          end:
+            type: datetime
+            example: 2025-09-16T05:49:40.252Z
+          daysOfUse:
+            type: integer
+            example: 0

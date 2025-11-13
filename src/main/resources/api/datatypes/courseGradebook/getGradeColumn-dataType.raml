@@ -1,0 +1,58 @@
+#%RAML 1.0 DataType
+type: object
+properties:
+  id: string
+  externalId?: string
+  externalToolId?: string
+  name?: string
+  displayName?: string
+  description?: string
+  externalGrade?: boolean
+  created?: datetime
+  modified?: datetime
+  contentId?: string
+  score?: 
+    type: object
+    properties:
+      possible?: integer
+  availability?:
+    type: object
+    properties:
+      available?: string
+  grading?:
+    type: object
+    properties:
+      type?: string
+      due?: datetime
+      attemptsAllowed?: integer
+      scoringModel?: string
+      schemaId?: string
+      anonymousGrading?:
+        type: object
+        properties:
+          type?: string
+          releaseAfter?: datetime
+      rubricAssociations?:
+        type: object
+        properties:
+          empty?: boolean
+  gradebookCategoryId?: string
+  formula?:
+    type: object
+    properties:
+      formula?: string
+      aliases?:
+        type: object
+        properties:
+          empty?: boolean
+  includeInCalculations?: boolean
+  showStatisticsToStudents?: boolean
+  scoreProviderHandle?: string
+  learningOutcome?:
+    type: object
+    properties:
+      signature?: boolean
+      columnScale?:
+        type: object
+        properties:
+          empty?: boolean

@@ -1,0 +1,11 @@
+{
+  "results": [
+    {
+      "id": "string",
+      "title": "string"
+    }
+  ],
+  "paging": {
+    "nextPage": "string"
+  }
+}

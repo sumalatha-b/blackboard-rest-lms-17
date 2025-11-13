@@ -1,0 +1,31 @@
+{
+  "results": [
+    {
+      "id": "12345",
+      "courseId": "CS101",
+      "name": "Introduction to Computer Science",
+      "description": "Basic CS fundamentals",
+      "organization": false,
+      "readOnly": false,
+      "termId": "2025TERM01",
+      "availability": {
+        "available": "Yes",
+        "duration": {
+          "type": "Continuous",
+          "start": "2025-01-01T00:00:00Z",
+          "end": "2025-12-31T23:59:59Z",
+          "daysOfUse": 365
+        }
+      },
+      "uuid": "uuid-1234",
+      "externalId": "ext-CS101",
+      "dataSourceId": "ds-001",
+      "created": "2025-01-01T00:00:00Z",
+      "modified": "2025-09-12T05:38:57.665Z",
+      "allowGuests": true
+    }
+  ],
+  "paging": {
+    "nextPage": "/learn/api/public/v3/courses?offset=10&limit=10"
+  }
+}

@@ -1,0 +1,11 @@
+https:
+  host: "localhost"
+  port: "8081"
+  
+blackboard:
+  baseUri: "https://canvas.instructure.com/api/v1"
+
+sf:
+  username: "aurosmit.sahoo@nexturn.comauro.edu"
+  password: "Aurosmit@2001"
+  securityToken: "mlXoqVnVqAN6ciAVNNYyGG9Xz"

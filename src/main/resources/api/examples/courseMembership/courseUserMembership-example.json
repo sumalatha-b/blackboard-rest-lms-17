@@ -1,0 +1,24 @@
+{
+  "id": "string",
+  "userId": "userName:jsmith",
+  "user": {
+    "id": "string",
+    "uuid": "915c7567d76d444abf1eed56aad3beb5",
+    "externalId": "externalId:jsmith",
+    "dataSourceId": "externalId:math101",
+    "userName": "jsmith",
+    "studentId": "123456",
+    "educationLevel": "K8",
+    "gender": "Female",
+    "pronouns": "she/her",
+    "birthDate": "2025-09-16T04:40:18.681Z",
+    "created": "2025-09-16T04:40:18.681Z",
+    "modified": "2025-09-16T04:40:18.681Z",
+    "lastLogin": "2025-09-16T04:40:18.681Z",
+    "institutionRoleIds": {},
+    "systemRoleIds": {},
+    "availability": {
+      "available": "Yes"
+    }
+  }
+}

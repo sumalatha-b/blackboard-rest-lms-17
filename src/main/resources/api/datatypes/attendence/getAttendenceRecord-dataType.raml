@@ -1,0 +1,12 @@
+#%RAML 1.0 DataType
+type: object
+properties:
+  id: integer
+  meetingId: string
+  userId: string
+  status:
+    type: string
+    enum: [Absent, Present, Late]   # you can add/remove values as needed
+  modifiedByUserId: string
+  createdTime: datetime
+  modifiedTime: datetime

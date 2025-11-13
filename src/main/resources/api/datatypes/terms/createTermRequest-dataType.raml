@@ -1,0 +1,18 @@
+#%RAML 1.0 DataType
+type: object
+properties:
+  externalId: string
+  dataSourceId?: string
+  name: string
+  description?: string
+  availability?:
+    type: object
+    properties:
+      available?: string
+      duration?:
+        type: object
+        properties:
+          type?: string
+          start?: datetime
+          end?: datetime
+          daysOfUse?: integer

@@ -1,0 +1,70 @@
+{
+  "results": [
+    {
+      "id": "string",
+      "externalId": "string",
+      "externalToolId": "string",
+      "name": "string",
+      "displayName": "string",
+      "description": "string",
+      "externalGrade": true,
+      "created": "2025-09-15T10:03:25.942Z",
+      "modified": "2025-09-15T10:03:25.942Z",
+      "contentId": "string",
+      "score": {
+        "possible": 0
+      },
+      "availability": {
+        "available": "Yes"
+      },
+      "grading": {
+        "type": "Attempts",
+        "due": "2025-09-15T10:03:25.942Z",
+        "attemptsAllowed": 0,
+        "scoringModel": "Last",
+        "schemaId": "string",
+        "anonymousGrading": {
+          "type": "None",
+          "releaseAfter": "2025-09-15T10:03:25.942Z"
+        },
+        "rubricAssociations": [
+          {
+            "id": "string",
+            "rubricId": "string",
+            "associationEntity": {
+              "gradebookColumnId": "string",
+              "questionId": "string"
+            },
+            "usedForGrading": true,
+            "rubricVisibility": "Disabled",
+            "links": [
+              {
+                "href": "string",
+                "rel": "string",
+                "title": "string",
+                "type": "string"
+              }
+            ]
+          }
+        ]
+      },
+      "gradebookCategoryId": "string",
+      "formula": {
+        "formula": "string",
+        "aliases": {
+          "key1": "value1",
+          "key2": "value2"
+        }
+      },
+      "includeInCalculations": true,
+      "showStatisticsToStudents": true,
+      "scoreProviderHandle": "string",
+      "learningOutcome": {
+        "signature": true
+      }
+    }
+  ],
+  "paging": {
+    "nextPage": "string"
+  }
+}

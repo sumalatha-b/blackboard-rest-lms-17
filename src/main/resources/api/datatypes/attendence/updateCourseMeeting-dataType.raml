@@ -1,0 +1,22 @@
+#%RAML 1.0 DataType
+type: object
+properties:
+  courseId: 
+    type: string
+    required: true
+  title: 
+    type: string
+    required: true
+  description?: 
+    type: string
+  start: 
+    type: datetime
+    required: true
+    example: 2025-09-17T06:59:14.277Z
+  end: 
+    type: datetime
+    required: true
+    example: 2025-09-17T06:59:14.277Z
+  externalLink?: 
+    type: string
+    example: "https://example.com/meeting-link"

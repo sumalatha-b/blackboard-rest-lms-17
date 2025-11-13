@@ -1,0 +1,12 @@
+{
+  "parentId": "string",
+  "categoryId": "string",
+  "title": "string",
+  "description": "string",
+  "frontPage": true,
+  "available": true,
+  "restricted": true,
+  "institutionRoleIds": [
+    "string"
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "id": "string",
+  "userId": "string",
+  "user": {
+    "id": "string",
+    "uuid": "string",
+    "externalId": "string",
+    "dataSourceId": "string",
+    "userName": "string",
+    "studentId": "string",
+    "educationLevel": "K8",
+    "gender": "Female",
+    "pronouns": "string",
+    "birthDate": "2025-09-17T09:44:59.763Z",
+    "created": "2025-09-17T09:44:59.763Z",
+    "modified": "2025-09-17T09:44:59.763Z",
+    "lastLogin": "2025-09-17T09:44:59.763Z",
+    "institutionRoleIds": {
+      "empty": true
+    },
+    "systemRoleIds": {
+      "empty": true
+    },
+    "availability": {
+      "available": "Yes"
+    },
+    "name": {
+      "given": "string",
+      "family": "string",
+      "middle": "string",
+      "other": "string",
+      "suffix": "string",
+      "title": "string",
+      "preferredDisplayName": "GivenName"
+    },
+    "job": {
+      "title": "string",
+      "department": "string",
+      "company": "string"
+    },
+    "contact": {
+      "homePhone": "string",
+      "mobilePhone": "string",
+      "businessPhone": "string",
+      "businessFax": "string",
+      "email": "string",
+      "institutionEmail": "string",
+      "webPage": "string"
+    },
+    "address": {
+      "street1": "string",
+      "street2": "string",
+      "city": "string",
+      "state": "string",
+      "zipCode": "string",
+      "country": "string"
+    },
+    "locale": {
+      "id": "string",
+      "calendar": "Gregorian",
+      "firstDayOfWeek": "0"
+    },
+    "avatar": {
+      "viewUrl": "string",
+      "source": "Default",
+      "uploadId": "string",
+      "resourceId": "string"
+    },
+    "pronunciation": "string",
+    "nodes": {
+      "empty": true
+    },
+    "pronunciationAudio": {
+      "viewUrl": "string",
+      "uploadId": "string"
+    }
+  },
+  "courseId": "string",
+  "childCourseId": "string",
+  "dataSourceId": "string",
+  "created": "2025-09-17T09:44:59.763Z",
+  "modified": "2025-09-17T09:44:59.763Z",
+  "availability": {
+    "available": "Yes"
+  },
+  "courseRoleId": "Instructor",
+  "bypassCourseAvailabilityUntil": "2025-09-17T09:44:59.763Z",
+  "lastAccessed": "2025-09-17T09:44:59.763Z",
+  "displayOrder": 0
+}

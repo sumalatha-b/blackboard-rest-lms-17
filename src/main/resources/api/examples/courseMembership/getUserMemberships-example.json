@@ -1,0 +1,30 @@
+{
+  "results": [
+    {
+      "id": "enroll_001",
+      "userId": "_123_1",
+      "courseId": "courseId:math101",
+      "courseRoleId": "student",
+      "created": "2025-09-01T10:00:00Z",
+      "modified": "2025-09-05T15:30:00Z",
+      "lastAccessed": "2025-09-10T08:45:00Z",
+      "availability": {
+        "available": "Yes"
+      }
+    },
+    {
+      "id": "enroll_002",
+      "userId": "_123_1",
+      "courseId": "courseId:eng202",
+      "courseRoleId": "teacher",
+      "created": "2025-08-15T09:00:00Z",
+      "modified": "2025-09-01T12:00:00Z",
+      "availability": {
+        "available": "No"
+      }
+    }
+  ],
+  "paging": {
+    "nextPage": "string"
+  }
+}

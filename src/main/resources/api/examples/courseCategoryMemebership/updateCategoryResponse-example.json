@@ -1,0 +1,16 @@
+{
+  "id": "cat123",
+  "dataSourceId": "ds_001",
+  "parentId": "root_01",
+  "categoryId": "mathCategory",
+  "title": "Mathematics Category",
+  "description": "Category for all Math related courses",
+  "type": "Course",
+  "frontPage": true,
+  "available": true,
+  "restricted": false,
+  "institutionRoleIds": {
+    "empty": true
+  },
+  "created": "2025-09-17T09:05:58.379Z"
+}

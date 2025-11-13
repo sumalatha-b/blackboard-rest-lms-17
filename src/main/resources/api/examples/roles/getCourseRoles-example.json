@@ -1,0 +1,19 @@
+{
+  "results": [
+    {
+      "id": "string",
+      "roleId": "string",
+      "nameForCourses": "string",
+      "nameForOrganizations": "string",
+      "description": "string",
+      "custom": true,
+      "actAsInstructor": true,
+      "availability": {
+        "available": "Course"
+      }
+    }
+  ],
+  "paging": {
+    "nextPage": "string"
+  }
+}

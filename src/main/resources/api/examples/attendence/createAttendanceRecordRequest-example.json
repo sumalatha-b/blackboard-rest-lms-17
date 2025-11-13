@@ -1,0 +1,5 @@
+{
+  "meetingId": "string",
+  "userId": "string",
+  "status": "Absent"
+}

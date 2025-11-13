@@ -1,0 +1,29 @@
+{
+  "externalId": "string",
+  "dataSourceId": "string",
+  "name": "string",
+  "description": "string",
+  "allowGuests": true,
+  "allowObservers": true,
+  "closedComplete": true,
+  "termId": "string",
+  "availability": {
+    "available": "Yes",
+    "duration": {
+      "type": "Continuous",
+      "start": "2025-09-17T06:43:07.121Z",
+      "end": "2025-09-17T06:43:07.121Z",
+      "daysOfUse": 0
+    }
+  },
+  "enrollment": {
+    "type": "InstructorLed",
+    "start": "2025-09-17T06:43:07.121Z",
+    "end": "2025-09-17T06:43:07.121Z",
+    "accessCode": "string"
+  },
+  "locale": {
+    "id": "string",
+    "force": true
+  }
+}

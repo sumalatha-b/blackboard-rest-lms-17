@@ -1,0 +1,25 @@
+{
+  "results": [
+    {
+      "id": "12345",
+      "userId": "67890",
+      "courseRoleId": "student",
+      "created": "2025-09-01T10:00:00Z",
+      "modified": "2025-09-10T12:00:00Z",
+      "availability": {
+        "available": "Yes"
+      },
+      "dataSourceId": "externalId:math101",
+      "lastAccessed": "2025-09-05T15:00:00Z",
+      "user": {
+        "id": "67890",
+        "userName": "jdoe",
+        "studentId": "S123456",
+        "externalId": "ext-67890"
+      }
+    }
+  ],
+  "paging": {
+    "nextPage": "string"
+  }
+}

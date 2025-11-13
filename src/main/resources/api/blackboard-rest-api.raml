@@ -1,0 +1,1453 @@
+#%RAML 1.0
+title: Blackboard
+baseUri: https://blackboard.poc.nexturn.com/learn/api/public
+protocols: HTTPS
+description: The Blackboard  API provides access to core learning management features such as courses, users, enrollments, grades, and content.It enables seamless integration with external applications to manage educationalexperiences, automate course operations, and enhance learning workflows.
+mediaType:
+  - application/json
+  - application/x-www-form-urlencoded
+
+securitySchemes:
+  Authorization:
+    description: Use a blackboard access token
+    type: Pass Through
+    describedBy:
+      headers:
+        Authorization:
+          description: "Bearer token"
+          type: string
+          required: true
+      responses:
+        401:
+          description: Unauthorized
+securedBy:
+  - Authorization
+
+traits:
+  errorResponse: !include /traits/errorResponse-trait.raml
+  commonHeaders: !include /traits/commonHeaders-trait.raml
+
+types:
+  commonResponse: !include /datatypes/common/commonResponse-dataType.raml
+  getAttendance: !include /datatypes/attendence/getAttendence-dataType.raml
+  getAttendenceRecord: !include /datatypes/attendence/getAttendenceRecord-dataType.raml
+  getCourseRoles: !include /datatypes/roles/getCourseRoles-dataType.raml
+  getCourseRole: !include /datatypes/roles/getCourseRole-dataType.raml
+  getInstitutionRoles: !include /datatypes/roles/getInstitutionRoles-dataType.raml
+  getInstitutionRole: !include /datatypes/roles/getInstitutionRole-dataType.raml
+  getTerms: !include /datatypes/terms/getTerms-dataType.raml
+  getTermByTermId: !include /datatypes/terms/getTermsByTermId-dataType.raml
+  getUsers: !include /datatypes/users/getUsers-dataType.raml
+  getUserByUserId: !include /datatypes/users/getUserByUserId-dataType.raml
+  upcomingEvents: !include /datatypes/calendars/upcomingEvents-dataType.raml
+  getCourses: !include /datatypes/courses/getCourses-dataType.raml
+  getCourseChildern: !include /datatypes/courses/getCourseChildren-dataType.raml
+  getCourseChild: !include /datatypes/courses/getCourseChild-dataType.raml
+  getCourse: !include /datatypes/courses/getCourse-dataType.raml
+  getCategory: !include /datatypes/courseCategory/getCategory-dataType.raml
+  getCategories: !include /datatypes/courseCategory/getCategories-dataType.raml
+  getCategoryMemberships: !include /datatypes/courseCategory/getCategoryMemberships-dataType.raml
+  getChildCategories: !include /datatypes/courseCategory/getChildCategories-dataType.raml
+  getGradeColumn: !include /datatypes/courseGradebook/getGradeColumn-dataType.raml
+  getGradeColumns: !include /datatypes/courseGradebook/getGradeColumns-dataType.raml 
+  getGradebookCategories: !include /datatypes/courseGradebook/getGradebookCategories-dataType.raml
+  getColumnGrade: !include /datatypes/courseGradebook/getColumnGrade-dataType.raml
+  getColumnGrades: !include /datatypes/courseGradebook/getColumnGrades-dataType.raml
+  getUserGrades: !include /datatypes/courseGradebook/getUserGrades-dataType.raml
+  createCourseMeetingRequest: !include /datatypes/attendence/createCourseMeetingRequest-dataType.raml
+  createCourseMeetingResponse: !include /datatypes/attendence/createCourseMeetingResponse-dataType.raml
+  createAttendanceRecordRequest: !include /datatypes/attendence/createAttendanceRecordRequest-dataType.raml
+  createAttendanceRecordResponse: !include /datatypes/attendence/createAttendanceRecordResponse-dataType.raml
+  createCategoryRequest: !include /datatypes/courseCategory/createCategoryRequest-dataType.raml
+  createCategoryResponse: !include /datatypes/courseCategory/createCategoryResponse-dataType.raml
+  createCourseRequest: !include /datatypes/courses/createCoursesRequest-dataType.raml
+  createCourseResponse: !include /datatypes/courses/createCoursesResponse-dataType.raml
+  createTermRequest: !include /datatypes/terms/createTermRequest-dataType.raml
+  createTermResponse: !include /datatypes/terms/createTermResponse-dataType.raml
+  createUserRequest: !include /datatypes/users/createUserRequest-dataType.raml
+  createUserResponse: !include /datatypes/users/createUserResponse-dataType.raml
+  updateCourseRequest: !include /datatypes/courses/updateCoursesRequest-dataType.raml
+  updateCourseResponse: !include /datatypes/courses/updateCoursesResponse-dataType.raml
+  updateTermRequest: !include /datatypes/terms/updateTermRequest-dataType.raml 
+  updateTermResponse: !include /datatypes/terms/updateTermResponse-dataType.raml
+  updateUserRequest: !include /datatypes/users/updateUserRequest-dataType.raml
+  updateUserResponse: !include /datatypes/users/updateUserResponse-dataType.raml
+  getCourseUsers: !include /datatypes/courseMembership/getUsers-dataType.raml
+  CourseUserMembership: !include /datatypes/courseMembership/courseUserMembership-dataType.raml
+  getUserMemberships: !include /datatypes/courseMembership/getUserMemberships-dataType.raml
+  CourseUserId: !include /datatypes/courseCategoryMemebership/courseUserMembership-dataType.raml
+  CourseMeetingUpdate: !include /datatypes/attendence/updateCourseMeeting-dataType.raml
+  CourseMeeting: !include /datatypes/attendence/updateCourseMeeting-dataType.raml
+  UpdateMeetingRecord: !include /datatypes/attendence/updateMeetingRecord-dataType.raml
+  updateCategoryRequest: !include /datatypes/courseCategoryMemebership/updateCategoryRequest-dataType.raml
+  updateCategoryResponse: !include /datatypes/courseCategoryMemebership/updateCategoryResponse-dataType.raml
+  updateCourseUserMembership: !include /datatypes/courseMembership/updateCourseUserMembershipRequest-dataType.raml
+  updateCourseUserMembershipResponse: !include /datatypes/courseMembership/updateCourseUserMembershipResponse-dataType.raml
+  createCategoryMembership: !include /datatypes/courseCategoryMemebership/createCategoryMembership-dataType.raml
+  courseMeetingResponse: !include /datatypes/attendence/courseMeetingResponse-dataType.raml
+  TokenRequest:
+    type: object
+    properties:
+      grant_type:
+        type: string
+        required: true
+        example: client_credentials
+  TokenResponse:
+    type: object
+    properties:
+      access_token: string
+      token_type: string
+      expires_in: integer
+      scope: string
+    example:
+      access_token: "abc123tokenexample"
+      token_type: "bearer"
+      expires_in: 3600
+      scope: "read write delete"
+        
+/v1/courses/{courseId}/meetings/users/{userId}:
+  uriParameters:
+    courseId:
+      type: string
+      required: true
+      example: "81259"
+    userId:
+      type: string
+      required: true
+      example: "81259"
+  get:
+    is: [commonHeaders,errorResponse]
+    displayName: Attendance - Get Attendance by User Id
+    description: Get Attendance by User Id
+    queryParameters:
+      offset?: integer
+      includePermissions?: boolean
+      limit?: integer
+      sort?: string
+      fields?: string
+    responses:
+      200:
+        body:
+          application/json:
+            type: getAttendance
+            example: !include /examples/attendence/getAttendence-example.json
+  delete:
+    is: [commonHeaders,errorResponse]
+    displayName: Attendance - Delete All Attendance Records by Course and User Id
+    description: Attendance - Delete All Attendance Records by Course and User Id
+    responses:
+      200:
+        body:
+          application/json:
+            type: commonResponse
+            example: !include /examples/common/commonResponse-example.json
+
+/v1/courses/{courseId}/meetings:
+  uriParameters:
+    courseId:
+      type: string
+      required: true
+      example: "81259"
+  get:
+    is: [commonHeaders,errorResponse]
+    displayName: Attendance - Get Course Meeting
+    description: Get Course Meeting
+    queryParameters:
+      offset?: integer
+      includePermissions?: boolean
+      limit?: integer
+      sort?: string
+      fields?: string
+    responses:
+      200:
+        body:
+          application/json:
+            type: getAttendance
+            example: !include /examples/attendence/getAttendence-example.json
+  delete:
+    is: [commonHeaders,errorResponse]
+    displayName: Attendance - Delete Course Meeting
+    description: Delete Course Meeting
+    responses:
+      200:
+        body:
+          application/json:
+            type: commonResponse
+            example: !include /examples/common/commonResponse-example.json
+  post:
+    is: [commonHeaders,errorResponse]
+    displayName: Attendance - Create Course Meeting
+    description: Creates a new Course Meeting within the provided Course/Organization Id.
+    body:
+      application/json:
+        type: createCourseMeetingRequest
+        example: !include /examples/attendence/createCourseMeetingRequest-example.json
+    queryParameters:
+      fields?:
+        type: string
+        description: Comma-delimited list of fields to include in the response.
+        example: "id,courseId,title"
+    responses:
+      201:
+        body:
+          application/json:
+            type: createCourseMeetingResponse
+            example: !include /examples/attendence/createCourseMeetingResponse-example.json
+
+/v1/courses/{courseId}/meetings/{meetingId}/users/{userId}:
+  uriParameters:
+    courseId:
+      type: string
+      required: true
+      example: "81259"
+    meetingId:
+      type: string
+      required: true
+      example: "81259"
+    userId:
+      type: string
+      required: true
+      example: "81259"
+  get:
+    is: [commonHeaders,errorResponse]
+    displayName: Attendance - Get Attendance Record
+    description: Get Attendance Record
+    responses:
+      200:
+        body:
+          application/json:
+            type: getAttendenceRecord
+            example: !include /examples/attendence/getAttendanceRecord-example.json
+  delete:
+    is: [commonHeaders,errorResponse]
+    displayName: Attendance - Delete Attendance Record
+    description: Delete Attendance Record
+    responses:
+      200:
+        body:
+          application/json:
+            type: commonResponse
+            example: !include /examples/common/commonResponse-example.json
+  patch:
+    is: [commonHeaders,errorResponse]
+    displayName: Attendance - Update Course Meeting
+    description: Update the attendance record for a specific user in a course meeting.
+    queryParameters:
+      fields?:
+        type: string
+        description: Comma-delimited list of fields to include in the response.
+        example: "id,meetingId,userId,status"
+    body:
+      application/json:
+        example: !include /examples/attendence/updateMeetingRecordRequest-example.json
+    responses:
+      200:
+        body:
+          application/json:
+            type: UpdateMeetingRecord
+            example: !include /examples/attendence/updateMeetingRecordResponse-example.json
+
+/v1/courses/{courseId}/meetings/{meetingId}/users:
+  uriParameters:
+    courseId:
+      type: string
+      required: true
+      example: "81259"
+    meetingId:
+      type: string
+      required: true
+      example: "81259"
+  get:
+    is: [commonHeaders,errorResponse]
+    displayName: Attendance - Get Attendance Records by Meeting Id
+    description: Attendance - Get Attendance Records by Meeting Id
+    queryParameters:
+      offset?: integer
+      includePermissions?: boolean
+      limit?: integer
+      sort?: string
+      fields?: string
+    responses:
+      200:
+        body:
+          application/json:
+            type: getAttendance
+            example: !include /examples/attendence/getAttendence-example.json
+  post:
+    is: [commonHeaders,errorResponse]
+    displayName: Attendance - Create Attendance Record
+    description: Creates a new Course Meeting Attendance within the provided Course/Organization Id.
+    body:
+      application/json:
+        type: createAttendanceRecordRequest
+        example: !include /examples/attendence/createAttendanceRecordRequest-example.json
+    queryParameters:
+      fields?:
+        type: string
+        description: Comma-delimited list of fields to include in the response.
+        example: "id,meetingId,userId"
+    responses:
+      201:
+        body:
+          application/json:
+            type: createAttendanceRecordResponse
+            example: !include /examples/attendence/createAttendanceRecordResponse-example.json
+/v1/courseRoles:
+  get:
+    is: [commonHeaders,errorResponse]
+    displayName: Roles - Get Course Roles
+    description: Get Course Roles
+    queryParameters:
+      offset?: integer
+      includePermissions?: boolean
+      limit?: integer
+      sort?: string
+      custom?: boolean
+      roleId?: string
+      fields?: string
+    responses:
+      200:
+        body:
+          application/json:
+            type: getCourseRoles
+            example: !include /examples/roles/getCourseRoles-example.json
+
+/v1/courseRoles/{roleId}:
+  uriParameters:
+    roleId: string
+  get:
+    is: [commonHeaders,errorResponse]
+    displayName: Roles - Get Course Role
+    description: Get Course Role
+    queryParameters:
+      fields?: string
+    responses:
+      200:
+        body:
+          application/json:
+            type: getCourseRole
+            example: !include /examples/roles/getCourseRole-example.json
+/v1/institutionRoles:
+  get:
+    is: [commonHeaders,errorResponse]
+    displayName: Roles - Get Institution Roles
+    description: Get Institution Roles
+    queryParameters:
+      offset?: integer
+      includePermissions?: boolean
+      limit?: integer
+      sort?: string
+      custom?: boolean
+      roleId?: string
+      fields?: string
+    responses:
+      200:
+        body:
+          application/json:
+            type: getInstitutionRoles
+            example: !include /examples/roles/getInstitutionRoles-example.json
+/v1/institutionRoles/{roleId}:
+  uriParameters:
+    roleId: string
+  get:
+    is: [commonHeaders,errorResponse]
+    displayName: Roles - Get Institution Role
+    description: Get Institution Role
+    queryParameters:
+      fields?: string
+    responses:
+      200:
+        body:
+          application/json:
+            type: getInstitutionRole
+            example: !include /examples/roles/getInstitutionRole-example.json
+/v1/terms:
+  get:
+    is: [commonHeaders,errorResponse]
+    displayName: Terms - Get Terms
+    description: Get Terms
+    responses:
+      200:
+        body:
+          application/json:
+            type: getTerms
+            example: !include /examples/terms/getTerms-example.json
+  post:
+    is: [commonHeaders,errorResponse]
+    displayName: Terms - Create Term
+    description: Creates a term.
+    body:
+      application/json:
+        type: createTermRequest
+        example: !include /examples/terms/createTermRequest-example.json
+    queryParameters:
+      fields?:
+        type: string
+        description: Comma-delimited list of fields to include in the response.
+        example: "id,externalId,name"
+    responses:
+      201:
+        body:
+          application/json:
+            type: createTermResponse 
+            example: !include /examples/terms/createTermResponse-example.json
+/v1/terms/{termId}:
+  uriParameters:
+    termId: string
+  get:
+    is: [commonHeaders,errorResponse]
+    displayName: Terms - Get Term
+    description: Get Terms By termId
+    queryParameters:
+      fields?: string
+    responses:
+      200:
+        body:
+          application/json:
+            type: getTermByTermId
+            example: !include /examples/terms/getTermsByTermId-example.json
+  delete:
+    is: [commonHeaders,errorResponse]
+    displayName: Terms - Delete Term
+    description: Delete Term
+    responses:
+      200:
+        body:
+          appliction/json:
+            type: commonResponse
+            example: !include /examples/common/commonResponse-example.json
+  patch:
+    is: [commonHeaders,errorResponse]
+    displayName: Terms - Update Term
+    description: Updates a term.
+    body:
+      application/json:
+        type: updateTermRequest
+        example: !include /examples/terms/updateTermRequest-example.json
+    queryParameters:
+      fields?:
+        type: string
+        description: Comma-delimited list of fields to include in the response.
+        example: "id,externalId,name"
+    responses:
+      200:
+        body:
+          application/json:
+            type: updateTermResponse
+            example: !include /examples/terms/updateTermResponse-example.json
+/v1/users:
+  get:
+    is: [commonHeaders,errorResponse]
+    displayName: Users - Get Users
+    description: Get Users
+    responses:
+      200:
+        body:
+          application/json:
+            type: getUsers
+            example: !include /examples/users/getUsers-example.json
+
+  post:
+    is: [commonHeaders,errorResponse]
+    displayName: Users - Create User
+    description: Creates a user. The 'system.user.CREATE' entitlement is needed.
+    body:
+      application/json:
+        type: createUserRequest
+        example: !include /examples/users/createUserRequest-example.json
+    queryParameters:
+      fields?:
+        type: string
+        description: Comma-delimited list of fields to include in the response.
+        example: "id,userName,externalId"
+    responses:
+      201:
+        body:
+          application/json:
+            type: createUserResponse
+            example: !include /examples/users/createUserResponse-example.json
+/v1/users/{userId}:
+  uriParameters:
+    userId: string
+  get:
+    is: [commonHeaders,errorResponse]
+    displayName: Users - Get User
+    description: Get User
+    queryParameters:
+      fields?: string
+    responses:
+      200:
+        body:
+          application/json:
+            type: getUserByUserId
+            example: !include /examples/users/getUserByUserId-example.json
+  delete:
+    is: [commonHeaders,errorResponse]
+    displayName: Users - Delete User
+    description: Delete User
+    responses:
+      200:
+        body:
+          appliction/json:
+            type: commonResponse
+            example: !include /examples/common/commonResponse-example.json
+  patch:
+    is: [commonHeaders,errorResponse]
+    displayName: Users - Update User
+    description: Updates a user record.
+    body:
+      application/json:
+        type: updateUserRequest
+        example: !include /examples/users/updateUserRequest-example.json
+    queryParameters:
+      fields?:
+        type: string
+        description: Comma-delimited list of fields to include in the response.
+        example: "id,userName,externalId"
+    responses:
+      200:
+        body:
+          application/json:
+            type: updateUserResponse
+            example: !include /examples/users/updateUserResponse-example.json
+
+/v1/calendars/items:
+  get:
+    is: [commonHeaders,errorResponse]
+    displayName: Users - Upcoming events
+    description: Users - Upcoming events
+    queryParameters:
+      courseId?: string
+      type?: string
+      since?: string
+      until?: string
+      offset?: integer
+      includePermissions?: boolean
+      limit?: integer
+      sort?: string
+      fields?: string
+    responses:
+      200:
+        body:
+          application/json:
+            type: upcomingEvents
+            example: !include /examples/calendars/upcomingEvents-example.json
+/v3/courses:
+  get:
+    is: [commonHeaders,errorResponse]
+    displayName: Courses - Get Courses
+    description: |
+      Returns a list of courses and organizations.
+      To view disabled courses a user must have the entitlement 'system.course.VIEW'.
+    responses:
+      200:
+        body:
+          application/json:
+            type: getCourses
+            example: !include /examples/courses/getCourses-example.json
+  post:
+    is: [commonHeaders,errorResponse]
+    displayName: Courses - Create Course
+    description: Creates a course or organization.
+    body:
+      application/json:
+        type: createCourseRequest
+        example: !include /examples/courses/createCourseRequest-example.json
+    queryParameters:
+      fields?:
+        type: string
+        description: Comma-delimited list of fields to include in the response.
+        example: "id,externalId,dataSourceId,courseId"
+    responses:
+      201:
+        body:
+          application/json:
+            type: createCourseResponse
+            example: !include /examples/courses/createCourseResponse-example.json
+/v1/courses/{courseId}/children:
+  uriParameters:
+    courseId: string
+  get:
+    is: [commonHeaders,errorResponse]
+    displayName: Courses - Get Course Children
+    description: Get Course Children
+    queryParameters:
+      offset?: integer
+      includePermissions?: boolean
+      limit?: integer
+      fields?: string
+      expand?: string
+    responses:
+      200:
+        body:
+          application/json:
+            type: getCourseChildern
+            example: !include /examples/courses/getCourseChildren-example.json
+
+/v1/courses/{courseId}/children/{childCourseId}:
+  uriParameters:
+    courseId: string
+    childCourseId: string
+  get:
+    is: [commonHeaders,errorResponse]
+    displayName: Courses - Get Course Child
+    description: Get Course Child
+    responses:
+      200:
+        body:
+          application/json:
+            type: getCourseChild
+            example: !include /examples/courses/getCourseChild-example.json
+  delete:
+    is: [commonHeaders,errorResponse]
+    displayName: Courses - Remove Child Course
+    description: Remove Child Course
+    responses:
+      200:
+        body:
+          appliction/json:
+            type: commonResponse
+            example: !include /examples/common/commonResponse-example.json
+  put:
+    is: [commonHeaders,errorResponse]
+    displayName: Courses - Add Child Course
+    description: |
+      Merges two courses (or organizations) together (cross-listing).  
+      Only a single level of parent/child relationship is supported.  
+
+      Entitlements required:  
+      - For courses: `system.course.cross-list.VIEW`  
+      - For organizations: `system.org.cross-list.VIEW`  
+
+      Upon being merged, enrollments in the child course are replicated in the parent course.  
+      Duplicate student enrollments will result in a conflict unless `ignoreEnrollmentErrors=true`.  
+    queryParameters:
+      ignoreEnrollmentErrors?:
+        description: >
+          If true, enrollment errors during merge are ignored.  
+          Default behavior: return conflict on duplicate enrollments.
+        type: boolean
+        example: true
+      fields?:
+        description: A comma-delimited list of fields to include in the response. Defaults to all fields.
+        type: string
+        example: "id,courseId,childCourseId"
+    responses:
+      200:
+        description: Courses successfully merged (cross-listed).
+        body:
+          application/json:
+            example: {}
+/v3/courses/{courseId}:
+  uriParameters:
+    courseId: string
+  get:
+    is: [commonHeaders,errorResponse]
+    displayName: Courses - Get Course
+    description: Get Course
+    queryParameters:
+      fields?: string
+    responses:
+      200:
+        body:
+          application/json:
+            type: getCourse
+            example: !include /examples/courses/getCourse-example.json
+  delete:
+    is: [commonHeaders,errorResponse]
+    displayName: Courses - Delete Course
+    description: Delete Course
+    responses:
+      200:
+        body:
+          appliction/json:
+            type: commonResponse
+            example: !include /examples/common/commonResponse-example.json 
+  patch:
+    is: [commonHeaders,errorResponse]
+    displayName: Courses - Update Course
+    description: Updates a course or organization.
+    body:
+      application/json:
+        type: updateCourseRequest
+        example: !include /examples/courses/updateCourseRequest-example.json
+    queryParameters:
+      fields?:
+        type: string
+        description: Comma-delimited list of fields to include in the response.
+        example: "id,name,dataSourceId"
+    responses:
+      200:
+        body:
+          application/json:
+            type: updateCourseResponse
+            example: !include /examples/courses/updateCourseResponse-example.json
+
+/v1/catalog/categories/{categoryType}/{categoryId}:
+  uriParameters:
+    categoryType: string
+    categoryId: string
+  get:
+    is: [commonHeaders,errorResponse]
+    displayName: Course Category - Get Category
+    description: Get Category by Type and ID
+    queryParameters:
+      fields?:
+        type: string
+        description: A comma-delimited list of fields to include in the response.
+        example: "id,title,description,type"
+    responses:
+      200:
+        body:
+          application/json:
+            type: getCategory
+            example: !include /examples/courseCategory/getCategory-example.json
+  delete:
+    is: [commonHeaders,errorResponse]
+    displayName: Course Category - Delete Category
+    description: Delete Category
+    responses:
+      200:
+        body:
+          appliction/json:
+            type: commonResponse
+            example: !include /examples/common/commonResponse-example.json
+  patch:
+    is: [commonHeaders,errorResponse]
+    displayName: Course Category - Update Category
+    description: Updates the category corresponding to the provided type and id.
+    body:
+      application/json:
+        type: updateCategoryRequest
+        example: !include /examples/courseCategoryMemebership/updateCategoryRequest-example.json
+    responses:
+      200:
+        body:
+          application/json:
+            type: updateCategoryResponse
+            example: !include /examples/courseCategoryMemebership/updateCategoryResponse-example.json
+
+/v1/catalog/categories/{categoryType}/{categoryId}/courses/{courseId}:
+  uriParameters:
+    categoryType: string
+    categoryId: string
+    courseId: string
+  delete:
+    is: [commonHeaders,errorResponse]
+    displayName: Course Category - Delete Category Membership
+    description: Delete Category Membership
+    responses:
+      200:
+        body:
+          appliction/json:
+            type: commonResponse
+            example: !include /examples/common/commonResponse-example.json 
+  put:
+    is: [commonHeaders,errorResponse]
+    displayName: Course Category - Create Category Membership
+    description: |
+      Creates a category/course association.  
+      The course defined by courseId must match the categoryType.  
+      Entitlements required:  
+      - `admin.course.categorize.MODIFY` (for course associations)  
+      - `admin.org.categorize.MODIFY` (for organization associations)
+    queryParameters:
+      fields?:
+        description: A comma-delimited list of fields to include in the response. If not specified, all fields will be returned.
+        type: string
+        example: "id,courseId,categoryId"
+    responses:
+      200:
+        description: Category-Course association created successfully
+        body:
+          application/json:
+            type: createCategoryMembership
+            example: !include /examples/courseCategoryMemebership/createCategoryMembership-example.json
+
+/v1/catalog/categories/{categoryType}:
+  uriParameters:
+    categoryType:
+      type: string
+      required: true   
+  get:
+    is: [commonHeaders,errorResponse]
+    displayName: Course Category - Get Categories
+    description: Get Categories
+    responses:
+      200:
+        body:
+          application/json:
+            type: getCategories
+            example: !include /examples/courseCategory/getCategories-example.json
+  
+  post:
+    is: [commonHeaders,errorResponse]
+    displayName: Course Category - Create Category
+    description: Creates a new category of the provided type as defined in the request body.
+    body:
+      application/json:
+        type: createCategoryRequest
+        example: !include /examples/courseCategory/createCategoryRequest-example.json
+    queryParameters:
+      fields?:
+        type: string
+        description: Comma-delimited list of fields to include in the response.
+        example: "id,title,categoryId"
+    responses:
+      201:
+        body:
+          application/json:
+            type: createCategoryResponse 
+            example: !include /examples/courseCategory/createCategoryResponse-example.json
+/v1/catalog/categories/{categoryType}/{categoryId}/courses:
+  uriParameters:
+    categoryType:
+      type: string
+      required: true
+      
+    categoryId:
+      type: string
+      required: true
+      example: "12345"
+  get:
+    is: [commonHeaders,errorResponse]
+    displayName: Course Category - Get Category Memberships
+    description: Get courses associated with the provided category
+    queryParameters:
+      offset?:
+        type: integer
+        example: 0
+      includePermissions?:
+        type: boolean
+        example: true
+      limit?:
+        type: integer
+        example: 25
+      fields?:
+        type: string
+        example: "id,name,availability"
+      expand?:
+        type: string
+        example: "course"
+    responses:
+      200:
+        body:
+          application/json:
+            type: getCategoryMemberships
+            example: !include /examples/courseCategory/getCategoryMemberships-example.json
+/v1/catalog/categories/{categoryType}/{parentId}/children:
+  uriParameters:
+    categoryType:
+      type: string
+      required: true
+      
+    parentId:
+      type: string
+      required: true
+      example: "12345"
+  get:
+    is: [commonHeaders,errorResponse]
+    displayName: Course Category - Get Child Categories
+    description: Returns a list of categories which are children of the specified parent category
+    queryParameters:
+      offset?:
+        type: integer
+        example: 0
+      includePermissions?:
+        type: boolean
+        example: true
+      limit?:
+        type: integer
+        example: 25
+      sort?:
+        type: string
+        example: "title(desc),created"
+      title?:
+        type: string
+        example: "Science"
+      categoryId?:
+        type: string
+        example: "1001"
+      created?:
+        type: datetime
+        example: "2025-09-15T05:16:36.399Z"
+      createdCompare?:
+        type: string
+        enum: [lessThan, greaterOrEqual]
+        example: "greaterOrEqual"
+      dataSourceId?:
+        type: string
+        example: "external_23"
+      frontPage?:
+        type: boolean
+        example: false
+      available?:
+        type: boolean
+        example: true
+      fields?:
+        type: string
+        example: "id,title,available"
+    responses:
+      200:
+        body:
+          application/json:
+            type: getChildCategories
+            example: !include /examples/courseCategory/getChildCategories-example.json
+/v2/courses/{courseId}/gradebook/columns/{columnId}:
+  uriParameters:
+    courseId:
+      type: string
+      required: true
+      description: 
+        The course or organization ID. May be the primary ID or secondary IDs prefixed with the ID type.
+      example: "_123_1"
+    columnId:
+      type: string
+      required: true
+      description: 
+        The grade column ID. May be the primary ID, secondary IDs with prefix, or the keyword 'finalGrade'.
+      example: "finalGrade"
+  get:
+    is: [commonHeaders,errorResponse]
+    displayName: Course Gradebook - Get Grade Column
+    description: Loads a specific grade column.
+    queryParameters:
+      fields?:
+        type: string
+        description: Comma-delimited list of fields to include in the response.
+        example: "id,name,description"
+      expand?:
+        type: string
+        description: Comma-delimited list of fields to expand.
+        example: "rubricAssociations"
+    responses:
+      200:
+        body:
+          application/json:
+            type: getGradeColumn
+            example: !include /examples/courseGradebook/getGradeColumn-example.json
+/v2/courses/{courseId}/gradebook/columns:
+  uriParameters:
+    courseId:
+      type: string
+      required: true
+      description: 
+        The course or organization ID. May be primary ID or secondary IDs prefixed with ID type.
+      example: "_123_1"
+  get:
+    is: [commonHeaders,errorResponse]
+    displayName: Course Gradebook - Get Grade Columns
+    description: Returns a list of grade columns.
+    queryParameters:
+      offset?:
+        type: integer
+        description: Number of rows to skip before returning rows.
+        example: 0
+      includePermissions?:
+        type: boolean
+        description: Flag to include permissions in the response.
+        example: true
+      limit?:
+        type: integer
+        description: Maximum number of results to return.
+        example: 25
+      contentId?:
+        type: string
+        description: Search for grade columns associated with this content item.
+        example: "content123"
+      displayName?:
+        type: string
+        description: Search criteria for displayName (contains).
+        example: "Math"
+      name?:
+        type: string
+        description: Search criteria for name (contains).
+        example: "Test"
+      gradebookCategoryId?:
+        type: string
+        description: Comma-delimited list of gradebook category IDs.
+        example: "cat1,cat2"
+      created?:
+        type: datetime
+        description: Search for grade columns with created date relative to this value.
+        example: "2025-09-15T10:00:00Z"
+      createdCompare?:
+        type: string
+        enum: [lessThan, greaterOrEqual]
+        description: Comparison for created date. Defaults to greaterOrEqual.
+        example: "greaterOrEqual"
+      modified?:
+        type: datetime
+        description: Search for grade columns with modified date relative to this value.
+        example: "2025-09-15T10:00:00Z"
+      modifiedCompare?:
+        type: string
+        enum: [lessThan, greaterOrEqual]
+        description: Comparison for modified date. Defaults to greaterOrEqual.
+        example: "greaterOrEqual"
+      fields?:
+        type: string
+        description: Comma-delimited list of fields to include in the response.
+        example: "id,name,displayName"
+      expand?:
+        type: string
+        description: Comma-delimited list of fields to expand
+        example: "rubricAssociations"
+    responses:
+      200:
+        body:
+          application/json:
+            type: getGradeColumns
+            example: !include /examples/courseGradebook/getGradeColumns-example.json
+/v1/courses/{courseId}/gradebook/categories:
+  uriParameters:
+    courseId:
+      type: string
+      required: true
+      description: 
+        The course or organization ID. May be the primary ID or secondary IDs prefixed with the ID type.
+      example: "_123_1"
+  get:
+    is: [commonHeaders,errorResponse]
+    displayName: Course Gradebook - Get Gradebook Categories
+    description: Returns a list of gradebook categories in a particular course.
+    queryParameters:
+      offset?:
+        type: integer
+        description: Number of rows to skip before beginning to return rows.
+        example: 0
+      includePermissions?:
+        type: boolean
+        description: Flag to indicate whether to include permissions in the response.
+        example: true
+      limit?:
+        type: integer
+        description: Maximum number of results to be returned.
+        example: 25
+    responses:
+      200:
+        body:
+          application/json:
+            type: getGradebookCategories
+            example: !include /examples/courseGradebook/getGradebookCategories-example.json
+/v2/courses/{courseId}/gradebook/columns/{columnId}/users/{userId}:
+  uriParameters:
+    courseId:
+      type: string
+      required: true
+      description: 
+        The course or organization ID. May be the primary ID or any secondary IDs prefixed with the ID type.
+      example: "_123_1"
+    columnId:
+      type: string
+      required: true
+      description: 
+        The grade column ID. May be primary ID, secondary IDs with prefix, or 'finalGrade'.
+      example: "finalGrade"
+    userId:
+      type: string
+      required: true
+      description: 
+        The user ID. May be primary ID, secondary IDs with prefix such as externalId, userName, uuid, etc.
+      example: "_123_1"
+  get:
+    is: [commonHeaders,errorResponse]
+    displayName: Course Gradebook - Get Column Grade
+    description: Loads the grade column grade for a specific user.
+    queryParameters:
+      unsupportedSearchOverChildCourses?:
+        type: boolean
+        description: Flag indicating unsupported search over child courses.
+      fields?:
+        type: string
+        description: Comma-delimited list of fields to include in the response.
+        example: "userId,columnId,status"
+    responses:
+      200:
+        body:
+          application/json:
+            type: getColumnGrade
+            example: !include /examples/courseGradebook/getColumnGrade-example.json
+/v2/courses/{courseId}/gradebook/columns/{columnId}/users:
+  uriParameters:
+    courseId:
+      type: string
+      required: true
+      description: 
+        The course or organization ID. May be the primary ID or any of the secondary IDs prefixed with the ID type.
+      example: "_123_1"
+    columnId:
+      type: string
+      required: true
+      description: 
+        The grade column ID. May be the primary ID, any secondary IDs prefixed with ID type, or the keyword 'finalGrade'.
+      example: "finalGrade"
+  get:
+    is: [commonHeaders,errorResponse]
+    displayName: Course Gradebook - Get Column Grades
+    description: Returns a list of grades associated with the specified grade column.
+    queryParameters:
+      offset?:
+        type: integer
+        description: Number of rows to skip before beginning to return rows.
+        example: 0
+      includePermissions?:
+        type: boolean
+        description: Flag to indicate whether to include permissions in the response.
+        example: true
+      limit?:
+        type: integer
+        description: The maximum number of results to return.
+        example: 25
+      changeIndex?:
+        type: integer
+        description: Retrieve only items modified after the given change index.
+      includeUnpostedGrades?:
+        type: boolean
+        description: 
+          If true, calculated columns will include unposted grades in calculations.
+          Requires appropriate entitlements.
+      includeDisabledMemberships?:
+        type: boolean
+        description: 
+          If true, users with disabled access will be included in the response.
+          Requires appropriate entitlements.
+      firstRelevantDate?:
+        type: datetime
+        description: Search criteria for the firstRelevantDate.
+      firstRelevantDateCompare?:
+        type: string
+        enum: [lessThan, greaterOrEqual]
+        description: Comparison operator for firstRelevantDate. Defaults to greaterOrEqual.
+      lastRelevantDate?:
+        type: datetime
+        description: Search criteria for the lastRelevantDate.
+      lastRelevantDateCompare?:
+        type: string
+        enum: [lessThan, greaterOrEqual]
+        description: Comparison operator for lastRelevantDate. Defaults to greaterOrEqual.
+      unsupportedSearchOverChildCourses?:
+        type: boolean
+        description: Flag indicating unsupported search over child courses.
+      fields?:
+        type: string
+        description: Comma-delimited list of fields to include in the response.
+        example: "userId,columnId,status"
+    responses:
+      200:
+        body:
+          application/json:
+            type: getColumnGrades
+            example: !include /examples/courseGradebook/getColumnGrades-example.json
+/v2/courses/{courseId}/gradebook/users/{userId}:
+  uriParameters:
+    courseId:
+      type: string
+      required: true
+      description: 
+        The course or organization ID. May be primary ID or any secondary IDs prefixed with ID type.
+      example: "_123_1"
+    userId:
+      type: string
+      required: true
+      description: 
+        The user ID. May be primary ID or secondary IDs prefixed with ID type such as externalId, userName, uuid, etc.
+      example: "_123_1"
+  get:
+    is: [commonHeaders,errorResponse]
+    displayName: Course Gradebook - Get User Grades
+    description: Loads the course grades for a specific user.
+    queryParameters:
+      offset?:
+        type: integer
+        description: Number of rows to skip before returning rows.
+        example: 0
+      includePermissions?:
+        type: boolean
+        description: Flag to indicate whether to include permissions in the response.
+        example: true
+      limit?:
+        type: integer
+        description: Maximum number of results to be returned.
+        example: 25
+      firstRelevantDate?:
+        type: datetime
+        description: Search grades by firstRelevantDate.
+      firstRelevantDateCompare?:
+        type: string
+        enum: [lessThan, greaterOrEqual]
+        description: Comparison operator for firstRelevantDate. Defaults to greaterOrEqual.
+      lastRelevantDate?:
+        type: datetime
+        description: Search grades by lastRelevantDate.
+      lastRelevantDateCompare?:
+        type: string
+        enum: [lessThan, greaterOrEqual]
+        description: Comparison operator for lastRelevantDate. Defaults to greaterOrEqual.
+      fields?:
+        type: string
+        description: Comma-delimited list of fields to include in the response.
+        example: "userId,columnId,status"
+    responses:
+      200:
+        body:
+          application/json:
+            type: getUserGrades
+            example: !include /examples/courseGradebook/getUserGrades-example.json
+
+/v1/courses/{courseId}/users:
+  uriParameters:
+    courseId:
+      type: string
+      required: true
+      example: "_123_1"
+  get:
+    is: [commonHeaders,errorResponse]
+    displayName: Course Membership - Get Course Memberships
+    description: Returns a list of user memberships for the specified course or organization.
+    queryParameters:
+      offset?:
+        type: integer
+        description: Number of rows to skip before beginning to return rows.
+        example: 0
+      includePermissions?:
+        type: boolean
+        description: Include permissions in the response.
+        example: true
+      limit?:
+        type: integer
+        description: Maximum number of results to be returned.
+        example: 50
+      role?:
+        type: string
+        description: Course role id filter.
+        example: "student"
+      created?:
+        type: datetime
+        description: Filter memberships created relative to this date.
+        example: 2025-09-01T00:00:00Z
+      createdCompare?:
+        type: string
+        enum: [lessThan, greaterOrEqual]
+        description: Comparison operator for created filter.
+        example: greaterOrEqual
+      modified?:
+        type: datetime
+        description: Filter memberships modified relative to this date.
+        example: 2025-09-10T00:00:00Z
+      modifiedCompare?:
+        type: string
+        enum: [lessThan, greaterOrEqual]
+        description: Comparison operator for modified filter.
+        example: lessThan
+      dataSourceId?:
+        type: string
+        description: Filter by dataSourceId.
+        example: "externalId:math101"
+      lastAccessed?:
+        type: datetime
+        description: Filter memberships by last accessed date.
+        example: 2025-09-05T12:00:00Z
+      lastAccessedCompare?:
+        type: string
+        enum: [lessThan, greaterOrEqual]
+        description: Comparison operator for lastAccessed filter.
+        example: greaterOrEqual
+      availability.available?:
+        type: string
+        enum: [Yes, No, Disabled]
+        description: Filter by availability status.
+        example: Yes
+      sort?:
+        type: string
+        description: Comma-delimited list of fields to sort by. Supports created, lastAccessed.
+        example: "created(desc)"
+      fields?:
+        type: string
+        description: Comma-delimited list of fields to include.
+        example: "id,userId,courseRoleId"
+      expand?:
+        type: string
+        description: Comma-delimited list of fields to expand.
+        example: "user"
+    responses:
+      200:
+        body:
+          application/json:
+            type: getCourseUsers
+            example: !include /examples/courseMembership/getUsers-example.json
+
+/v1/courses/{courseId}/users/{userId}:
+  uriParameters:
+    courseId:
+      type: string
+      required: true
+      example: "_123_1"
+    userId:
+      type: string
+      required: true
+      example: "userName:jsmith"
+  get:
+    is: [commonHeaders,errorResponse]
+    displayName: Course Membership - Get Course Membership
+    description: Loads a user membership in the specified course.
+    queryParameters:
+      fields?:
+        type: string
+        example: "id,userId,user"
+        description: Comma-delimited list of fields to include in the response.
+      expand?:
+        type: string
+        example: "user"
+        description: Comma-delimited list of fields to expand (only `user` is supported).
+    responses:
+      200:
+        body:
+          application/json:
+            type: CourseUserMembership
+            example: !include /examples/courseMembership/courseUserMembership-example.json
+  patch:
+    is: [commonHeaders,errorResponse]
+    displayName: Course Membership - Update Course User Membership
+    description: Updates a user membership in the specified course.
+    body:
+      application/json:
+        type: updateCourseUserMembership
+        example: !include /examples/courseMembership/updateCourseUserMembershipRequest-example.json
+    responses:
+      200:
+        body:
+          application/json:
+            type: updateCourseUserMembership
+            example: !include /examples/courseMembership/updateCourseUserMembershipResponse-example.json
+  put:
+    is: [commonHeaders,errorResponse]
+    displayName: Course Membership - Create Course User Membership
+    description: |
+      Creates a user membership in the specified course.  
+
+      **Minimal entitlements required:**  
+      - `system.enrollment.CREATE` with `system.user.VIEW`, or  
+      - `course.user-enroll.EXECUTE`, or  
+      - `system.generic.VIEW` (if self-enrollment is enabled).  
+
+      By default:  
+      - `courseRoleId = Student`  
+      - `availability.available = Yes`  
+
+      **Additional entitlements required** to change defaults:  
+      - For courses: `course.user-role.MODIFY` or `course.user.MODIFY`  
+      - For organizations: `course.user-role.MODIFY` or `org.user.MODIFY`
+    body:
+      application/json:
+        type: CourseUserId
+        example: !include /examples/courseCategoryMemebership/courseUserMembershipRequest-example.json
+    queryParameters:
+      fields?:
+        description: A comma-delimited list of fields to include in the response.
+        type: string
+        example: "courseRoleId,availability"
+    responses:
+      201:
+        description: User membership created successfully
+        body:
+          application/json:
+            type: commonResponse
+            example: !include /examples/common/commonResponse-example.json 
+  delete:
+    is: [commonHeaders,errorResponse]
+    displayName: Course Membership - Delete Course Membership
+    description: Delete Course Membership
+    responses:
+      200:
+        body:
+          appliction/json:
+            type: commonResponse
+            example: !include /examples/common/commonResponse-example.json 
+
+/v1/users/{userId}/courses:
+  uriParameters:
+    userId:
+      type: string
+      required: true
+      example: "_123_1"
+  get:
+    is: [commonHeaders,errorResponse]
+    displayName: Course Membership - Get User Memberships
+    description: Returns a list of course and organization memberships for the specified user.
+    queryParameters:
+      offset?: integer
+      includePermissions?: boolean
+      limit?: integer
+      role?: string
+      created?: datetime
+      createdCompare?: string
+      modified?: datetime
+      modifiedCompare?: string
+      dataSourceId?: string
+      lastAccessed?: datetime
+      lastAccessedCompare?: string
+      availability.available?:
+        type: string
+        enum: [Yes, No, Disabled]
+      sort?: string
+      fields?: string
+      expand?: string
+    responses:
+      200:
+        body:
+          application/json:
+            type: getUserMemberships
+            example: !include /examples/courseMembership/getUserMemberships-example.json
+
+/v1/courses/{courseId}/meetings/{meetingId}:
+  uriParameters:
+    courseId:
+      type: string
+      description: The course or organization ID.
+      example: "_123_1"
+    meetingId:
+      type: string
+      description: The ID of the meeting to update.
+      example: "456"
+  patch:
+    is: [commonHeaders,errorResponse]
+    displayName: Attendance - Update Course Meeting
+    description: Update the Course Meeting for the given Course/Organization.  
+    body:
+      application/json:
+        type: CourseMeetingUpdate
+        example:
+          courseId: "_123_1"
+          title: "Weekly Math Meeting"
+          description: "Discussion about upcoming assignments"
+          start: "2025-09-17T06:59:14.277Z"
+          end: "2025-09-17T07:59:14.277Z"
+          externalLink: "https://example.com/meeting-link"
+    queryParameters:
+      fields:
+        type: string
+        required: false
+        description: A comma-delimited list of fields to include in the response.
+    responses:
+      200:
+        body:
+          application/json:
+            type: courseMeetingResponse
+            example: !include /examples/attendence/courseMeetingResponse-example.json
+
+/oauth2/token:
+  post:
+    is: [commonHeaders,errorResponse]
+    displayName: Token - AccessToken
+    description: Obtain OAuth2 token with Basic Auth
+    body:
+      application/x-www-form-urlencoded:
+        type: TokenRequest
+    responses:
+      200:
+        body:
+          application/json:
+           type: TokenResponse
+  
+

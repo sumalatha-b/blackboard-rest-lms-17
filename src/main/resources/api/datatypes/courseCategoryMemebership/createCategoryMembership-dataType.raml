@@ -1,0 +1,19 @@
+#%RAML 1.0 DataType
+type: object
+properties:
+  id:
+    description: Unique identifier of the category-course association
+    type: string
+    example: "ASSOC_001"
+  courseId:
+    description: The ID of the course or organization
+    type: string
+    example: "_123_1"
+  categoryId:
+    description: The ID of the category
+    type: string
+    example: "CAT_001"
+  created:
+    description: Date and time when the association was created
+    type: datetime
+    example: 2025-09-16T10:30:00Z

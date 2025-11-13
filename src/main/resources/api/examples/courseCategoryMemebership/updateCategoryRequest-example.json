@@ -1,0 +1,8 @@
+{
+  "title": "Mathematics Category",
+  "description": "Category for all Math related courses",
+  "frontPage": true,
+  "available": true,
+  "restricted": false,
+  "institutionRoleIds": []
+}

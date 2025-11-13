@@ -1,0 +1,71 @@
+#%RAML 1.0 DataType
+type: object
+properties:
+  results:
+    type: array
+    items:
+      type: object
+      properties:
+        id: string
+        parentId: string
+        dataSourceId: string
+        created: datetime
+        childCourse:
+          type: object
+          properties:
+            id: string
+            uuid: string
+            externalId: string
+            dataSourceId: string
+            courseId: string
+            name: string
+            description: string
+            created: datetime
+            organization: boolean
+            ultraStatus:
+              type: string
+              enum: [Undecided, Classic, Ultra]
+              example: Undecided
+            allowGuests: boolean
+            readOnly: boolean
+            termId: string
+            availability:
+              type: object
+              properties:
+                available:
+                  type: string
+                  enum: [Yes, No, Disabled]
+                  example: Yes
+                duration:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      enum: [Continuous, DateRange, FixedDays]
+                      example: Continuous
+                    start: datetime
+                    end: datetime
+                    daysOfUse: integer
+            enrollment:
+              type: object
+              properties:
+                type:
+                  type: string
+                  enum: [InstructorLed, SelfEnrollment]
+                  example: InstructorLed
+                start: datetime
+                end: datetime
+                accessCode: string
+            locale:
+              type: object
+              properties:
+                id: string
+                force: boolean
+            hasChildren: boolean
+            parentId: string
+            externalAccessUrl: string
+            guestAccessUrl: string
+  paging:
+    type: object
+    properties:
+      nextPage: string

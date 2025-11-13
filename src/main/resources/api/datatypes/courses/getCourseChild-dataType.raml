@@ -1,0 +1,50 @@
+#%RAML 1.0 DataType
+type: object
+properties:
+  id: string
+  parentId: string
+  dataSourceId: string
+  created: datetime
+  childCourse:
+    type: object
+    properties:
+      id: string
+      uuid: string
+      externalId: string
+      dataSourceId: string
+      courseId: string
+      name: string
+      description: string
+      created: datetime
+      organization: boolean
+      ultraStatus: string
+      allowGuests: boolean
+      readOnly: boolean
+      termId: string
+      availability:
+        type: object
+        properties:
+          available: string
+          duration:
+            type: object
+            properties:
+              type: string
+              start: datetime
+              end: datetime
+              daysOfUse: integer
+      enrollment:
+        type: object
+        properties:
+          type: string
+          start: datetime
+          end: datetime
+          accessCode: string
+      locale:
+        type: object
+        properties:
+          id: string
+          force: boolean
+      hasChildren: boolean
+      parentId: string
+      externalAccessUrl: string
+      guestAccessUrl: string

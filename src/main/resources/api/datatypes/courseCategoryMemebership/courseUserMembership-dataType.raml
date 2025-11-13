@@ -1,0 +1,28 @@
+#%RAML 1.0 DataType
+type: object
+properties:
+  childCourseId?:
+    description: Child course identifier, if applicable
+    type: string
+    example: "_456_1"
+  dataSourceId?:
+    description: The ID of the data source associated with the enrollment
+    type: string
+    example: "SYSTEM_DS"
+  availability?:
+    type: object
+    properties:
+      available:
+        description: Availability status of the user in the course
+        type: string
+        enum: [Yes, No, Disabled]
+        example: Yes
+  courseRoleId?:
+    description: The role of the user in the course
+    type: string
+    default: Student
+    example: Instructor
+  displayOrder?:
+    description: Display order of the user in the course roster
+    type: integer
+    example: 0

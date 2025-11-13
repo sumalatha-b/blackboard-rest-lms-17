@@ -1,0 +1,86 @@
+#%RAML 1.0 DataType
+type: object
+properties:
+  id?: string
+  uuid?: string
+  externalId?: string
+  dataSourceId?: string
+  userName?: string
+  studentId?: string
+  educationLevel?: string
+  gender?: string
+  pronouns?: string
+  birthDate?: datetime
+  created?: datetime
+  modified?: datetime
+  lastLogin?: datetime
+  institutionRoleIds?: any
+  systemRoleIds?: any
+  availability?:
+    type: object
+    properties:
+      available?: string
+  name?:
+    type: object
+    properties:
+      given?: string
+      family?: string
+      middle?: string
+      other?: string
+      suffix?: string
+      title?: string
+      preferredDisplayName?: string
+  job?:
+    type: object
+    properties:
+      title?: string
+      department?: string
+      company?: string
+  contact?:
+    type: object
+    properties:
+      homePhone?: string
+      mobilePhone?: string
+      businessPhone?: string
+      businessFax?: string
+      email?: string
+      institutionEmail?: string
+      webPage?: string
+  address?:
+    type: object
+    properties:
+      street1?: string
+      street2?: string
+      city?: string
+      state?: string
+      zipCode?: string
+      country?: string
+  locale?:
+    type: object
+    properties:
+      id?: string
+      calendar?: string
+      firstDayOfWeek?: string
+  avatar?:
+    type: object
+    properties:
+      viewUrl?: string
+      source?: string
+      uploadId?: string
+      resourceId?: string
+  pronunciation?: string
+  nodes?:
+    type: array
+    items:
+      type: object
+      properties:
+        id?: string
+        externalId?: string
+        title?: string
+        description?: string
+        parentId?: string
+  pronunciationAudio?:
+    type: object
+    properties:
+      viewUrl?: string
+      uploadId?: string

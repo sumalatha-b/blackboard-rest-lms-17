@@ -1,0 +1,24 @@
+#%RAML 1.0 DataType
+type: object
+properties:
+  userId: string
+  columnId: string
+  status?: string
+  displayGrade?:
+    type: object
+    properties:
+      scaleType?: string
+      score?: number
+      possible?: number
+      text?: string
+  text?: string
+  score?: number
+  overridden?: datetime
+  notes?: string
+  feedback?: string
+  exempt?: boolean
+  corrupt?: boolean
+  gradeNotationId?: string
+  changeIndex?: integer
+  firstRelevantDate?: datetime
+  lastRelevantDate?: datetime

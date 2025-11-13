@@ -1,0 +1,48 @@
+{
+  "id": "string",
+  "externalId": "string",
+  "externalToolId": "string",
+  "name": "string",
+  "displayName": "string",
+  "description": "string",
+  "externalGrade": true,
+  "created": "2025-09-15T05:57:32.030Z",
+  "modified": "2025-09-15T05:57:32.030Z",
+  "contentId": "string",
+  "score": {
+    "possible": 0
+  },
+  "availability": {
+    "available": "Yes"
+  },
+  "grading": {
+    "type": "Attempts",
+    "due": "2025-09-15T05:57:32.030Z",
+    "attemptsAllowed": 0,
+    "scoringModel": "Last",
+    "schemaId": "string",
+    "anonymousGrading": {
+      "type": "None",
+      "releaseAfter": "2025-09-15T05:57:32.030Z"
+    },
+    "rubricAssociations": {
+      "empty": true
+    }
+  },
+  "gradebookCategoryId": "string",
+  "formula": {
+    "formula": "string",
+    "aliases": {
+      "empty": true
+    }
+  },
+  "includeInCalculations": true,
+  "showStatisticsToStudents": true,
+  "scoreProviderHandle": "string",
+  "learningOutcome": {
+    "signature": true,
+    "columnScale": {
+      "empty": true
+    }
+  }
+}

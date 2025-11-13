@@ -1,0 +1,32 @@
+{
+  "externalId": "string",
+  "dataSourceId": "string",
+  "courseId": "string",
+  "name": "string",
+  "description": "string",
+  "organization": true,
+  "ultraStatus": "Undecided",
+  "allowGuests": true,
+  "allowObservers": true,
+  "closedComplete": true,
+  "termId": "string",
+  "availability": {
+    "available": "Yes",
+    "duration": {
+      "type": "Continuous",
+      "start": "2025-09-16T09:49:40.063Z",
+      "end": "2025-09-16T09:49:40.063Z",
+      "daysOfUse": 0
+    }
+  },
+  "enrollment": {
+    "type": "InstructorLed",
+    "start": "2025-09-16T09:49:40.063Z",
+    "end": "2025-09-16T09:49:40.063Z",
+    "accessCode": "string"
+  },
+  "locale": {
+    "id": "string",
+    "force": true
+  }
+}

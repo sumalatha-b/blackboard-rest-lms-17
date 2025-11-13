@@ -1,0 +1,7 @@
+{
+  "id": "string",
+  "roleId": "string",
+  "name": "string",
+  "description": "string",
+  "custom": true
+}

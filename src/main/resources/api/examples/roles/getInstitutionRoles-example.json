@@ -1,0 +1,14 @@
+{
+  "results": [
+    {
+      "id": "string",
+      "roleId": "string",
+      "name": "string",
+      "description": "string",
+      "custom": true
+    }
+  ],
+  "paging": {
+    "nextPage": "string"
+  }
+}

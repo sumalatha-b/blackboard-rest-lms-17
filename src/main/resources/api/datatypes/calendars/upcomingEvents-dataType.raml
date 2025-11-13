@@ -1,0 +1,72 @@
+#%RAML 1.0 DataType
+type: object
+properties:
+  results:
+    type: array
+    items:
+      type: object
+      properties:
+        id: string
+        type:
+          type: string
+          enum: [Course, Event, Task]
+          example: Course
+        calendarId: string
+        calendarName: string
+        title: string
+        description: string
+        location: string
+        start: datetime
+        end: datetime
+        modified: datetime
+        color: string
+        disableResizing: boolean
+        createdByUserId: string
+        dynamicCalendarItemProps:
+          type: object
+          properties:
+            attemptable: boolean
+            categoryId: string
+            dateRangeLimited: boolean
+            eventType: string
+            gradable: boolean
+        recurrence:
+          type: object
+          properties:
+            count: integer
+            frequency:
+              type: string
+              enum: [Daily, Weekly, Monthly, Yearly]
+              example: Monthly
+            interval: integer
+            monthRepeatDay: integer
+            monthPosition: integer
+            originalStart: datetime
+            originalEnd: datetime
+            repeatBroken: boolean
+            repeatDay:
+              type: string
+              enum: [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
+              example: Sunday
+            until: datetime
+            weekDays:
+              type: array
+              items:
+                type: string
+                enum: [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
+        ltiLaunchDeepLink:
+          type: object
+          properties:
+            placementHandle: string
+            uuid: string
+            url: string
+            title: string
+            customParameters:
+              type: object
+              properties:
+                key1?: string
+                key2?: string             
+  paging:
+    type: object
+    properties:
+      nextPage: string

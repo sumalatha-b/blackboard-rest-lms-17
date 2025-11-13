@@ -1,0 +1,87 @@
+{
+  "results": [
+    {
+      "id": "string",
+      "uuid": "string",
+      "externalId": "string",
+      "dataSourceId": "string",
+      "userName": "string",
+      "studentId": "string",
+      "educationLevel": "K8",
+      "gender": "Female",
+      "pronouns": "string",
+      "birthDate": "2025-09-16T06:05:56.744Z",
+      "created": "2025-09-16T06:05:56.744Z",
+      "modified": "2025-09-16T06:05:56.744Z",
+      "lastLogin": "2025-09-16T06:05:56.744Z",
+      "institutionRoleIds": [
+        "string"
+      ],
+      "systemRoleIds": [
+        "SystemAdmin"
+      ],
+      "availability": {
+        "available": "Yes"
+      },
+      "name": {
+        "given": "string",
+        "family": "string",
+        "middle": "string",
+        "other": "string",
+        "suffix": "string",
+        "title": "string",
+        "preferredDisplayName": "GivenName"
+      },
+      "job": {
+        "title": "string",
+        "department": "string",
+        "company": "string"
+      },
+      "contact": {
+        "homePhone": "string",
+        "mobilePhone": "string",
+        "businessPhone": "string",
+        "businessFax": "string",
+        "email": "string",
+        "institutionEmail": "string",
+        "webPage": "string"
+      },
+      "address": {
+        "street1": "string",
+        "street2": "string",
+        "city": "string",
+        "state": "string",
+        "zipCode": "string",
+        "country": "string"
+      },
+      "locale": {
+        "id": "string",
+        "calendar": "Gregorian",
+        "firstDayOfWeek": "Sunday"
+      },
+      "avatar": {
+        "viewUrl": "string",
+        "source": "Default",
+        "uploadId": "string",
+        "resourceId": "string"
+      },
+      "pronunciation": "string",
+      "nodes": [
+        {
+          "id": "string",
+          "externalId": "string",
+          "title": "string",
+          "description": "string",
+          "parentId": "string"
+        }
+      ],
+      "pronunciationAudio": {
+        "viewUrl": "string",
+        "uploadId": "string"
+      }
+    }
+  ],
+  "paging": {
+    "nextPage": "string"
+  }
+}

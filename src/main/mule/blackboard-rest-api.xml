@@ -1,0 +1,2222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd ">
+    
+    <flow name="blackboard-rest-api-main">
+        <http:listener config-ref="blackboard-rest-api-httpListenerConfig" path="/api/*">
+            <http:response statusCode="#[vars.httpStatus default 200]">
+                <http:headers>#[vars.outboundHeaders default {}]</http:headers>
+            </http:response>
+            <http:error-response statusCode="#[vars.httpStatus default 500]">
+                <http:body>#[payload]</http:body>
+                <http:headers>#[vars.outboundHeaders default {}]</http:headers>
+            </http:error-response>
+        </http:listener>
+        <apikit:router config-ref="blackboard-rest-api-config" />
+    </flow>
+    <flow name="blackboard-rest-api-console">
+        <http:listener config-ref="blackboard-rest-api-httpListenerConfig" path="/console/*">
+            <http:response statusCode="#[vars.httpStatus default 200]">
+                <http:headers>#[vars.outboundHeaders default {}]</http:headers>
+            </http:response>
+            <http:error-response statusCode="#[vars.httpStatus default 500]">
+                <http:body>#[payload]</http:body>
+                <http:headers>#[vars.outboundHeaders default {}]</http:headers>
+            </http:error-response>
+        </http:listener>
+        <apikit:console config-ref="blackboard-rest-api-config" />
+    </flow>
+    <flow name="put:\v1\catalog\categories\(categoryType)\(categoryId)\courses\(courseId):blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="categoryType">attributes.uriParams.'categoryType'</ee:set-variable>
+                <ee:set-variable variableName="categoryId">attributes.uriParams.'categoryId'</ee:set-variable>
+                <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  id: "ASSOC_001",
+  courseId: "_123_1",
+  categoryId: "CAT_001",
+  created: "2025-09-16T10:30:00Z"
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="put:\v1\courses\(courseId)\children\(childCourseId):blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
+                <ee:set-variable variableName="childCourseId">attributes.uriParams.'childCourseId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="put:\v1\courses\(courseId)\users\(userId):application\json:blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
+                <ee:set-variable variableName="userId">attributes.uriParams.'userId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  message: "deleted sucessfully"
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="delete:\v1\catalog\categories\(categoryType)\(categoryId):blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="categoryType">attributes.uriParams.'categoryType'</ee:set-variable>
+                <ee:set-variable variableName="categoryId">attributes.uriParams.'categoryId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  message: "deleted sucessfully"
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="delete:\v1\catalog\categories\(categoryType)\(categoryId)\courses\(courseId):blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="categoryType">attributes.uriParams.'categoryType'</ee:set-variable>
+                <ee:set-variable variableName="categoryId">attributes.uriParams.'categoryId'</ee:set-variable>
+                <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  message: "deleted sucessfully"
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="delete:\v1\courses\(courseId)\children\(childCourseId):blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
+                <ee:set-variable variableName="childCourseId">attributes.uriParams.'childCourseId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  message: "deleted sucessfully"
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="delete:\v1\courses\(courseId)\meetings:blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  message: "deleted sucessfully"
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="delete:\v1\courses\(courseId)\meetings\users\(userId):blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
+                <ee:set-variable variableName="userId">attributes.uriParams.'userId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  message: "deleted sucessfully"
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="delete:\v1\courses\(courseId)\meetings\(meetingId)\users\(userId):blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
+                <ee:set-variable variableName="meetingId">attributes.uriParams.'meetingId'</ee:set-variable>
+                <ee:set-variable variableName="userId">attributes.uriParams.'userId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  message: "deleted sucessfully"
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="delete:\v1\courses\(courseId)\users\(userId):blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
+                <ee:set-variable variableName="userId">attributes.uriParams.'userId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  message: "deleted sucessfully"
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="delete:\v1\terms\(termId):blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="termId">attributes.uriParams.'termId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  message: "deleted sucessfully"
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="delete:\v1\users\(userId):blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="userId">attributes.uriParams.'userId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  message: "deleted sucessfully"
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="delete:\v3\courses\(courseId):blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  message: "deleted sucessfully"
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="patch:\v1\catalog\categories\(categoryType)\(categoryId):application\json:blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="categoryType">attributes.uriParams.'categoryType'</ee:set-variable>
+                <ee:set-variable variableName="categoryId">attributes.uriParams.'categoryId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  id: "cat123",
+  dataSourceId: "ds_001",
+  parentId: "root_01",
+  categoryId: "mathCategory",
+  title: "Mathematics Category",
+  description: "Category for all Math related courses",
+  "type": "Course",
+  frontPage: true,
+  available: true,
+  restricted: false,
+  institutionRoleIds: {
+    empty: true
+  },
+  created: "2025-09-17T09:05:58.379Z"
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="patch:\v1\courses\(courseId)\meetings\(meetingId)\users\(userId):application\json:blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
+                <ee:set-variable variableName="meetingId">attributes.uriParams.'meetingId'</ee:set-variable>
+                <ee:set-variable variableName="userId">attributes.uriParams.'userId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  id: 456,
+  meetingId: "_987_1",
+  userId: "_123_1",
+  status: "Absent",
+  modifiedByUserId: "adminUser",
+  createdTime: "2025-09-17T08:02:06.750Z",
+  modifiedTime: "2025-09-17T08:10:45.123Z"
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="patch:\v1\courses\(courseId)\meetings\(meetingId):application\json:blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
+                <ee:set-variable variableName="meetingId">attributes.uriParams.'meetingId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  id: 12345,
+  courseId: "_123_1",
+  title: "Weekly Math Meeting",
+  description: "Discussion about upcoming assignments",
+  start: "2025-09-17T06:59:14.305Z",
+  end: "2025-09-17T07:59:14.305Z",
+  externalLink: "https://example.com/meeting-link"
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="patch:\v1\courses\(courseId)\users\(userId):application\json:blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
+                <ee:set-variable variableName="userId">attributes.uriParams.'userId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  id: "string",
+  userId: "string",
+  user: {
+    id: "string",
+    uuid: "string",
+    externalId: "string",
+    dataSourceId: "string",
+    userName: "string",
+    studentId: "string",
+    educationLevel: "K8",
+    gender: "Female",
+    pronouns: "string",
+    birthDate: "2025-09-17T09:44:59.763Z",
+    created: "2025-09-17T09:44:59.763Z",
+    modified: "2025-09-17T09:44:59.763Z",
+    lastLogin: "2025-09-17T09:44:59.763Z",
+    institutionRoleIds: {
+      empty: true
+    },
+    systemRoleIds: {
+      empty: true
+    },
+    availability: {
+      available: "Yes"
+    },
+    name: {
+      given: "string",
+      family: "string",
+      middle: "string",
+      other: "string",
+      suffix: "string",
+      title: "string",
+      preferredDisplayName: "GivenName"
+    },
+    job: {
+      title: "string",
+      department: "string",
+      company: "string"
+    },
+    contact: {
+      homePhone: "string",
+      mobilePhone: "string",
+      businessPhone: "string",
+      businessFax: "string",
+      email: "string",
+      institutionEmail: "string",
+      webPage: "string"
+    },
+    address: {
+      street1: "string",
+      street2: "string",
+      city: "string",
+      state: "string",
+      zipCode: "string",
+      country: "string"
+    },
+    locale: {
+      id: "string",
+      calendar: "Gregorian",
+      firstDayOfWeek: "0"
+    },
+    avatar: {
+      viewUrl: "string",
+      source: "Default",
+      uploadId: "string",
+      resourceId: "string"
+    },
+    pronunciation: "string",
+    nodes: {
+      empty: true
+    },
+    pronunciationAudio: {
+      viewUrl: "string",
+      uploadId: "string"
+    }
+  },
+  courseId: "string",
+  childCourseId: "string",
+  dataSourceId: "string",
+  created: "2025-09-17T09:44:59.763Z",
+  modified: "2025-09-17T09:44:59.763Z",
+  availability: {
+    available: "Yes"
+  },
+  courseRoleId: "Instructor",
+  bypassCourseAvailabilityUntil: "2025-09-17T09:44:59.763Z",
+  lastAccessed: "2025-09-17T09:44:59.763Z",
+  displayOrder: 0
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="patch:\v1\terms\(termId):application\json:blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="termId">attributes.uriParams.'termId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  id: "string",
+  externalId: "string",
+  dataSourceId: "string",
+  name: "string",
+  description: "<!-- {\"bbMLEditorVersion\":1} --><div data-bbid=\"bbml-editor-id_9c6a9556-80a5-496c-b10d-af2a9ab22d45\"> <h4>Header Large</h4>  <h5>Header Medium</h5>  <h6>Header Small</h6>  <p><strong>Bold&nbsp;</strong><em>Italic&nbsp;<span style=\"text-decoration: underline;\">Italic Underline</span></em></p> <ul>   <li><span style=\"text-decoration: underline;\"><em></em></span>Bullet 1</li>  <li>Bullet 2</li> </ul> <p>  <img src=\"@X@EmbeddedFile.requestUrlStub@X@bbcswebdav/xid-1217_1\">   <span>\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"</span> </p>  <p><span>&lt;braces test=\"values\" other=\"strange things\"&gt;</span></p> <p>Header Small</p> <ol>   <li>Number 1</li>   <li>Number 2</li> </ol>  <p>Just words followed by a formula</p>  <p><img align=\"middle\" alt=\"3 divided by 4 2 root of 7\" class=\"Wirisformula\" src=\"@X@EmbeddedFile.requestUrlStub@X@sessions/EA5F7FF3DF32D271D0E54AF0150D924A/anonymous/wiris/49728c9f5b4091622e2f4d183d857d35.png\" data-mathml=\"«math xmlns=¨http://www.w3.org/1998/Math/MathML¨»«mn»3«/mn»«mo»/«/mo»«mn»4«/mn»«mroot»«mn»7«/mn»«mn»2«/mn»«/mroot»«/math»\"></p> <p><a href=\"http://www.blackboard.com\">Blackboard</a></p> </div>",
+  availability: {
+    available: "Yes",
+    duration: {
+      "type": "Continuous",
+      start: "2025-09-17T06:52:37.100Z",
+      end: "2025-09-17T06:52:37.100Z",
+      daysOfUse: 0
+    }
+  }
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="patch:\v1\users\(userId):application\json:blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="userId">attributes.uriParams.'userId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  id: "string",
+  uuid: "string",
+  externalId: "string",
+  dataSourceId: "string",
+  userName: "string",
+  studentId: "string",
+  educationLevel: "K8",
+  gender: "Female",
+  pronouns: "string",
+  birthDate: "2025-09-17T07:14:28.172Z",
+  created: "2025-09-17T07:14:28.172Z",
+  modified: "2025-09-17T07:14:28.172Z",
+  lastLogin: "2025-09-17T07:14:28.172Z",
+  institutionRoleIds: [
+    "string"
+  ],
+  systemRoleIds: [
+    "SystemAdmin"
+  ],
+  availability: {
+    available: "Yes"
+  },
+  name: {
+    given: "string",
+    family: "string",
+    middle: "string",
+    other: "string",
+    suffix: "string",
+    title: "string",
+    preferredDisplayName: "GivenName"
+  },
+  job: {
+    title: "string",
+    department: "string",
+    company: "string"
+  },
+  contact: {
+    homePhone: "string",
+    mobilePhone: "string",
+    businessPhone: "string",
+    businessFax: "string",
+    email: "string",
+    institutionEmail: "string",
+    webPage: "string"
+  },
+  address: {
+    street1: "string",
+    street2: "string",
+    city: "string",
+    state: "string",
+    zipCode: "string",
+    country: "string"
+  },
+  locale: {
+    id: "string",
+    calendar: "Gregorian",
+    firstDayOfWeek: "Sunday"
+  },
+  avatar: {
+    viewUrl: "string",
+    source: "Default",
+    uploadId: "string",
+    resourceId: "string"
+  },
+  pronunciation: "string",
+  nodes: [
+    {
+      id: "string",
+      externalId: "string",
+      title: "string",
+      description: "string",
+      parentId: "string"
+    }
+  ],
+  pronunciationAudio: {
+    viewUrl: "string",
+    uploadId: "string"
+  }
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="patch:\v3\courses\(courseId):application\json:blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  id: "string",
+  uuid: "string",
+  externalId: "string",
+  dataSourceId: "string",
+  courseId: "string",
+  name: "string",
+  description: "string",
+  created: "2025-09-17T06:43:07.264Z",
+  modified: "2025-09-17T06:43:07.264Z",
+  organization: true,
+  ultraStatus: "Undecided",
+  allowGuests: true,
+  allowObservers: true,
+  closedComplete: true,
+  termId: "string",
+  availability: {
+    available: "Yes",
+    duration: {
+      "type": "Continuous",
+      start: "2025-09-17T06:43:07.264Z",
+      end: "2025-09-17T06:43:07.264Z",
+      daysOfUse: 0
+    }
+  },
+  enrollment: {
+    "type": "InstructorLed",
+    start: "2025-09-17T06:43:07.264Z",
+    end: "2025-09-17T06:43:07.264Z",
+    accessCode: "string"
+  },
+  locale: {
+    id: "string",
+    force: true
+  },
+  hasChildren: true,
+  parentId: "string",
+  externalAccessUrl: "string",
+  guestAccessUrl: "string",
+  copyHistory: {
+    empty: true
+  }
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="get:\v1\calendars\items:blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  results: [
+    {
+      id: "string",
+      "type": "Course",
+      calendarId: "string",
+      calendarName: "string",
+      title: "string",
+      description: "string",
+      location: "string",
+      start: "2025-09-16T09:58:31.643Z",
+      end: "2025-09-16T09:58:31.643Z",
+      modified: "2025-09-16T09:58:31.643Z",
+      color: "string",
+      disableResizing: true,
+      createdByUserId: "string",
+      dynamicCalendarItemProps: {
+        attemptable: true,
+        categoryId: "string",
+        dateRangeLimited: true,
+        eventType: "string",
+        gradable: true
+      },
+      recurrence: {
+        count: 0,
+        frequency: "Monthly",
+        interval: 0,
+        monthRepeatDay: 0,
+        monthPosition: 0,
+        originalStart: "2025-09-16T09:58:31.643Z",
+        originalEnd: "2025-09-16T09:58:31.643Z",
+        repeatBroken: true,
+        repeatDay: "Sunday",
+        until: "2025-09-16T09:58:31.643Z",
+        weekDays: [
+          "Sunday"
+        ]
+      },
+      ltiLaunchDeepLink: {
+        placementHandle: "string",
+        uuid: "string",
+        url: "string",
+        title: "string",
+        customParameters: {
+          key1: "value1",
+          key2: "value2"
+        }
+      }
+    }
+  ],
+  paging: {
+    nextPage: "string"
+  }
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="get:\v1\catalog\categories\(categoryType):blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="categoryType">attributes.uriParams.'categoryType'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  results: [
+    {
+      id: "string",
+      dataSourceId: "string",
+      parentId: "string",
+      categoryId: "string",
+      title: "string",
+      description: "string",
+      "type": "Course",
+      frontPage: true,
+      available: true,
+      restricted: true,
+      institutionRoleIds: [
+        "string"
+      ],
+      created: "2025-09-15T05:03:30.002Z"
+    }
+  ],
+  paging: {
+    nextPage: "string"
+  }
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="get:\v1\catalog\categories\(categoryType)\(categoryId):blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="categoryType">attributes.uriParams.'categoryType'</ee:set-variable>
+                <ee:set-variable variableName="categoryId">attributes.uriParams.'categoryId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  id: "string",
+  dataSourceId: "string",
+  parentId: "string",
+  categoryId: "string",
+  title: "string",
+  description: "string",
+  "type": "Course",
+  frontPage: true,
+  available: true,
+  restricted: true,
+  institutionRoleIds: {
+    empty: true
+  },
+  created: "2025-09-15T04:42:25.524Z"
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="get:\v1\catalog\categories\(categoryType)\(categoryId)\courses:blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="categoryType">attributes.uriParams.'categoryType'</ee:set-variable>
+                <ee:set-variable variableName="categoryId">attributes.uriParams.'categoryId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  results: [
+    {
+      categoryId: "string",
+      categoryType: "Course",
+      courseId: "string",
+      course: {
+        id: "string",
+        uuid: "string",
+        externalId: "string",
+        dataSourceId: "string",
+        courseId: "string",
+        name: "string",
+        description: "string",
+        created: "2025-09-15T05:10:32.810Z",
+        modified: "2025-09-15T05:10:32.810Z",
+        organization: true,
+        ultraStatus: "Undecided",
+        allowGuests: true,
+        allowObservers: true,
+        closedComplete: true,
+        termId: "string",
+        availability: {
+          available: "Yes",
+          duration: {
+            "type": "Continuous",
+            start: "2025-09-15T05:10:32.810Z",
+            end: "2025-09-15T05:10:32.810Z",
+            daysOfUse: 0
+          }
+        },
+        enrollment: {
+          "type": "InstructorLed",
+          start: "2025-09-15T05:10:32.810Z",
+          end: "2025-09-15T05:10:32.810Z",
+          accessCode: "string"
+        },
+        locale: {
+          id: "string",
+          force: true
+        },
+        hasChildren: true,
+        parentId: "string",
+        externalAccessUrl: "string",
+        guestAccessUrl: "string",
+        copyHistory: [
+          {
+            uuid: "string"
+          }
+        ]
+      },
+      dataSourceId: "string",
+      created: "2025-09-15T05:10:32.810Z"
+    }
+  ],
+  paging: {
+    nextPage: "string"
+  }
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="get:\v1\catalog\categories\(categoryType)\(parentId)\children:blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="categoryType">attributes.uriParams.'categoryType'</ee:set-variable>
+                <ee:set-variable variableName="parentId">attributes.uriParams.'parentId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  results: [
+    {
+      id: "string",
+      dataSourceId: "string",
+      parentId: "string",
+      categoryId: "string",
+      title: "string",
+      description: "string",
+      "type": "Course",
+      frontPage: true,
+      available: true,
+      restricted: true,
+      institutionRoleIds: [
+        "string"
+      ],
+      created: "2025-09-15T05:16:36.399Z"
+    }
+  ],
+  paging: {
+    nextPage: "string"
+  }
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="get:\v1\courseRoles:blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  results: [
+    {
+      id: "string",
+      roleId: "string",
+      nameForCourses: "string",
+      nameForOrganizations: "string",
+      description: "string",
+      custom: true,
+      actAsInstructor: true,
+      availability: {
+        available: "Course"
+      }
+    }
+  ],
+  paging: {
+    nextPage: "string"
+  }
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="get:\v1\courseRoles\(roleId):blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="roleId">attributes.uriParams.'roleId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  id: "string",
+  roleId: "string",
+  nameForCourses: "string",
+  nameForOrganizations: "string",
+  description: "string",
+  custom: true,
+  actAsInstructor: true,
+  availability: {
+    available: "Course"
+  }
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="get:\v1\courses\(courseId)\children:blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  results: [
+    {
+      id: "string",
+      parentId: "string",
+      dataSourceId: "string",
+      created: "2025-09-16T10:52:59.969Z",
+      childCourse: {
+        id: "string",
+        uuid: "string",
+        externalId: "string",
+        dataSourceId: "string",
+        courseId: "string",
+        name: "string",
+        description: "string",
+        created: "2025-09-16T10:52:59.969Z",
+        organization: true,
+        ultraStatus: "Undecided",
+        allowGuests: true,
+        readOnly: true,
+        termId: "string",
+        availability: {
+          available: "Yes",
+          duration: {
+            "type": "Continuous",
+            start: "2025-09-16T10:52:59.969Z",
+            end: "2025-09-16T10:52:59.969Z",
+            daysOfUse: 0
+          }
+        },
+        enrollment: {
+          "type": "InstructorLed",
+          start: "2025-09-16T10:52:59.969Z",
+          end: "2025-09-16T10:52:59.969Z",
+          accessCode: "string"
+        },
+        locale: {
+          id: "string",
+          force: true
+        },
+        hasChildren: true,
+        parentId: "string",
+        externalAccessUrl: "string",
+        guestAccessUrl: "string"
+      }
+    }
+  ],
+  paging: {
+    nextPage: "string"
+  }
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="get:\v1\courses\(courseId)\children\(childCourseId):blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
+                <ee:set-variable variableName="childCourseId">attributes.uriParams.'childCourseId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  id: "string",
+  parentId: "string",
+  dataSourceId: "string",
+  created: "2025-09-16T11:07:34.048Z",
+  childCourse: {
+    id: "string",
+    uuid: "string",
+    externalId: "string",
+    dataSourceId: "string",
+    courseId: "string",
+    name: "string",
+    description: "string",
+    created: "2025-09-16T11:07:34.048Z",
+    organization: true,
+    ultraStatus: "Undecided",
+    allowGuests: true,
+    readOnly: true,
+    termId: "string",
+    availability: {
+      available: "Yes",
+      duration: {
+        "type": "Continuous",
+        start: "2025-09-16T11:07:34.048Z",
+        end: "2025-09-16T11:07:34.048Z",
+        daysOfUse: 0
+      }
+    },
+    enrollment: {
+      "type": "InstructorLed",
+      start: "2025-09-16T11:07:34.048Z",
+      end: "2025-09-16T11:07:34.048Z",
+      accessCode: "string"
+    },
+    locale: {
+      id: "string",
+      force: true
+    },
+    hasChildren: true,
+    parentId: "string",
+    externalAccessUrl: "string",
+    guestAccessUrl: "string"
+  }
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="get:\v1\courses\(courseId)\gradebook\categories:blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  results: [
+    {
+      id: "string",
+      title: "string"
+    }
+  ],
+  paging: {
+    nextPage: "string"
+  }
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="get:\v1\courses\(courseId)\meetings:blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  results: [
+    {
+      id: 0,
+      meetingId: "string",
+      userId: "string",
+      status: "Absent",
+      modifiedByUserId: "string",
+      createdTime: "2025-09-12T05:38:57.665Z",
+      modifiedTime: "2025-09-12T05:38:57.665Z"
+    }
+  ],
+  paging: {
+    nextPage: "string"
+  }
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="get:\v1\courses\(courseId)\meetings\users\(userId):blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
+                <ee:set-variable variableName="userId">attributes.uriParams.'userId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  results: [
+    {
+      id: 0,
+      meetingId: "string",
+      userId: "string",
+      status: "Absent",
+      modifiedByUserId: "string",
+      createdTime: "2025-09-12T05:38:57.665Z",
+      modifiedTime: "2025-09-12T05:38:57.665Z"
+    }
+  ],
+  paging: {
+    nextPage: "string"
+  }
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="get:\v1\courses\(courseId)\meetings\(meetingId)\users:blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
+                <ee:set-variable variableName="meetingId">attributes.uriParams.'meetingId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  results: [
+    {
+      id: 0,
+      meetingId: "string",
+      userId: "string",
+      status: "Absent",
+      modifiedByUserId: "string",
+      createdTime: "2025-09-12T05:38:57.665Z",
+      modifiedTime: "2025-09-12T05:38:57.665Z"
+    }
+  ],
+  paging: {
+    nextPage: "string"
+  }
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="get:\v1\courses\(courseId)\meetings\(meetingId)\users\(userId):blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
+                <ee:set-variable variableName="meetingId">attributes.uriParams.'meetingId'</ee:set-variable>
+                <ee:set-variable variableName="userId">attributes.uriParams.'userId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  id: 0,
+  meetingId: "string",
+  userId: "string",
+  status: "Absent",
+  modifiedByUserId: "string",
+  createdTime: "2025-09-12T07:24:47.789Z",
+  modifiedTime: "2025-09-12T07:24:47.789Z"
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="get:\v1\courses\(courseId)\users:blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  results: [
+    {
+      id: "12345",
+      userId: "67890",
+      courseRoleId: "student",
+      created: "2025-09-01T10:00:00Z",
+      modified: "2025-09-10T12:00:00Z",
+      availability: {
+        available: "Yes"
+      },
+      dataSourceId: "externalId:math101",
+      lastAccessed: "2025-09-05T15:00:00Z",
+      user: {
+        id: "67890",
+        userName: "jdoe",
+        studentId: "S123456",
+        externalId: "ext-67890"
+      }
+    }
+  ],
+  paging: {
+    nextPage: "string"
+  }
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="get:\v1\courses\(courseId)\users\(userId):blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
+                <ee:set-variable variableName="userId">attributes.uriParams.'userId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  id: "string",
+  userId: "userName:jsmith",
+  user: {
+    id: "string",
+    uuid: "915c7567d76d444abf1eed56aad3beb5",
+    externalId: "externalId:jsmith",
+    dataSourceId: "externalId:math101",
+    userName: "jsmith",
+    studentId: "123456",
+    educationLevel: "K8",
+    gender: "Female",
+    pronouns: "she/her",
+    birthDate: "2025-09-16T04:40:18.681Z",
+    created: "2025-09-16T04:40:18.681Z",
+    modified: "2025-09-16T04:40:18.681Z",
+    lastLogin: "2025-09-16T04:40:18.681Z",
+    institutionRoleIds: {},
+    systemRoleIds: {},
+    availability: {
+      available: "Yes"
+    }
+  }
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="get:\v1\institutionRoles:blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  results: [
+    {
+      id: "string",
+      roleId: "string",
+      name: "string",
+      description: "string",
+      custom: true
+    }
+  ],
+  paging: {
+    nextPage: "string"
+  }
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="get:\v1\institutionRoles\(roleId):blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="roleId">attributes.uriParams.'roleId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  id: "string",
+  roleId: "string",
+  name: "string",
+  description: "string",
+  custom: true
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="get:\v1\terms:blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  statusCode: "CONTINUE",
+  statusCodeValue: {}
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="get:\v1\terms\(termId):blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="termId">attributes.uriParams.'termId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  id: "string",
+  externalId: "string",
+  dataSourceId: "string",
+  name: "string",
+  description: "<!-- {\"bbMLEditorVersion\":1} --><div data-bbid=\"bbml-editor-id_9c6a9556-80a5-496c-b10d-af2a9ab22d45\"> <h4>Header Large</h4>  <h5>Header Medium</h5>  <h6>Header Small</h6>  <p><strong>Bold&nbsp;</strong><em>Italic&nbsp;<span style=\"text-decoration: underline;\">Italic Underline</span></em></p> <ul>   <li><span style=\"text-decoration: underline;\"><em></em></span>Bullet 1</li>  <li>Bullet 2</li> </ul> <p>  <img src=\"@X@EmbeddedFile.requestUrlStub@X@bbcswebdav/xid-1217_1\">   <span>\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"</span> </p>  <p><span>&lt;braces test=\"values\" other=\"strange things\"&gt;</span></p> <p>Header Small</p> <ol>   <li>Number 1</li>   <li>Number 2</li> </ol>  <p>Just words followed by a formula</p>  <p><img align=\"middle\" alt=\"3 divided by 4 2 root of 7\" class=\"Wirisformula\" src=\"@X@EmbeddedFile.requestUrlStub@X@sessions/EA5F7FF3DF32D271D0E54AF0150D924A/anonymous/wiris/49728c9f5b4091622e2f4d183d857d35.png\" data-mathml=\"«math xmlns=¨http://www.w3.org/1998/Math/MathML¨»«mn»3«/mn»«mo»/«/mo»«mn»4«/mn»«mroot»«mn»7«/mn»«mn»2«/mn»«/mroot»«/math»\"></p> <p><a href=\"http://www.blackboard.com\">Blackboard</a></p> </div>",
+  availability: {
+    available: "Yes",
+    duration: {
+      "type": "Continuous",
+      start: "2025-09-16T05:49:40.252Z",
+      end: "2025-09-16T05:49:40.252Z",
+      daysOfUse: 0
+    }
+  }
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="get:\v1\users:blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  results: [
+    {
+      id: "string",
+      uuid: "string",
+      externalId: "string",
+      dataSourceId: "string",
+      userName: "string",
+      studentId: "string",
+      educationLevel: "K8",
+      gender: "Female",
+      pronouns: "string",
+      birthDate: "2025-09-16T06:05:56.744Z",
+      created: "2025-09-16T06:05:56.744Z",
+      modified: "2025-09-16T06:05:56.744Z",
+      lastLogin: "2025-09-16T06:05:56.744Z",
+      institutionRoleIds: [
+        "string"
+      ],
+      systemRoleIds: [
+        "SystemAdmin"
+      ],
+      availability: {
+        available: "Yes"
+      },
+      name: {
+        given: "string",
+        family: "string",
+        middle: "string",
+        other: "string",
+        suffix: "string",
+        title: "string",
+        preferredDisplayName: "GivenName"
+      },
+      job: {
+        title: "string",
+        department: "string",
+        company: "string"
+      },
+      contact: {
+        homePhone: "string",
+        mobilePhone: "string",
+        businessPhone: "string",
+        businessFax: "string",
+        email: "string",
+        institutionEmail: "string",
+        webPage: "string"
+      },
+      address: {
+        street1: "string",
+        street2: "string",
+        city: "string",
+        state: "string",
+        zipCode: "string",
+        country: "string"
+      },
+      locale: {
+        id: "string",
+        calendar: "Gregorian",
+        firstDayOfWeek: "Sunday"
+      },
+      avatar: {
+        viewUrl: "string",
+        source: "Default",
+        uploadId: "string",
+        resourceId: "string"
+      },
+      pronunciation: "string",
+      nodes: [
+        {
+          id: "string",
+          externalId: "string",
+          title: "string",
+          description: "string",
+          parentId: "string"
+        }
+      ],
+      pronunciationAudio: {
+        viewUrl: "string",
+        uploadId: "string"
+      }
+    }
+  ],
+  paging: {
+    nextPage: "string"
+  }
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="get:\v1\users\(userId):blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="userId">attributes.uriParams.'userId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  id: "string",
+  uuid: "string",
+  externalId: "string",
+  dataSourceId: "string",
+  userName: "string",
+  studentId: "string",
+  educationLevel: "K8",
+  gender: "Female",
+  pronouns: "string",
+  birthDate: "2025-09-16T07:30:20.313Z",
+  created: "2025-09-16T07:30:20.313Z",
+  modified: "2025-09-16T07:30:20.313Z",
+  lastLogin: "2025-09-16T07:30:20.313Z",
+  institutionRoleIds: [
+    "string"
+  ],
+  systemRoleIds: [
+    "SystemAdmin"
+  ],
+  availability: {
+    available: "Yes"
+  },
+  name: {
+    given: "string",
+    family: "string",
+    middle: "string",
+    other: "string",
+    suffix: "string",
+    title: "string",
+    preferredDisplayName: "GivenName"
+  },
+  job: {
+    title: "string",
+    department: "string",
+    company: "string"
+  },
+  contact: {
+    homePhone: "string",
+    mobilePhone: "string",
+    businessPhone: "string",
+    businessFax: "string",
+    email: "string",
+    institutionEmail: "string",
+    webPage: "string"
+  },
+  address: {
+    street1: "string",
+    street2: "string",
+    city: "string",
+    state: "string",
+    zipCode: "string",
+    country: "string"
+  },
+  locale: {
+    id: "string",
+    calendar: "Gregorian",
+    firstDayOfWeek: "Sunday"
+  },
+  avatar: {
+    viewUrl: "string",
+    source: "Default",
+    uploadId: "string",
+    resourceId: "string"
+  },
+  pronunciation: "string",
+  nodes: [
+    {
+      id: "string",
+      externalId: "string",
+      title: "string",
+      description: "string",
+      parentId: "string"
+    }
+  ],
+  pronunciationAudio: {
+    viewUrl: "string",
+    uploadId: "string"
+  }
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="get:\v1\users\(userId)\courses:blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="userId">attributes.uriParams.'userId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  results: [
+    {
+      id: "enroll_001",
+      userId: "_123_1",
+      courseId: "courseId:math101",
+      courseRoleId: "student",
+      created: "2025-09-01T10:00:00Z",
+      modified: "2025-09-05T15:30:00Z",
+      lastAccessed: "2025-09-10T08:45:00Z",
+      availability: {
+        available: "Yes"
+      }
+    }, 
+    {
+      id: "enroll_002",
+      userId: "_123_1",
+      courseId: "courseId:eng202",
+      courseRoleId: "teacher",
+      created: "2025-08-15T09:00:00Z",
+      modified: "2025-09-01T12:00:00Z",
+      availability: {
+        available: "No"
+      }
+    }
+  ],
+  paging: {
+    nextPage: "string"
+  }
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="get:\v2\courses\(courseId)\gradebook\columns:blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  results: [
+    {
+      id: "string",
+      externalId: "string",
+      externalToolId: "string",
+      name: "string",
+      displayName: "string",
+      description: "string",
+      externalGrade: true,
+      created: "2025-09-15T10:03:25.942Z",
+      modified: "2025-09-15T10:03:25.942Z",
+      contentId: "string",
+      score: {
+        possible: 0
+      },
+      availability: {
+        available: "Yes"
+      },
+      grading: {
+        "type": "Attempts",
+        due: "2025-09-15T10:03:25.942Z",
+        attemptsAllowed: 0,
+        scoringModel: "Last",
+        schemaId: "string",
+        anonymousGrading: {
+          "type": "None",
+          releaseAfter: "2025-09-15T10:03:25.942Z"
+        },
+        rubricAssociations: [
+          {
+            id: "string",
+            rubricId: "string",
+            associationEntity: {
+              gradebookColumnId: "string",
+              questionId: "string"
+            },
+            usedForGrading: true,
+            rubricVisibility: "Disabled",
+            links: [
+              {
+                href: "string",
+                rel: "string",
+                title: "string",
+                "type": "string"
+              }
+            ]
+          }
+        ]
+      },
+      gradebookCategoryId: "string",
+      formula: {
+        formula: "string",
+        aliases: {
+          key1: "value1",
+          key2: "value2"
+        }
+      },
+      includeInCalculations: true,
+      showStatisticsToStudents: true,
+      scoreProviderHandle: "string",
+      learningOutcome: {
+        signature: true
+      }
+    }
+  ],
+  paging: {
+    nextPage: "string"
+  }
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="get:\v2\courses\(courseId)\gradebook\columns\(columnId):blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
+                <ee:set-variable variableName="columnId">attributes.uriParams.'columnId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  id: "string",
+  externalId: "string",
+  externalToolId: "string",
+  name: "string",
+  displayName: "string",
+  description: "string",
+  externalGrade: true,
+  created: "2025-09-15T05:57:32.030Z",
+  modified: "2025-09-15T05:57:32.030Z",
+  contentId: "string",
+  score: {
+    possible: 0
+  },
+  availability: {
+    available: "Yes"
+  },
+  grading: {
+    "type": "Attempts",
+    due: "2025-09-15T05:57:32.030Z",
+    attemptsAllowed: 0,
+    scoringModel: "Last",
+    schemaId: "string",
+    anonymousGrading: {
+      "type": "None",
+      releaseAfter: "2025-09-15T05:57:32.030Z"
+    },
+    rubricAssociations: {
+      empty: true
+    }
+  },
+  gradebookCategoryId: "string",
+  formula: {
+    formula: "string",
+    aliases: {
+      empty: true
+    }
+  },
+  includeInCalculations: true,
+  showStatisticsToStudents: true,
+  scoreProviderHandle: "string",
+  learningOutcome: {
+    signature: true,
+    columnScale: {
+      empty: true
+    }
+  }
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="get:\v2\courses\(courseId)\gradebook\columns\(columnId)\users:blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
+                <ee:set-variable variableName="columnId">attributes.uriParams.'columnId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  results: [
+    {
+      userId: "string",
+      columnId: "string",
+      status: "Graded",
+      displayGrade: {
+        scaleType: "Percent",
+        score: 0,
+        possible: 0,
+        text: "string"
+      },
+      text: "string",
+      score: 0,
+      overridden: "2025-09-15T11:09:09.978Z",
+      notes: "string",
+      feedback: "string",
+      exempt: true,
+      corrupt: true,
+      gradeNotationId: "string",
+      changeIndex: 0,
+      firstRelevantDate: "2025-09-15T11:09:09.978Z",
+      lastRelevantDate: "2025-09-15T11:09:09.978Z"
+    }
+  ],
+  paging: {
+    nextPage: "string"
+  }
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="get:\v2\courses\(courseId)\gradebook\columns\(columnId)\users\(userId):blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
+                <ee:set-variable variableName="columnId">attributes.uriParams.'columnId'</ee:set-variable>
+                <ee:set-variable variableName="userId">attributes.uriParams.'userId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  userId: "string",
+  columnId: "string",
+  status: "Graded",
+  displayGrade: {
+    scaleType: "Percent",
+    score: 0,
+    possible: 0,
+    text: "string"
+  },
+  text: "string",
+  score: 0,
+  overridden: "2025-09-15T11:02:48.053Z",
+  notes: "string",
+  feedback: "string",
+  exempt: true,
+  corrupt: true,
+  gradeNotationId: "string",
+  changeIndex: 0,
+  firstRelevantDate: "2025-09-15T11:02:48.053Z",
+  lastRelevantDate: "2025-09-15T11:02:48.053Z"
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="get:\v2\courses\(courseId)\gradebook\users\(userId):blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
+                <ee:set-variable variableName="userId">attributes.uriParams.'userId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  results: [
+    {
+      userId: "string",
+      columnId: "string",
+      status: "Graded",
+      displayGrade: {
+        scaleType: "Percent",
+        score: 0,
+        possible: 0,
+        text: "string"
+      },
+      text: "string",
+      score: 0,
+      overridden: "2025-09-15T11:16:34.541Z",
+      notes: "string",
+      feedback: "string",
+      exempt: true,
+      corrupt: true,
+      gradeNotationId: "string",
+      changeIndex: 0,
+      firstRelevantDate: "2025-09-15T11:16:34.541Z",
+      lastRelevantDate: "2025-09-15T11:16:34.541Z"
+    }
+  ],
+  paging: {
+    nextPage: "string"
+  }
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="get:\v3\courses:blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  results: [
+    {
+      id: "12345",
+      courseId: "CS101",
+      name: "Introduction to Computer Science",
+      description: "Basic CS fundamentals",
+      organization: false,
+      readOnly: false,
+      termId: "2025TERM01",
+      availability: {
+        available: "Yes",
+        duration: {
+          "type": "Continuous",
+          start: "2025-01-01T00:00:00Z",
+          end: "2025-12-31T23:59:59Z",
+          daysOfUse: 365
+        }
+      },
+      uuid: "uuid-1234",
+      externalId: "ext-CS101",
+      dataSourceId: "ds-001",
+      created: "2025-01-01T00:00:00Z",
+      modified: "2025-09-12T05:38:57.665Z",
+      allowGuests: true
+    }
+  ],
+  paging: {
+    nextPage: "/learn/api/public/v3/courses?offset=10&limit=10"
+  }
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="get:\v3\courses\(courseId):blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  id: "string",
+  uuid: "string",
+  externalId: "string",
+  dataSourceId: "string",
+  courseId: "string",
+  name: "string",
+  description: "string",
+  created: "2025-09-16T11:22:11.689Z",
+  modified: "2025-09-16T11:22:11.689Z",
+  organization: true,
+  ultraStatus: "Undecided",
+  allowGuests: true,
+  allowObservers: true,
+  closedComplete: true,
+  termId: "string",
+  availability: {
+    available: "Yes",
+    duration: {
+      "type": "Continuous",
+      start: "2025-09-16T11:22:11.689Z",
+      end: "2025-09-16T11:22:11.689Z",
+      daysOfUse: 0
+    }
+  },
+  enrollment: {
+    "type": "InstructorLed",
+    start: "2025-09-16T11:22:11.689Z",
+    end: "2025-09-16T11:22:11.689Z",
+    accessCode: "string"
+  },
+  locale: {
+    id: "string",
+    force: true
+  },
+  hasChildren: true,
+  parentId: "string",
+  externalAccessUrl: "string",
+  guestAccessUrl: "string",
+  copyHistory: [
+    {
+      uuid: "string"
+    }
+  ]
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="post:\oauth2\token:application\x-www-form-urlencoded:blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  access_token: "abc123tokenexample",
+  token_type: "bearer",
+  expires_in: 3600,
+  scope: "read write delete"
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="post:\v1\catalog\categories\(categoryType):application\json:blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="categoryType">attributes.uriParams.'categoryType'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  id: "string",
+  dataSourceId: "string",
+  parentId: "string",
+  categoryId: "string",
+  title: "string",
+  description: "string",
+  "type": "Course",
+  frontPage: true,
+  available: true,
+  restricted: true,
+  institutionRoleIds: [
+    "string"
+  ],
+  created: "2025-09-16T09:39:14.403Z"
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="post:\v1\courses\(courseId)\meetings\(meetingId)\users:application\json:blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
+                <ee:set-variable variableName="meetingId">attributes.uriParams.'meetingId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  id: 0,
+  meetingId: "string",
+  userId: "string",
+  status: "Absent",
+  modifiedByUserId: "string",
+  createdTime: "2025-09-16T09:30:27.257Z",
+  modifiedTime: "2025-09-16T09:30:27.257Z"
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="post:\v1\courses\(courseId)\meetings:application\json:blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  id: 0,
+  courseId: "string",
+  title: "string",
+  description: "string",
+  start: "2025-09-16T05:58:12.959Z",
+  end: "2025-09-16T05:58:12.959Z",
+  externalLink: "string"
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="post:\v1\terms:application\json:blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  id: "string",
+  externalId: "string",
+  dataSourceId: "string",
+  name: "string",
+  description: "<!-- {\"bbMLEditorVersion\":1} --><div data-bbid=\"bbml-editor-id_9c6a9556-80a5-496c-b10d-af2a9ab22d45\"> <h4>Header Large</h4>  <h5>Header Medium</h5>  <h6>Header Small</h6>  <p><strong>Bold&nbsp;</strong><em>Italic&nbsp;<span style=\"text-decoration: underline;\">Italic Underline</span></em></p> <ul>   <li><span style=\"text-decoration: underline;\"><em></em></span>Bullet 1</li>  <li>Bullet 2</li> </ul> <p>  <img src=\"@X@EmbeddedFile.requestUrlStub@X@bbcswebdav/xid-1217_1\">   <span>\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"</span> </p>  <p><span>&lt;braces test=\"values\" other=\"strange things\"&gt;</span></p> <p>Header Small</p> <ol>   <li>Number 1</li>   <li>Number 2</li> </ol>  <p>Just words followed by a formula</p>  <p><img align=\"middle\" alt=\"3 divided by 4 2 root of 7\" class=\"Wirisformula\" src=\"@X@EmbeddedFile.requestUrlStub@X@sessions/EA5F7FF3DF32D271D0E54AF0150D924A/anonymous/wiris/49728c9f5b4091622e2f4d183d857d35.png\" data-mathml=\"«math xmlns=¨http://www.w3.org/1998/Math/MathML¨»«mn»3«/mn»«mo»/«/mo»«mn»4«/mn»«mroot»«mn»7«/mn»«mn»2«/mn»«/mroot»«/math»\"></p> <p><a href=\"http://www.blackboard.com\">Blackboard</a></p> </div>",
+  availability: {
+    available: "Yes",
+    duration: {
+      "type": "Continuous",
+      start: "2025-09-16T11:20:13.339Z",
+      end: "2025-09-16T11:20:13.339Z",
+      daysOfUse: 0
+    }
+  }
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="post:\v1\users:application\json:blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  id: "string",
+  uuid: "string",
+  externalId: "string",
+  dataSourceId: "string",
+  userName: "string",
+  studentId: "string",
+  educationLevel: "K8",
+  gender: "Female",
+  pronouns: "string",
+  birthDate: "2025-09-16T11:29:57.287Z",
+  created: "2025-09-16T11:29:57.287Z",
+  modified: "2025-09-16T11:29:57.287Z",
+  lastLogin: "2025-09-16T11:29:57.287Z",
+  institutionRoleIds: [
+    "string"
+  ],
+  systemRoleIds: [
+    "SystemAdmin"
+  ],
+  availability: {
+    available: "Yes"
+  },
+  name: {
+    given: "string",
+    family: "string",
+    middle: "string",
+    other: "string",
+    suffix: "string",
+    title: "string",
+    preferredDisplayName: "GivenName"
+  },
+  job: {
+    title: "string",
+    department: "string",
+    company: "string"
+  },
+  contact: {
+    homePhone: "string",
+    mobilePhone: "string",
+    businessPhone: "string",
+    businessFax: "string",
+    email: "string",
+    institutionEmail: "string",
+    webPage: "string"
+  },
+  address: {
+    street1: "string",
+    street2: "string",
+    city: "string",
+    state: "string",
+    zipCode: "string",
+    country: "string"
+  },
+  locale: {
+    id: "string",
+    calendar: "Gregorian",
+    firstDayOfWeek: "Sunday"
+  },
+  avatar: {
+    viewUrl: "string",
+    source: "Default",
+    uploadId: "string",
+    resourceId: "string"
+  },
+  pronunciation: "string",
+  nodes: [
+    {
+      id: "string",
+      externalId: "string",
+      title: "string",
+      description: "string",
+      parentId: "string"
+    }
+  ],
+  pronunciationAudio: {
+    viewUrl: "string",
+    uploadId: "string"
+  }
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="post:\v3\courses:application\json:blackboard-rest-api-config">
+        <ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  id: "string",
+  uuid: "string",
+  externalId: "string",
+  dataSourceId: "string",
+  courseId: "string",
+  name: "string",
+  description: "string",
+  created: "2025-09-16T09:49:40.120Z",
+  modified: "2025-09-16T09:49:40.120Z",
+  organization: true,
+  ultraStatus: "Undecided",
+  allowGuests: true,
+  allowObservers: true,
+  closedComplete: true,
+  termId: "string",
+  availability: {
+    available: "Yes",
+    duration: {
+      "type": "Continuous",
+      start: "2025-09-16T09:49:40.120Z",
+      end: "2025-09-16T09:49:40.120Z",
+      daysOfUse: 0
+    }
+  },
+  enrollment: {
+    "type": "InstructorLed",
+    start: "2025-09-16T09:49:40.120Z",
+    end: "2025-09-16T09:49:40.120Z",
+    accessCode: "string"
+  },
+  locale: {
+    id: "string",
+    force: true
+  },
+  hasChildren: true,
+  parentId: "string",
+  externalAccessUrl: "string",
+  guestAccessUrl: "string",
+  copyHistory: [
+    {
+      uuid: "string"
+    }
+  ]
+} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+</mule>

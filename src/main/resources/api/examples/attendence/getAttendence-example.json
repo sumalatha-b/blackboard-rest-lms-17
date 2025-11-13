@@ -1,0 +1,16 @@
+{
+  "results": [
+    {
+      "id": 0,
+      "meetingId": "string",
+      "userId": "string",
+      "status": "Absent",
+      "modifiedByUserId": "string",
+      "createdTime": "2025-09-12T05:38:57.665Z",
+      "modifiedTime": "2025-09-12T05:38:57.665Z"
+    }
+  ],
+  "paging": {
+    "nextPage": "string"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "results": [
+    {
+      "id": "string",
+      "dataSourceId": "string",
+      "parentId": "string",
+      "categoryId": "string",
+      "title": "string",
+      "description": "string",
+      "type": "Course",
+      "frontPage": true,
+      "available": true,
+      "restricted": true,
+      "institutionRoleIds": [
+        "string"
+      ],
+      "created": "2025-09-15T05:03:30.002Z"
+    }
+  ],
+  "paging": {
+    "nextPage": "string"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "userId": "string",
+  "columnId": "string",
+  "status": "Graded",
+  "displayGrade": {
+    "scaleType": "Percent",
+    "score": 0,
+    "possible": 0,
+    "text": "string"
+  },
+  "text": "string",
+  "score": 0,
+  "overridden": "2025-09-15T11:02:48.053Z",
+  "notes": "string",
+  "feedback": "string",
+  "exempt": true,
+  "corrupt": true,
+  "gradeNotationId": "string",
+  "changeIndex": 0,
+  "firstRelevantDate": "2025-09-15T11:02:48.053Z",
+  "lastRelevantDate": "2025-09-15T11:02:48.053Z"
+}

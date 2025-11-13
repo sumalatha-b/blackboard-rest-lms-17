@@ -1,0 +1,54 @@
+{
+  "results": [
+    {
+      "id": "string",
+      "type": "Course",
+      "calendarId": "string",
+      "calendarName": "string",
+      "title": "string",
+      "description": "string",
+      "location": "string",
+      "start": "2025-09-16T09:58:31.643Z",
+      "end": "2025-09-16T09:58:31.643Z",
+      "modified": "2025-09-16T09:58:31.643Z",
+      "color": "string",
+      "disableResizing": true,
+      "createdByUserId": "string",
+      "dynamicCalendarItemProps": {
+        "attemptable": true,
+        "categoryId": "string",
+        "dateRangeLimited": true,
+        "eventType": "string",
+        "gradable": true
+      },
+      "recurrence": {
+        "count": 0,
+        "frequency": "Monthly",
+        "interval": 0,
+        "monthRepeatDay": 0,
+        "monthPosition": 0,
+        "originalStart": "2025-09-16T09:58:31.643Z",
+        "originalEnd": "2025-09-16T09:58:31.643Z",
+        "repeatBroken": true,
+        "repeatDay": "Sunday",
+        "until": "2025-09-16T09:58:31.643Z",
+        "weekDays": [
+          "Sunday"
+        ]
+      },
+      "ltiLaunchDeepLink": {
+        "placementHandle": "string",
+        "uuid": "string",
+        "url": "string",
+        "title": "string",
+        "customParameters": {
+          "key1": "value1",
+          "key2": "value2"
+        }
+      }
+    }
+  ],
+  "paging": {
+    "nextPage": "string"
+  }
+}

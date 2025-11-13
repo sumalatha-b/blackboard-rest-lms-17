@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "userId": "string",
+      "columnId": "string",
+      "status": "Graded",
+      "displayGrade": {
+        "scaleType": "Percent",
+        "score": 0,
+        "possible": 0,
+        "text": "string"
+      },
+      "text": "string",
+      "score": 0,
+      "overridden": "2025-09-15T11:16:34.541Z",
+      "notes": "string",
+      "feedback": "string",
+      "exempt": true,
+      "corrupt": true,
+      "gradeNotationId": "string",
+      "changeIndex": 0,
+      "firstRelevantDate": "2025-09-15T11:16:34.541Z",
+      "lastRelevantDate": "2025-09-15T11:16:34.541Z"
+    }
+  ],
+  "paging": {
+    "nextPage": "string"
+  }
+}

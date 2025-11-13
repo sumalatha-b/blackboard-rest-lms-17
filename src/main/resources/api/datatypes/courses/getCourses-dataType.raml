@@ -1,0 +1,36 @@
+#%RAML 1.0 DataType
+type: object
+properties:
+  results:
+    type: array
+    items:
+      type: object
+      properties:
+        id: string
+        courseId: string
+        name: string
+        description?: string
+        organization?: boolean
+        readOnly?: boolean
+        termId?: string
+        availability?:
+          type: object
+          properties:
+            available?: string
+            duration?:
+              type: object
+              properties:
+                type?: string
+                start?: datetime
+                end?: datetime
+                daysOfUse?: integer
+        uuid?: string
+        externalId?: string
+        dataSourceId?: string
+        created?: datetime
+        modified?: datetime
+        allowGuests?: boolean
+  paging:
+    type: object
+    properties:
+      nextPage?: string
