@@ -193,6 +193,31 @@ types:
           application/json:
             type: createCourseMeetingResponse
             example: !include /examples/attendence/createCourseMeetingResponse-example.json
+  patch:
+    is: [commonHeaders,errorResponse]
+    displayName: Attendance - Update Course Meeting
+    description: Update the Course Meeting for the given Course/Organization.  
+    body:
+      application/json:
+        type: CourseMeetingUpdate
+        example:
+          courseId: "_123_1"
+          title: "Weekly Math Meeting"
+          description: "Discussion about upcoming assignments"
+          start: "2025-09-17T06:59:14.277Z"
+          end: "2025-09-17T07:59:14.277Z"
+          externalLink: "https://example.com/meeting-link"
+    queryParameters:
+      fields:
+        type: string
+        required: false
+        description: A comma-delimited list of fields to include in the response.
+    responses:
+      200:
+        body:
+          application/json:
+            type: courseMeetingResponse
+            example: !include /examples/attendence/courseMeetingResponse-example.json
 
 /v1/courses/{courseId}/meetings/{meetingId}/users/{userId}:
   uriParameters:
@@ -230,7 +255,7 @@ types:
             example: !include /examples/common/commonResponse-example.json
   patch:
     is: [commonHeaders,errorResponse]
-    displayName: Attendance - Update Course Meeting
+    displayName: Attendance - Update Attendance Record
     description: Update the attendance record for a specific user in a course meeting.
     queryParameters:
       fields?:
@@ -1400,43 +1425,7 @@ types:
             type: getUserMemberships
             example: !include /examples/courseMembership/getUserMemberships-example.json
 
-/v1/courses/{courseId}/meetings/{meetingId}:
-  uriParameters:
-    courseId:
-      type: string
-      description: The course or organization ID.
-      example: "_123_1"
-    meetingId:
-      type: string
-      description: The ID of the meeting to update.
-      example: "456"
-  patch:
-    is: [commonHeaders,errorResponse]
-    displayName: Attendance - Update Course Meeting
-    description: Update the Course Meeting for the given Course/Organization.  
-    body:
-      application/json:
-        type: CourseMeetingUpdate
-        example:
-          courseId: "_123_1"
-          title: "Weekly Math Meeting"
-          description: "Discussion about upcoming assignments"
-          start: "2025-09-17T06:59:14.277Z"
-          end: "2025-09-17T07:59:14.277Z"
-          externalLink: "https://example.com/meeting-link"
-    queryParameters:
-      fields:
-        type: string
-        required: false
-        description: A comma-delimited list of fields to include in the response.
-    responses:
-      200:
-        body:
-          application/json:
-            type: courseMeetingResponse
-            example: !include /examples/attendence/courseMeetingResponse-example.json
-
-/oauth2/token:
+/oauth2/token:  
   post:
     is: [commonHeaders,errorResponse]
     displayName: Token - AccessToken
