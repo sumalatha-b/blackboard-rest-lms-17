@@ -74,16 +74,6 @@ http://www.mulesoft.org/schema/mule/blackboard http://www.mulesoft.org/schema/mu
                 <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  message: "deleted sucessfully"
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="532c6ae7-da87-49f6-bd28-d4fd2e909cf2" name="accesstoken_Flow"/>
 		<blackboard:delete-v1-catalog-categories-category-type-category-id-courses-course-id doc:name="Course Category - Delete Category Membership" doc:id="91a9e8d9-7522-4456-86a5-81db29ef431b" categoryTypeUriParam="#[vars.categoryType]" categoryIdUriParam="#[vars.categoryId]" config-ref="Blackboard_Config" courseIdUriParam="#[vars.courseId]" correlationIdHeader="#[correlationId]"/>
     </flow>
@@ -95,16 +85,6 @@ output application/json
             </ee:variables>
         </ee:transform>
         <flow-ref doc:name="blackboard-token-subFlow" doc:id="f3a9694c-e8aa-4a80-8ed2-73e5dbbbe69f" name="accesstoken_Flow"/>
-		<ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  message: "deleted sucessfully"
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<blackboard:delete-v1-courses-course-id-children-child-course-id doc:name="Courses - Remove Child Course" doc:id="ea1f51e8-f8f2-4510-9ff1-fd5831f0e68b" courseIdUriParam="#[vars.courseId]" childCourseIdUriParam="#[vars.childCourseId]" config-ref="Blackboard_Config" correlationIdHeader="#[correlationId]"/>
     </flow>
     <flow name="delete:\v1\courses\(courseId)\meetings:blackboard-rest-api-config">
@@ -112,16 +92,6 @@ output application/json
             <ee:variables>
                 <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
             </ee:variables>
-        </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  message: "deleted sucessfully"
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
         </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="695fda12-4511-4c8f-bf2b-a4c1f00c7e79" name="accesstoken_Flow"/>
 		<blackboard:delete-v1-courses-course-id-meetings doc:name="Attendance - Delete Course Meeting" doc:id="bc5220ee-f8ef-4bbf-904a-ad3a06f32af8" config-ref="Blackboard_Config" courseIdUriParam="#[vars.courseId]" correlationIdHeader="#[correlationId]"/>
@@ -132,16 +102,6 @@ output application/json
                 <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
                 <ee:set-variable variableName="userId">attributes.uriParams.'userId'</ee:set-variable>
             </ee:variables>
-        </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  message: "deleted sucessfully"
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
         </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="e14838a3-e39c-46d3-86db-0c7280c2134f" name="accesstoken_Flow"/>
 		<blackboard:delete-v1-courses-course-id-meetings-users-user-id doc:name="Attendance - Delete All Attendance Records by Course and User Id" doc:id="013ceca5-31b7-4bfe-a066-1c9ff942c26a" courseIdUriParam="#[vars.courseId]" config-ref="Blackboard_Config" userIdUriParam="#[vars.userId]" correlationIdHeader="#[correlationId]"/>
@@ -154,16 +114,6 @@ output application/json
                 <ee:set-variable variableName="userId">attributes.uriParams.'userId'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  message: "deleted sucessfully"
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="ede47eaa-a144-4ae5-a24a-a8ee10145f8b" name="accesstoken_Flow"/>
 		<blackboard:delete-v1-courses-course-id-meetings-meeting-id-users-user-id doc:name="Attendance - Delete Attendance Record" doc:id="ffaeeb20-5b7a-4852-a060-d1ba05d8c562" config-ref="Blackboard_Config" courseIdUriParam="#[vars.courseId]" meetingIdUriParam="#[vars.meetingId]" userIdUriParam="#[vars.userId]" correlationIdHeader="#[correlationId]"/>
     </flow>
@@ -174,16 +124,6 @@ output application/json
                 <ee:set-variable variableName="userId">attributes.uriParams.'userId'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  message: "deleted sucessfully"
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="ef9ee2e3-1ace-4503-b4dc-40801b7c80eb" name="accesstoken_Flow"/>
 		<blackboard:delete-v1-courses-course-id-users-user-id doc:name="Course Membership - Delete Course Membership" doc:id="c3514967-84f2-4b7a-a63a-9a3499f3ae40" courseIdUriParam="#[vars.courseId]" config-ref="Blackboard_Config" userIdUriParam="#[vars.userId]" correlationIdHeader="#[correlationId]"/>
     </flow>
@@ -192,16 +132,6 @@ output application/json
             <ee:variables>
                 <ee:set-variable variableName="termId">attributes.uriParams.'termId'</ee:set-variable>
             </ee:variables>
-        </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  message: "deleted sucessfully"
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
         </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="60e3d265-97f0-456f-85b2-dedacdd2a04c" name="accesstoken_Flow"/>
 		<blackboard:delete-v1-terms-term-id doc:name="Terms - Delete Term" doc:id="0874ef7a-e6aa-4f5f-8af2-3544cf60c5f5" config-ref="Blackboard_Config" termIdUriParam="#[vars.termId]" correlationIdHeader="#[correlationId]"/>
@@ -212,16 +142,6 @@ output application/json
                 <ee:set-variable variableName="userId">attributes.uriParams.'userId'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  message: "deleted sucessfully"
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="b7ef129f-c1a4-463a-be24-a3bd8898cf45" name="accesstoken_Flow"/>
 		<blackboard:delete-v1-users-user-id doc:name="Users - Delete User" doc:id="e6006200-2963-494a-8346-360ff865ce6e" config-ref="Blackboard_Config" userIdUriParam="#[vars.userId]" correlationIdHeader="#[correlationId]"/>
     </flow>
@@ -230,16 +150,6 @@ output application/json
             <ee:variables>
                 <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
             </ee:variables>
-        </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  message: "deleted sucessfully"
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
         </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="cc368fd6-5c0f-417f-a7e0-a9adb5882687" name="accesstoken_Flow"/>
 		<blackboard:delete-v3-courses-course-id doc:name="Courses - Delete Course" doc:id="a3546141-b7ec-4e46-bc15-b4e50d03c342" config-ref="Blackboard_Config" courseIdUriParam="#[vars.courseId]" correlationIdHeader="#[correlationId]"/>
@@ -250,29 +160,6 @@ output application/json
                 <ee:set-variable variableName="categoryType">attributes.uriParams.'categoryType'</ee:set-variable>
                 <ee:set-variable variableName="categoryId">attributes.uriParams.'categoryId'</ee:set-variable>
             </ee:variables>
-        </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  id: "cat123",
-  dataSourceId: "ds_001",
-  parentId: "root_01",
-  categoryId: "mathCategory",
-  title: "Mathematics Category",
-  description: "Category for all Math related courses",
-  "type": "Course",
-  frontPage: true,
-  available: true,
-  restricted: false,
-  institutionRoleIds: {
-    empty: true
-  },
-  created: "2025-09-17T09:05:58.379Z"
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
         </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="1fc4e667-8571-4e19-98f3-519e71a4c17f" name="accesstoken_Flow"/>
 		<blackboard:patch-v1-catalog-categories-category-type-category-id doc:name="Course Category - Update Category" doc:id="af0e6774-8045-4c00-93ca-47cdd254cf05" categoryTypeUriParam="#[vars.categoryType]" config-ref="Blackboard_Config" categoryIdUriParam="#[vars.categoryId]" correlationIdHeader="#[correlationId]"/>
@@ -285,22 +172,6 @@ output application/json
                 <ee:set-variable variableName="userId">attributes.uriParams.'userId'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  id: 456,
-  meetingId: "_987_1",
-  userId: "_123_1",
-  status: "Absent",
-  modifiedByUserId: "adminUser",
-  createdTime: "2025-09-17T08:02:06.750Z",
-  modifiedTime: "2025-09-17T08:10:45.123Z"
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="9af88f4e-ea16-428f-b5f0-25456da999e1" name="accesstoken_Flow"/>
 		<blackboard:patch-v1-courses-course-id-meetings-meeting-id-users-user-id doc:name="Attendance - Update Attendance Record" doc:id="a84b51fd-3d0b-4e90-aaf5-1152e23f6a2e" courseIdUriParam="#[vars.courseId]" meetingIdUriParam="#[vars.meetingId]" config-ref="Blackboard_Config" userIdUriParam="#[vars.userId]" correlationIdHeader="#[correlationId]"/>
     </flow>
@@ -311,103 +182,6 @@ output application/json
                 <ee:set-variable variableName="userId">attributes.uriParams.'userId'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  id: "string",
-  userId: "string",
-  user: {
-    id: "string",
-    uuid: "string",
-    externalId: "string",
-    dataSourceId: "string",
-    userName: "string",
-    studentId: "string",
-    educationLevel: "K8",
-    gender: "Female",
-    pronouns: "string",
-    birthDate: "2025-09-17T09:44:59.763Z",
-    created: "2025-09-17T09:44:59.763Z",
-    modified: "2025-09-17T09:44:59.763Z",
-    lastLogin: "2025-09-17T09:44:59.763Z",
-    institutionRoleIds: {
-      empty: true
-    },
-    systemRoleIds: {
-      empty: true
-    },
-    availability: {
-      available: "Yes"
-    },
-    name: {
-      given: "string",
-      family: "string",
-      middle: "string",
-      other: "string",
-      suffix: "string",
-      title: "string",
-      preferredDisplayName: "GivenName"
-    },
-    job: {
-      title: "string",
-      department: "string",
-      company: "string"
-    },
-    contact: {
-      homePhone: "string",
-      mobilePhone: "string",
-      businessPhone: "string",
-      businessFax: "string",
-      email: "string",
-      institutionEmail: "string",
-      webPage: "string"
-    },
-    address: {
-      street1: "string",
-      street2: "string",
-      city: "string",
-      state: "string",
-      zipCode: "string",
-      country: "string"
-    },
-    locale: {
-      id: "string",
-      calendar: "Gregorian",
-      firstDayOfWeek: "0"
-    },
-    avatar: {
-      viewUrl: "string",
-      source: "Default",
-      uploadId: "string",
-      resourceId: "string"
-    },
-    pronunciation: "string",
-    nodes: {
-      empty: true
-    },
-    pronunciationAudio: {
-      viewUrl: "string",
-      uploadId: "string"
-    }
-  },
-  courseId: "string",
-  childCourseId: "string",
-  dataSourceId: "string",
-  created: "2025-09-17T09:44:59.763Z",
-  modified: "2025-09-17T09:44:59.763Z",
-  availability: {
-    available: "Yes"
-  },
-  courseRoleId: "Instructor",
-  bypassCourseAvailabilityUntil: "2025-09-17T09:44:59.763Z",
-  lastAccessed: "2025-09-17T09:44:59.763Z",
-  displayOrder: 0
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="548a3e3e-e895-473a-8a1a-7b3373c6c8a8" name="accesstoken_Flow"/>
 		<blackboard:patch-v1-courses-course-id-users-user-id doc:name="Course Membership - Update Course User Membership" doc:id="ea848535-adae-46e0-a813-d55a6be7afa0" courseIdUriParam="#[vars.courseId]" config-ref="Blackboard_Config" userIdUriParam="#[vars.userId]" correlationIdHeader="#[correlationId]"/>
     </flow>
@@ -416,29 +190,6 @@ output application/json
             <ee:variables>
                 <ee:set-variable variableName="termId">attributes.uriParams.'termId'</ee:set-variable>
             </ee:variables>
-        </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  id: "string",
-  externalId: "string",
-  dataSourceId: "string",
-  name: "string",
-  description: "<!-- {\"bbMLEditorVersion\":1} --><div data-bbid=\"bbml-editor-id_9c6a9556-80a5-496c-b10d-af2a9ab22d45\"> <h4>Header Large</h4>  <h5>Header Medium</h5>  <h6>Header Small</h6>  <p><strong>Bold&nbsp;</strong><em>Italic&nbsp;<span style=\"text-decoration: underline;\">Italic Underline</span></em></p> <ul>   <li><span style=\"text-decoration: underline;\"><em></em></span>Bullet 1</li>  <li>Bullet 2</li> </ul> <p>  <img src=\"@X@EmbeddedFile.requestUrlStub@X@bbcswebdav/xid-1217_1\">   <span>\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"</span> </p>  <p><span>&lt;braces test=\"values\" other=\"strange things\"&gt;</span></p> <p>Header Small</p> <ol>   <li>Number 1</li>   <li>Number 2</li> </ol>  <p>Just words followed by a formula</p>  <p><img align=\"middle\" alt=\"3 divided by 4 2 root of 7\" class=\"Wirisformula\" src=\"@X@EmbeddedFile.requestUrlStub@X@sessions/EA5F7FF3DF32D271D0E54AF0150D924A/anonymous/wiris/49728c9f5b4091622e2f4d183d857d35.png\" data-mathml=\"«math xmlns=¨http://www.w3.org/1998/Math/MathML¨»«mn»3«/mn»«mo»/«/mo»«mn»4«/mn»«mroot»«mn»7«/mn»«mn»2«/mn»«/mroot»«/math»\"></p> <p><a href=\"http://www.blackboard.com\">Blackboard</a></p> </div>",
-  availability: {
-    available: "Yes",
-    duration: {
-      "type": "Continuous",
-      start: "2025-09-17T06:52:37.100Z",
-      end: "2025-09-17T06:52:37.100Z",
-      daysOfUse: 0
-    }
-  }
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
         </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="9bc5ee70-6052-4b05-9e74-a47973f99adc" name="accesstoken_Flow"/>
 		<blackboard:patch-v1-terms-term-id doc:name="Terms - Update Term" doc:id="46ca7136-8f90-46d2-9c58-d750a4bd0a6b" config-ref="Blackboard_Config" termIdUriParam="#[vars.termId]" correlationIdHeader="#[correlationId]"/>
@@ -449,93 +200,6 @@ output application/json
                 <ee:set-variable variableName="userId">attributes.uriParams.'userId'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  id: "string",
-  uuid: "string",
-  externalId: "string",
-  dataSourceId: "string",
-  userName: "string",
-  studentId: "string",
-  educationLevel: "K8",
-  gender: "Female",
-  pronouns: "string",
-  birthDate: "2025-09-17T07:14:28.172Z",
-  created: "2025-09-17T07:14:28.172Z",
-  modified: "2025-09-17T07:14:28.172Z",
-  lastLogin: "2025-09-17T07:14:28.172Z",
-  institutionRoleIds: [
-    "string"
-  ],
-  systemRoleIds: [
-    "SystemAdmin"
-  ],
-  availability: {
-    available: "Yes"
-  },
-  name: {
-    given: "string",
-    family: "string",
-    middle: "string",
-    other: "string",
-    suffix: "string",
-    title: "string",
-    preferredDisplayName: "GivenName"
-  },
-  job: {
-    title: "string",
-    department: "string",
-    company: "string"
-  },
-  contact: {
-    homePhone: "string",
-    mobilePhone: "string",
-    businessPhone: "string",
-    businessFax: "string",
-    email: "string",
-    institutionEmail: "string",
-    webPage: "string"
-  },
-  address: {
-    street1: "string",
-    street2: "string",
-    city: "string",
-    state: "string",
-    zipCode: "string",
-    country: "string"
-  },
-  locale: {
-    id: "string",
-    calendar: "Gregorian",
-    firstDayOfWeek: "Sunday"
-  },
-  avatar: {
-    viewUrl: "string",
-    source: "Default",
-    uploadId: "string",
-    resourceId: "string"
-  },
-  pronunciation: "string",
-  nodes: [
-    {
-      id: "string",
-      externalId: "string",
-      title: "string",
-      description: "string",
-      parentId: "string"
-    }
-  ],
-  pronunciationAudio: {
-    viewUrl: "string",
-    uploadId: "string"
-  }
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="67f140e9-5763-4d39-a188-043c95edaf8b" name="accesstoken_Flow"/>
 		<blackboard:patch-v1-users-user-id doc:name="Users - Update User" doc:id="f999d133-4a98-45a0-bf9d-b7852c355b86" config-ref="Blackboard_Config" userIdUriParam="#[vars.userId]" correlationIdHeader="#[correlationId]"/>
     </flow>
@@ -545,122 +209,10 @@ output application/json
                 <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  id: "string",
-  uuid: "string",
-  externalId: "string",
-  dataSourceId: "string",
-  courseId: "string",
-  name: "string",
-  description: "string",
-  created: "2025-09-17T06:43:07.264Z",
-  modified: "2025-09-17T06:43:07.264Z",
-  organization: true,
-  ultraStatus: "Undecided",
-  allowGuests: true,
-  allowObservers: true,
-  closedComplete: true,
-  termId: "string",
-  availability: {
-    available: "Yes",
-    duration: {
-      "type": "Continuous",
-      start: "2025-09-17T06:43:07.264Z",
-      end: "2025-09-17T06:43:07.264Z",
-      daysOfUse: 0
-    }
-  },
-  enrollment: {
-    "type": "InstructorLed",
-    start: "2025-09-17T06:43:07.264Z",
-    end: "2025-09-17T06:43:07.264Z",
-    accessCode: "string"
-  },
-  locale: {
-    id: "string",
-    force: true
-  },
-  hasChildren: true,
-  parentId: "string",
-  externalAccessUrl: "string",
-  guestAccessUrl: "string",
-  copyHistory: {
-    empty: true
-  }
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="497fd344-72b4-4e26-bc52-945eb9fa31de" name="accesstoken_Flow"/>
 		<blackboard:patch-v3-courses-course-id doc:name="Courses - Update Course" doc:id="836a203c-aae5-4ed9-ac7e-85a1e32d4d28" config-ref="Blackboard_Config" courseIdUriParam="#[vars.courseId]" correlationIdHeader="#[correlationId]"/>
     </flow>
     <flow name="get:\v1\calendars\items:blackboard-rest-api-config">
-        <flow-ref doc:name="Flow Reference" doc:id="ec742344-1ebe-4aa1-87e9-71ccb7ac86ee" name="accesstoken_Flow" />
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  results: [
-    {
-      id: "string",
-      "type": "Course",
-      calendarId: "string",
-      calendarName: "string",
-      title: "string",
-      description: "string",
-      location: "string",
-      start: "2025-09-16T09:58:31.643Z",
-      end: "2025-09-16T09:58:31.643Z",
-      modified: "2025-09-16T09:58:31.643Z",
-      color: "string",
-      disableResizing: true,
-      createdByUserId: "string",
-      dynamicCalendarItemProps: {
-        attemptable: true,
-        categoryId: "string",
-        dateRangeLimited: true,
-        eventType: "string",
-        gradable: true
-      },
-      recurrence: {
-        count: 0,
-        frequency: "Monthly",
-        interval: 0,
-        monthRepeatDay: 0,
-        monthPosition: 0,
-        originalStart: "2025-09-16T09:58:31.643Z",
-        originalEnd: "2025-09-16T09:58:31.643Z",
-        repeatBroken: true,
-        repeatDay: "Sunday",
-        until: "2025-09-16T09:58:31.643Z",
-        weekDays: [
-          "Sunday"
-        ]
-      },
-      ltiLaunchDeepLink: {
-        placementHandle: "string",
-        uuid: "string",
-        url: "string",
-        title: "string",
-        customParameters: {
-          key1: "value1",
-          key2: "value2"
-        }
-      }
-    }
-  ],
-  paging: {
-    nextPage: "string"
-  }
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="a8cb779b-44e2-493b-ab5a-90ef5b454993" name="accesstoken_Flow"/>
 		<blackboard:get-v1-calendars-items doc:name="Users - Upcoming events" doc:id="18863faf-3c55-4f70-bf5e-ef63192198b8" config-ref="Blackboard_Config" correlationIdHeader="#[correlationId]"/>
     </flow>
@@ -669,36 +221,6 @@ output application/json
             <ee:variables>
                 <ee:set-variable variableName="categoryType">attributes.uriParams.'categoryType'</ee:set-variable>
             </ee:variables>
-        </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  results: [
-    {
-      id: "string",
-      dataSourceId: "string",
-      parentId: "string",
-      categoryId: "string",
-      title: "string",
-      description: "string",
-      "type": "Course",
-      frontPage: true,
-      available: true,
-      restricted: true,
-      institutionRoleIds: [
-        "string"
-      ],
-      created: "2025-09-15T05:03:30.002Z"
-    }
-  ],
-  paging: {
-    nextPage: "string"
-  }
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
         </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="ae54f223-4e27-4732-bd70-7befc3dbee24" name="accesstoken_Flow"/>
 		<blackboard:get-v1-catalog-categories-category-type doc:name="Course Category - Get Categories" doc:id="20152eaf-2dd1-40f6-aa96-963691f2a810" config-ref="Blackboard_Config" categoryTypeUriParam="#[vars.categoryType]" correlationIdHeader="#[correlationId]"/>
@@ -710,29 +232,6 @@ output application/json
                 <ee:set-variable variableName="categoryId">attributes.uriParams.'categoryId'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  id: "string",
-  dataSourceId: "string",
-  parentId: "string",
-  categoryId: "string",
-  title: "string",
-  description: "string",
-  "type": "Course",
-  frontPage: true,
-  available: true,
-  restricted: true,
-  institutionRoleIds: {
-    empty: true
-  },
-  created: "2025-09-15T04:42:25.524Z"
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="84ed8bc9-8b6a-459b-ab41-083ced5be3db" name="accesstoken_Flow"/>
 		<blackboard:get-v1-catalog-categories-category-type-category-id doc:name="Course Category - Get Category" doc:id="1bb9e70e-53a2-476d-bccf-d8c4aa6d5048" categoryTypeUriParam="#[vars.categoryType]" config-ref="Blackboard_Config" categoryIdUriParam="#[vars.categoryId]" correlationIdHeader="#[correlationId]"/>
     </flow>
@@ -742,72 +241,6 @@ output application/json
                 <ee:set-variable variableName="categoryType">attributes.uriParams.'categoryType'</ee:set-variable>
                 <ee:set-variable variableName="categoryId">attributes.uriParams.'categoryId'</ee:set-variable>
             </ee:variables>
-        </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  results: [
-    {
-      categoryId: "string",
-      categoryType: "Course",
-      courseId: "string",
-      course: {
-        id: "string",
-        uuid: "string",
-        externalId: "string",
-        dataSourceId: "string",
-        courseId: "string",
-        name: "string",
-        description: "string",
-        created: "2025-09-15T05:10:32.810Z",
-        modified: "2025-09-15T05:10:32.810Z",
-        organization: true,
-        ultraStatus: "Undecided",
-        allowGuests: true,
-        allowObservers: true,
-        closedComplete: true,
-        termId: "string",
-        availability: {
-          available: "Yes",
-          duration: {
-            "type": "Continuous",
-            start: "2025-09-15T05:10:32.810Z",
-            end: "2025-09-15T05:10:32.810Z",
-            daysOfUse: 0
-          }
-        },
-        enrollment: {
-          "type": "InstructorLed",
-          start: "2025-09-15T05:10:32.810Z",
-          end: "2025-09-15T05:10:32.810Z",
-          accessCode: "string"
-        },
-        locale: {
-          id: "string",
-          force: true
-        },
-        hasChildren: true,
-        parentId: "string",
-        externalAccessUrl: "string",
-        guestAccessUrl: "string",
-        copyHistory: [
-          {
-            uuid: "string"
-          }
-        ]
-      },
-      dataSourceId: "string",
-      created: "2025-09-15T05:10:32.810Z"
-    }
-  ],
-  paging: {
-    nextPage: "string"
-  }
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
         </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="aedcccd8-0110-4765-a689-2149821e7b2f" name="accesstoken_Flow"/>
 		<blackboard:get-v1-catalog-categories-category-type-category-id-courses doc:name="Course Category - Get Category Memberships" doc:id="54f875bd-ac86-4baf-b331-fdae5ab0dc3a" categoryTypeUriParam="#[vars.categoryType]" categoryIdUriParam="#[vars.categoryId]" config-ref="Blackboard_Config" correlationIdHeader="#[correlationId]"/>
@@ -819,66 +252,10 @@ output application/json
                 <ee:set-variable variableName="parentId">attributes.uriParams.'parentId'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  results: [
-    {
-      id: "string",
-      dataSourceId: "string",
-      parentId: "string",
-      categoryId: "string",
-      title: "string",
-      description: "string",
-      "type": "Course",
-      frontPage: true,
-      available: true,
-      restricted: true,
-      institutionRoleIds: [
-        "string"
-      ],
-      created: "2025-09-15T05:16:36.399Z"
-    }
-  ],
-  paging: {
-    nextPage: "string"
-  }
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="468898f7-ff52-4b87-816f-856edacfe7d0" name="accesstoken_Flow"/>
 		<blackboard:get-v1-catalog-categories-category-type-parent-id-children doc:name="Course Category - Get Child Categories" doc:id="c9324b75-cce7-4c2e-9ff5-717995695210" parentIdUriParam="#[vars.parentId]" config-ref="Blackboard_Config" categoryTypeUriParam="#[vars.categoryType]" correlationIdHeader="#[correlationId]"/>
     </flow>
     <flow name="get:\v1\courseRoles:blackboard-rest-api-config">
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  results: [
-    {
-      id: "string",
-      roleId: "string",
-      nameForCourses: "string",
-      nameForOrganizations: "string",
-      description: "string",
-      custom: true,
-      actAsInstructor: true,
-      availability: {
-        available: "Course"
-      }
-    }
-  ],
-  paging: {
-    nextPage: "string"
-  }
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="eb9d5660-61e5-41ce-b529-248c0ce8a060" name="accesstoken_Flow"/>
 		<blackboard:get-v1-course-roles doc:name="Roles - Get Course Roles" doc:id="95086c16-3442-4a56-918a-7eb4019af240" config-ref="Blackboard_Config" correlationIdHeader="#[correlationId]"/>
     </flow>
@@ -888,25 +265,6 @@ output application/json
                 <ee:set-variable variableName="roleId">attributes.uriParams.'roleId'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  id: "string",
-  roleId: "string",
-  nameForCourses: "string",
-  nameForOrganizations: "string",
-  description: "string",
-  custom: true,
-  actAsInstructor: true,
-  availability: {
-    available: "Course"
-  }
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="a34a8385-8709-4373-b174-24efd5637e1b" name="accesstoken_Flow"/>
 		<blackboard:get-v1-course-roles-role-id doc:name="Roles - Get Course Role" doc:id="d7555a89-574d-47d2-bdec-6a4bc50369a4" config-ref="Blackboard_Config" roleIdUriParam="#[vars.roleId]" correlationIdHeader="#[correlationId]"/>
     </flow>
@@ -915,64 +273,6 @@ output application/json
             <ee:variables>
                 <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
             </ee:variables>
-        </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  results: [
-    {
-      id: "string",
-      parentId: "string",
-      dataSourceId: "string",
-      created: "2025-09-16T10:52:59.969Z",
-      childCourse: {
-        id: "string",
-        uuid: "string",
-        externalId: "string",
-        dataSourceId: "string",
-        courseId: "string",
-        name: "string",
-        description: "string",
-        created: "2025-09-16T10:52:59.969Z",
-        organization: true,
-        ultraStatus: "Undecided",
-        allowGuests: true,
-        readOnly: true,
-        termId: "string",
-        availability: {
-          available: "Yes",
-          duration: {
-            "type": "Continuous",
-            start: "2025-09-16T10:52:59.969Z",
-            end: "2025-09-16T10:52:59.969Z",
-            daysOfUse: 0
-          }
-        },
-        enrollment: {
-          "type": "InstructorLed",
-          start: "2025-09-16T10:52:59.969Z",
-          end: "2025-09-16T10:52:59.969Z",
-          accessCode: "string"
-        },
-        locale: {
-          id: "string",
-          force: true
-        },
-        hasChildren: true,
-        parentId: "string",
-        externalAccessUrl: "string",
-        guestAccessUrl: "string"
-      }
-    }
-  ],
-  paging: {
-    nextPage: "string"
-  }
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
         </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="c5a14e06-128f-41cb-a714-125941fe7928" name="accesstoken_Flow"/>
 		<blackboard:get-v1-courses-course-id-children doc:name="Courses - Get Course Children" doc:id="48453cfc-0daf-4dce-ab6f-b43a8641cb3d" config-ref="Blackboard_Config" courseIdUriParam="#[vars.courseId]" correlationIdHeader="#[correlationId]"/>
@@ -984,57 +284,6 @@ output application/json
                 <ee:set-variable variableName="childCourseId">attributes.uriParams.'childCourseId'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  id: "string",
-  parentId: "string",
-  dataSourceId: "string",
-  created: "2025-09-16T11:07:34.048Z",
-  childCourse: {
-    id: "string",
-    uuid: "string",
-    externalId: "string",
-    dataSourceId: "string",
-    courseId: "string",
-    name: "string",
-    description: "string",
-    created: "2025-09-16T11:07:34.048Z",
-    organization: true,
-    ultraStatus: "Undecided",
-    allowGuests: true,
-    readOnly: true,
-    termId: "string",
-    availability: {
-      available: "Yes",
-      duration: {
-        "type": "Continuous",
-        start: "2025-09-16T11:07:34.048Z",
-        end: "2025-09-16T11:07:34.048Z",
-        daysOfUse: 0
-      }
-    },
-    enrollment: {
-      "type": "InstructorLed",
-      start: "2025-09-16T11:07:34.048Z",
-      end: "2025-09-16T11:07:34.048Z",
-      accessCode: "string"
-    },
-    locale: {
-      id: "string",
-      force: true
-    },
-    hasChildren: true,
-    parentId: "string",
-    externalAccessUrl: "string",
-    guestAccessUrl: "string"
-  }
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="b3f9ca6a-7def-4be4-bd63-df8c4e357602" name="accesstoken_Flow"/>
 		<blackboard:get-v1-courses-course-id-children-child-course-id doc:name="Courses - Get Course Child" doc:id="f55ef8df-c9fa-47e0-bf28-6d4d102e5b2c" courseIdUriParam="#[vars.courseId]" config-ref="Blackboard_Config" childCourseIdUriParam="#[vars.childCourseId]" correlationIdHeader="#[correlationId]"/>
     </flow>
@@ -1044,24 +293,6 @@ output application/json
                 <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  results: [
-    {
-      id: "string",
-      title: "string"
-    }
-  ],
-  paging: {
-    nextPage: "string"
-  }
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="6af867e9-3998-4c86-8908-ba6c80e85700" name="accesstoken_Flow"/>
 		<blackboard:get-v1-courses-course-id-gradebook-categories doc:name="Course Gradebook - Get Gradebook Categories" doc:id="7ad3ac70-e910-4a8b-ba61-c0bef4de3758" config-ref="Blackboard_Config" courseIdUriParam="#[vars.courseId]" correlationIdHeader="#[correlationId]"/>
     </flow>
@@ -1070,29 +301,6 @@ output application/json
             <ee:variables>
                 <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
             </ee:variables>
-        </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  results: [
-    {
-      id: 0,
-      meetingId: "string",
-      userId: "string",
-      status: "Absent",
-      modifiedByUserId: "string",
-      createdTime: "2025-09-12T05:38:57.665Z",
-      modifiedTime: "2025-09-12T05:38:57.665Z"
-    }
-  ],
-  paging: {
-    nextPage: "string"
-  }
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
         </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="27fe6e83-a5ff-4594-b335-7fb9a1d1bbd0" name="accesstoken_Flow"/>
 		<blackboard:get-v1-courses-course-id-meetings doc:name="Attendance - Get Course Meeting" doc:id="4b789c60-e5ea-4fde-aa4e-4fac7cbe6748" config-ref="Blackboard_Config" courseIdUriParam="#[vars.courseId]" correlationIdHeader="#[correlationId]"/>
@@ -1104,29 +312,6 @@ output application/json
                 <ee:set-variable variableName="userId">attributes.uriParams.'userId'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  results: [
-    {
-      id: 0,
-      meetingId: "string",
-      userId: "string",
-      status: "Absent",
-      modifiedByUserId: "string",
-      createdTime: "2025-09-12T05:38:57.665Z",
-      modifiedTime: "2025-09-12T05:38:57.665Z"
-    }
-  ],
-  paging: {
-    nextPage: "string"
-  }
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="5c997cc7-12a7-4211-965b-ebba7cdbb4a4" name="accesstoken_Flow"/>
 		<blackboard:get-v1-courses-course-id-meetings-users-user-id doc:name="Attendance - Get Attendance by User Id" doc:id="89421cc8-e903-4153-b0d2-f3d589d6cf7b" courseIdUriParam="#[vars.courseId]" config-ref="Blackboard_Config" userIdUriParam="#[vars.userId]" correlationIdHeader="#[correlationId]"/>
     </flow>
@@ -1136,29 +321,6 @@ output application/json
                 <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
                 <ee:set-variable variableName="meetingId">attributes.uriParams.'meetingId'</ee:set-variable>
             </ee:variables>
-        </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  results: [
-    {
-      id: 0,
-      meetingId: "string",
-      userId: "string",
-      status: "Absent",
-      modifiedByUserId: "string",
-      createdTime: "2025-09-12T05:38:57.665Z",
-      modifiedTime: "2025-09-12T05:38:57.665Z"
-    }
-  ],
-  paging: {
-    nextPage: "string"
-  }
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
         </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="bba11d41-a7df-4b6f-bcfb-783793bb7760" name="accesstoken_Flow"/>
 		<blackboard:get-v1-courses-course-id-meetings-meeting-id-users doc:name="Attendance - Get Attendance Records by Meeting Id" doc:id="30586838-808c-42c8-ad13-5e3eca6722ac" courseIdUriParam="#[vars.courseId]" config-ref="Blackboard_Config" meetingIdUriParam="#[vars.meetingId]" correlationIdHeader="#[correlationId]"/>
@@ -1171,22 +333,6 @@ output application/json
                 <ee:set-variable variableName="userId">attributes.uriParams.'userId'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  id: 0,
-  meetingId: "string",
-  userId: "string",
-  status: "Absent",
-  modifiedByUserId: "string",
-  createdTime: "2025-09-12T07:24:47.789Z",
-  modifiedTime: "2025-09-12T07:24:47.789Z"
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="0493d7c7-115c-4a4d-b61c-e201f5450fa9" name="accesstoken_Flow"/>
 		<blackboard:get-v1-courses-course-id-meetings-meeting-id-users-user-id doc:name="Attendance - Get Attendance Record" doc:id="89020ba9-728c-4486-9e6f-aa642fffa52a" courseIdUriParam="#[vars.courseId]" userIdUriParam="#[vars.userId]" config-ref="Blackboard_Config" meetingIdUriParam="#[vars.meetingId]" correlationIdHeader="#[correlationId]"/>
     </flow>
@@ -1195,38 +341,6 @@ output application/json
             <ee:variables>
                 <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
             </ee:variables>
-        </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  results: [
-    {
-      id: "12345",
-      userId: "67890",
-      courseRoleId: "student",
-      created: "2025-09-01T10:00:00Z",
-      modified: "2025-09-10T12:00:00Z",
-      availability: {
-        available: "Yes"
-      },
-      dataSourceId: "externalId:math101",
-      lastAccessed: "2025-09-05T15:00:00Z",
-      user: {
-        id: "67890",
-        userName: "jdoe",
-        studentId: "S123456",
-        externalId: "ext-67890"
-      }
-    }
-  ],
-  paging: {
-    nextPage: "string"
-  }
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
         </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="f75cc591-eb0e-4708-a7a2-c43d9caadf73" name="accesstoken_Flow"/>
 		<blackboard:get-v1-courses-course-id-users doc:name="Course Membership - Get Course Memberships" doc:id="3a638ac3-844a-482a-bfe9-6bc198b8ea66" courseIdUriParam="#[vars.courseId]" config-ref="Blackboard_Config" correlationIdHeader="#[correlationId]"/>
@@ -1238,62 +352,10 @@ output application/json
                 <ee:set-variable variableName="userId">attributes.uriParams.'userId'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  id: "string",
-  userId: "userName:jsmith",
-  user: {
-    id: "string",
-    uuid: "915c7567d76d444abf1eed56aad3beb5",
-    externalId: "externalId:jsmith",
-    dataSourceId: "externalId:math101",
-    userName: "jsmith",
-    studentId: "123456",
-    educationLevel: "K8",
-    gender: "Female",
-    pronouns: "she/her",
-    birthDate: "2025-09-16T04:40:18.681Z",
-    created: "2025-09-16T04:40:18.681Z",
-    modified: "2025-09-16T04:40:18.681Z",
-    lastLogin: "2025-09-16T04:40:18.681Z",
-    institutionRoleIds: {},
-    systemRoleIds: {},
-    availability: {
-      available: "Yes"
-    }
-  }
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="f1ecca46-2512-4c30-ab3e-beb888a19a75" name="accesstoken_Flow"/>
 		<blackboard:get-v1-courses-course-id-users-user-id doc:name="Course Membership - Get Course Membership" doc:id="58fde462-5436-4313-a4c6-f21204ffdc13" courseIdUriParam="#[vars.courseId]" userIdUriParam="#[vars.userId]" config-ref="Blackboard_Config" correlationIdHeader="#[correlationId]"/>
     </flow>
     <flow name="get:\v1\institutionRoles:blackboard-rest-api-config">
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  results: [
-    {
-      id: "string",
-      roleId: "string",
-      name: "string",
-      description: "string",
-      custom: true
-    }
-  ],
-  paging: {
-    nextPage: "string"
-  }
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="e176243b-a6a5-4b13-a03a-b2adcc7707cd" name="accesstoken_Flow"/>
 		<blackboard:get-v1-institution-roles doc:name="Roles - Get Institution Roles" doc:id="3f91d9e6-ba53-4195-81d9-46da8016d5a0" config-ref="Blackboard_Config" correlationIdHeader="#[correlationId]"/>
     </flow>
@@ -1303,35 +365,10 @@ output application/json
                 <ee:set-variable variableName="roleId">attributes.uriParams.'roleId'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  id: "string",
-  roleId: "string",
-  name: "string",
-  description: "string",
-  custom: true
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="00a91420-fb3b-4580-ab59-3e1f91d42c48" name="accesstoken_Flow"/>
 		<blackboard:get-v1-institution-roles-role-id doc:name="Roles - Get Institution Role" doc:id="d73336af-1be4-4f09-bcfb-dff39545d7ae" config-ref="Blackboard_Config" roleIdUriParam="#[vars.roleId]" correlationIdHeader="#[correlationId]"/>
     </flow>
     <flow name="get:\v1\terms:blackboard-rest-api-config">
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  statusCode: "CONTINUE",
-  statusCodeValue: {}
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="24b99119-1ea3-4977-b62d-e5af73a2c997" name="accesstoken_Flow"/>
 		<blackboard:get-v1-terms doc:name="Terms - Get Terms" doc:id="9f6fbeb7-d75b-4769-bd83-5b2343ea20ce" config-ref="Blackboard_Config" correlationIdHeader="#[correlationId]"/>
     </flow>
@@ -1341,127 +378,10 @@ output application/json
                 <ee:set-variable variableName="termId">attributes.uriParams.'termId'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  id: "string",
-  externalId: "string",
-  dataSourceId: "string",
-  name: "string",
-  description: "<!-- {\"bbMLEditorVersion\":1} --><div data-bbid=\"bbml-editor-id_9c6a9556-80a5-496c-b10d-af2a9ab22d45\"> <h4>Header Large</h4>  <h5>Header Medium</h5>  <h6>Header Small</h6>  <p><strong>Bold&nbsp;</strong><em>Italic&nbsp;<span style=\"text-decoration: underline;\">Italic Underline</span></em></p> <ul>   <li><span style=\"text-decoration: underline;\"><em></em></span>Bullet 1</li>  <li>Bullet 2</li> </ul> <p>  <img src=\"@X@EmbeddedFile.requestUrlStub@X@bbcswebdav/xid-1217_1\">   <span>\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"</span> </p>  <p><span>&lt;braces test=\"values\" other=\"strange things\"&gt;</span></p> <p>Header Small</p> <ol>   <li>Number 1</li>   <li>Number 2</li> </ol>  <p>Just words followed by a formula</p>  <p><img align=\"middle\" alt=\"3 divided by 4 2 root of 7\" class=\"Wirisformula\" src=\"@X@EmbeddedFile.requestUrlStub@X@sessions/EA5F7FF3DF32D271D0E54AF0150D924A/anonymous/wiris/49728c9f5b4091622e2f4d183d857d35.png\" data-mathml=\"«math xmlns=¨http://www.w3.org/1998/Math/MathML¨»«mn»3«/mn»«mo»/«/mo»«mn»4«/mn»«mroot»«mn»7«/mn»«mn»2«/mn»«/mroot»«/math»\"></p> <p><a href=\"http://www.blackboard.com\">Blackboard</a></p> </div>",
-  availability: {
-    available: "Yes",
-    duration: {
-      "type": "Continuous",
-      start: "2025-09-16T05:49:40.252Z",
-      end: "2025-09-16T05:49:40.252Z",
-      daysOfUse: 0
-    }
-  }
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="d1fabc51-4b8c-4272-a5b5-23a88d4c42e4" name="accesstoken_Flow"/>
 		<blackboard:get-v1-terms-term-id doc:name="Terms - Get Term" doc:id="283b70af-6e06-46b7-859e-bb5df96b8238" config-ref="Blackboard_Config" termIdUriParam="#[vars.termId]" correlationIdHeader="#[correlationId]"/>
     </flow>
     <flow name="get:\v1\users:blackboard-rest-api-config">
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  results: [
-    {
-      id: "string",
-      uuid: "string",
-      externalId: "string",
-      dataSourceId: "string",
-      userName: "string",
-      studentId: "string",
-      educationLevel: "K8",
-      gender: "Female",
-      pronouns: "string",
-      birthDate: "2025-09-16T06:05:56.744Z",
-      created: "2025-09-16T06:05:56.744Z",
-      modified: "2025-09-16T06:05:56.744Z",
-      lastLogin: "2025-09-16T06:05:56.744Z",
-      institutionRoleIds: [
-        "string"
-      ],
-      systemRoleIds: [
-        "SystemAdmin"
-      ],
-      availability: {
-        available: "Yes"
-      },
-      name: {
-        given: "string",
-        family: "string",
-        middle: "string",
-        other: "string",
-        suffix: "string",
-        title: "string",
-        preferredDisplayName: "GivenName"
-      },
-      job: {
-        title: "string",
-        department: "string",
-        company: "string"
-      },
-      contact: {
-        homePhone: "string",
-        mobilePhone: "string",
-        businessPhone: "string",
-        businessFax: "string",
-        email: "string",
-        institutionEmail: "string",
-        webPage: "string"
-      },
-      address: {
-        street1: "string",
-        street2: "string",
-        city: "string",
-        state: "string",
-        zipCode: "string",
-        country: "string"
-      },
-      locale: {
-        id: "string",
-        calendar: "Gregorian",
-        firstDayOfWeek: "Sunday"
-      },
-      avatar: {
-        viewUrl: "string",
-        source: "Default",
-        uploadId: "string",
-        resourceId: "string"
-      },
-      pronunciation: "string",
-      nodes: [
-        {
-          id: "string",
-          externalId: "string",
-          title: "string",
-          description: "string",
-          parentId: "string"
-        }
-      ],
-      pronunciationAudio: {
-        viewUrl: "string",
-        uploadId: "string"
-      }
-    }
-  ],
-  paging: {
-    nextPage: "string"
-  }
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="cfbd02e0-19ae-44b0-bb19-e3dcf321f396" name="accesstoken_Flow"/>
 		<blackboard:get-v1-users doc:name="Users - Get Users" doc:id="5ce4dcab-9e3d-4f25-aebf-10915696648d" config-ref="Blackboard_Config" correlationIdHeader="#[correlationId]"/>
     </flow>
@@ -1470,93 +390,6 @@ output application/json
             <ee:variables>
                 <ee:set-variable variableName="userId">attributes.uriParams.'userId'</ee:set-variable>
             </ee:variables>
-        </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  id: "string",
-  uuid: "string",
-  externalId: "string",
-  dataSourceId: "string",
-  userName: "string",
-  studentId: "string",
-  educationLevel: "K8",
-  gender: "Female",
-  pronouns: "string",
-  birthDate: "2025-09-16T07:30:20.313Z",
-  created: "2025-09-16T07:30:20.313Z",
-  modified: "2025-09-16T07:30:20.313Z",
-  lastLogin: "2025-09-16T07:30:20.313Z",
-  institutionRoleIds: [
-    "string"
-  ],
-  systemRoleIds: [
-    "SystemAdmin"
-  ],
-  availability: {
-    available: "Yes"
-  },
-  name: {
-    given: "string",
-    family: "string",
-    middle: "string",
-    other: "string",
-    suffix: "string",
-    title: "string",
-    preferredDisplayName: "GivenName"
-  },
-  job: {
-    title: "string",
-    department: "string",
-    company: "string"
-  },
-  contact: {
-    homePhone: "string",
-    mobilePhone: "string",
-    businessPhone: "string",
-    businessFax: "string",
-    email: "string",
-    institutionEmail: "string",
-    webPage: "string"
-  },
-  address: {
-    street1: "string",
-    street2: "string",
-    city: "string",
-    state: "string",
-    zipCode: "string",
-    country: "string"
-  },
-  locale: {
-    id: "string",
-    calendar: "Gregorian",
-    firstDayOfWeek: "Sunday"
-  },
-  avatar: {
-    viewUrl: "string",
-    source: "Default",
-    uploadId: "string",
-    resourceId: "string"
-  },
-  pronunciation: "string",
-  nodes: [
-    {
-      id: "string",
-      externalId: "string",
-      title: "string",
-      description: "string",
-      parentId: "string"
-    }
-  ],
-  pronunciationAudio: {
-    viewUrl: "string",
-    uploadId: "string"
-  }
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
         </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="a79650e1-e81f-46d7-b43c-16da67f570a1" name="accesstoken_Flow"/>
 		<blackboard:get-v1-users-user-id doc:name="Users - Get User" doc:id="acd0d94b-3907-4e73-a50d-1f2dd7a595ec" config-ref="Blackboard_Config" userIdUriParam="#[vars.userId]" fieldsQueryParam="#[correlationId]"/>
@@ -1567,43 +400,6 @@ output application/json
                 <ee:set-variable variableName="userId">attributes.uriParams.'userId'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  results: [
-    {
-      id: "enroll_001",
-      userId: "_123_1",
-      courseId: "courseId:math101",
-      courseRoleId: "student",
-      created: "2025-09-01T10:00:00Z",
-      modified: "2025-09-05T15:30:00Z",
-      lastAccessed: "2025-09-10T08:45:00Z",
-      availability: {
-        available: "Yes"
-      }
-    }, 
-    {
-      id: "enroll_002",
-      userId: "_123_1",
-      courseId: "courseId:eng202",
-      courseRoleId: "teacher",
-      created: "2025-08-15T09:00:00Z",
-      modified: "2025-09-01T12:00:00Z",
-      availability: {
-        available: "No"
-      }
-    }
-  ],
-  paging: {
-    nextPage: "string"
-  }
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="fc4bd87c-7b59-4233-b070-e1c0f845f272" name="accesstoken_Flow"/>
 		<blackboard:get-v1-users-user-id-courses doc:name="Course Membership - Get User Memberships" doc:id="a8a53577-888e-4cf2-bdaf-0defc3b300bc" config-ref="Blackboard_Config" userIdUriParam="#[vars.userId]" correlationIdHeader="#[correlationId]"/>
     </flow>
@@ -1612,83 +408,6 @@ output application/json
             <ee:variables>
                 <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
             </ee:variables>
-        </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  results: [
-    {
-      id: "string",
-      externalId: "string",
-      externalToolId: "string",
-      name: "string",
-      displayName: "string",
-      description: "string",
-      externalGrade: true,
-      created: "2025-09-15T10:03:25.942Z",
-      modified: "2025-09-15T10:03:25.942Z",
-      contentId: "string",
-      score: {
-        possible: 0
-      },
-      availability: {
-        available: "Yes"
-      },
-      grading: {
-        "type": "Attempts",
-        due: "2025-09-15T10:03:25.942Z",
-        attemptsAllowed: 0,
-        scoringModel: "Last",
-        schemaId: "string",
-        anonymousGrading: {
-          "type": "None",
-          releaseAfter: "2025-09-15T10:03:25.942Z"
-        },
-        rubricAssociations: [
-          {
-            id: "string",
-            rubricId: "string",
-            associationEntity: {
-              gradebookColumnId: "string",
-              questionId: "string"
-            },
-            usedForGrading: true,
-            rubricVisibility: "Disabled",
-            links: [
-              {
-                href: "string",
-                rel: "string",
-                title: "string",
-                "type": "string"
-              }
-            ]
-          }
-        ]
-      },
-      gradebookCategoryId: "string",
-      formula: {
-        formula: "string",
-        aliases: {
-          key1: "value1",
-          key2: "value2"
-        }
-      },
-      includeInCalculations: true,
-      showStatisticsToStudents: true,
-      scoreProviderHandle: "string",
-      learningOutcome: {
-        signature: true
-      }
-    }
-  ],
-  paging: {
-    nextPage: "string"
-  }
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
         </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="0c675df5-bda8-4718-9c7c-5a013c2e8a49" name="accesstoken_Flow"/>
 		<blackboard:get-v2-courses-course-id-gradebook-columns doc:name="Course Gradebook - Get Grade Columns" doc:id="2693e565-feb6-48c4-9284-33b5d770987b" config-ref="Blackboard_Config" courseIdUriParam="#[vars.courseId]" correlationIdHeader="#[correlationId]"/>
@@ -1700,61 +419,6 @@ output application/json
                 <ee:set-variable variableName="columnId">attributes.uriParams.'columnId'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  id: "string",
-  externalId: "string",
-  externalToolId: "string",
-  name: "string",
-  displayName: "string",
-  description: "string",
-  externalGrade: true,
-  created: "2025-09-15T05:57:32.030Z",
-  modified: "2025-09-15T05:57:32.030Z",
-  contentId: "string",
-  score: {
-    possible: 0
-  },
-  availability: {
-    available: "Yes"
-  },
-  grading: {
-    "type": "Attempts",
-    due: "2025-09-15T05:57:32.030Z",
-    attemptsAllowed: 0,
-    scoringModel: "Last",
-    schemaId: "string",
-    anonymousGrading: {
-      "type": "None",
-      releaseAfter: "2025-09-15T05:57:32.030Z"
-    },
-    rubricAssociations: {
-      empty: true
-    }
-  },
-  gradebookCategoryId: "string",
-  formula: {
-    formula: "string",
-    aliases: {
-      empty: true
-    }
-  },
-  includeInCalculations: true,
-  showStatisticsToStudents: true,
-  scoreProviderHandle: "string",
-  learningOutcome: {
-    signature: true,
-    columnScale: {
-      empty: true
-    }
-  }
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="2d7ea46b-85bf-41d0-a7ed-00d5c9ddb01b" name="accesstoken_Flow"/>
 		<blackboard:get-v2-courses-course-id-gradebook-columns-column-id doc:name="Course Gradebook - Get Grade Column" doc:id="82a49dda-63a7-40e9-8703-9741fa005c10" courseIdUriParam="#[vars.courseId]" config-ref="Blackboard_Config" columnIdUriParam="#[vars.columnId]" correlationIdHeader="#[correlationId]"/>
     </flow>
@@ -1764,42 +428,6 @@ output application/json
                 <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
                 <ee:set-variable variableName="columnId">attributes.uriParams.'columnId'</ee:set-variable>
             </ee:variables>
-        </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  results: [
-    {
-      userId: "string",
-      columnId: "string",
-      status: "Graded",
-      displayGrade: {
-        scaleType: "Percent",
-        score: 0,
-        possible: 0,
-        text: "string"
-      },
-      text: "string",
-      score: 0,
-      overridden: "2025-09-15T11:09:09.978Z",
-      notes: "string",
-      feedback: "string",
-      exempt: true,
-      corrupt: true,
-      gradeNotationId: "string",
-      changeIndex: 0,
-      firstRelevantDate: "2025-09-15T11:09:09.978Z",
-      lastRelevantDate: "2025-09-15T11:09:09.978Z"
-    }
-  ],
-  paging: {
-    nextPage: "string"
-  }
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
         </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="f6611d3d-7b13-4771-b68a-226d12a7c037" name="accesstoken_Flow"/>
 		<blackboard:get-v2-courses-course-id-gradebook-columns-column-id-users doc:name="Course Gradebook - Get Column Grades" doc:id="dd6f43b9-ae38-4551-9aa2-3172f1a203e4" columnIdUriParam="#[vars.columnId]" config-ref="Blackboard_Config" courseIdUriParam="#[vars.courseId]" correlationIdHeader="#[correlationId]"/>
@@ -1812,35 +440,6 @@ output application/json
                 <ee:set-variable variableName="userId">attributes.uriParams.'userId'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  userId: "string",
-  columnId: "string",
-  status: "Graded",
-  displayGrade: {
-    scaleType: "Percent",
-    score: 0,
-    possible: 0,
-    text: "string"
-  },
-  text: "string",
-  score: 0,
-  overridden: "2025-09-15T11:02:48.053Z",
-  notes: "string",
-  feedback: "string",
-  exempt: true,
-  corrupt: true,
-  gradeNotationId: "string",
-  changeIndex: 0,
-  firstRelevantDate: "2025-09-15T11:02:48.053Z",
-  lastRelevantDate: "2025-09-15T11:02:48.053Z"
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="8b50b627-46db-49c8-a53b-ef09bdda3fe3" name="accesstoken_Flow"/>
 		<blackboard:get-v2-courses-course-id-gradebook-columns-column-id-users-user-id doc:name="Course Gradebook - Get Column Grade" doc:id="6f00ae16-03ef-4c69-b94e-cb91de751fb6" courseIdUriParam="#[vars.courseId]" columnIdUriParam="#[vars.columnId]" userIdUriParam="#[vars.userId]" config-ref="Blackboard_Config" correlationIdHeader="#[correlationId]"/>
     </flow>
@@ -1851,84 +450,10 @@ output application/json
                 <ee:set-variable variableName="userId">attributes.uriParams.'userId'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  results: [
-    {
-      userId: "string",
-      columnId: "string",
-      status: "Graded",
-      displayGrade: {
-        scaleType: "Percent",
-        score: 0,
-        possible: 0,
-        text: "string"
-      },
-      text: "string",
-      score: 0,
-      overridden: "2025-09-15T11:16:34.541Z",
-      notes: "string",
-      feedback: "string",
-      exempt: true,
-      corrupt: true,
-      gradeNotationId: "string",
-      changeIndex: 0,
-      firstRelevantDate: "2025-09-15T11:16:34.541Z",
-      lastRelevantDate: "2025-09-15T11:16:34.541Z"
-    }
-  ],
-  paging: {
-    nextPage: "string"
-  }
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="1d45eee2-870a-4c85-a326-e6f7cbe54af3" name="accesstoken_Flow"/>
 		<blackboard:get-v2-courses-course-id-gradebook-users-user-id doc:name="Course Gradebook - Get User Grades" doc:id="bc794b5a-d65e-4fe3-a694-532be3c91c51" userIdUriParam="#[vars.userId]" config-ref="Blackboard_Config" courseIdUriParam="#[vars.courseId]" correlationIdHeader="#[correlationId]"/>
     </flow>
     <flow name="get:\v3\courses:blackboard-rest-api-config">
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  results: [
-    {
-      id: "12345",
-      courseId: "CS101",
-      name: "Introduction to Computer Science",
-      description: "Basic CS fundamentals",
-      organization: false,
-      readOnly: false,
-      termId: "2025TERM01",
-      availability: {
-        available: "Yes",
-        duration: {
-          "type": "Continuous",
-          start: "2025-01-01T00:00:00Z",
-          end: "2025-12-31T23:59:59Z",
-          daysOfUse: 365
-        }
-      },
-      uuid: "uuid-1234",
-      externalId: "ext-CS101",
-      dataSourceId: "ds-001",
-      created: "2025-01-01T00:00:00Z",
-      modified: "2025-09-12T05:38:57.665Z",
-      allowGuests: true
-    }
-  ],
-  paging: {
-    nextPage: "/learn/api/public/v3/courses?offset=10&limit=10"
-  }
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="bcd2a092-3b8d-41df-818e-f7b0c132ef23" name="accesstoken_Flow"/>
 		<blackboard:get-v3-courses doc:name="Courses - Get Courses" doc:id="48695f41-b2fd-4c07-a05a-c9d1500f05c1" config-ref="Blackboard_Config" correlationIdHeader="#[correlationId]"/>
     </flow>
@@ -1937,58 +462,6 @@ output application/json
             <ee:variables>
                 <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
             </ee:variables>
-        </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  id: "string",
-  uuid: "string",
-  externalId: "string",
-  dataSourceId: "string",
-  courseId: "string",
-  name: "string",
-  description: "string",
-  created: "2025-09-16T11:22:11.689Z",
-  modified: "2025-09-16T11:22:11.689Z",
-  organization: true,
-  ultraStatus: "Undecided",
-  allowGuests: true,
-  allowObservers: true,
-  closedComplete: true,
-  termId: "string",
-  availability: {
-    available: "Yes",
-    duration: {
-      "type": "Continuous",
-      start: "2025-09-16T11:22:11.689Z",
-      end: "2025-09-16T11:22:11.689Z",
-      daysOfUse: 0
-    }
-  },
-  enrollment: {
-    "type": "InstructorLed",
-    start: "2025-09-16T11:22:11.689Z",
-    end: "2025-09-16T11:22:11.689Z",
-    accessCode: "string"
-  },
-  locale: {
-    id: "string",
-    force: true
-  },
-  hasChildren: true,
-  parentId: "string",
-  externalAccessUrl: "string",
-  guestAccessUrl: "string",
-  copyHistory: [
-    {
-      uuid: "string"
-    }
-  ]
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
         </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="7fd61ea6-792d-49bc-86f4-574b4e2be1c9" name="accesstoken_Flow"/>
 		<blackboard:get-v3-courses-course-id doc:name="Courses - Get Course" doc:id="8735bbb2-930a-4e56-a77e-60ea330dc589" config-ref="Blackboard_Config" courseIdUriParam="#[vars.courseId]" correlationIdHeader="#[correlationId]"/>
@@ -2014,29 +487,6 @@ output application/json
                 <ee:set-variable variableName="categoryType">attributes.uriParams.'categoryType'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  id: "string",
-  dataSourceId: "string",
-  parentId: "string",
-  categoryId: "string",
-  title: "string",
-  description: "string",
-  "type": "Course",
-  frontPage: true,
-  available: true,
-  restricted: true,
-  institutionRoleIds: [
-    "string"
-  ],
-  created: "2025-09-16T09:39:14.403Z"
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="ff772da1-87b1-4126-9fae-7813e1ad5f4f" name="accesstoken_Flow"/>
 		<blackboard:post-v1-catalog-categories-category-type doc:name="Course Category - Create Category" doc:id="27810fcc-a01c-4200-b9a7-ce9c3fb8febe" config-ref="Blackboard_Config" categoryTypeUriParam="#[vars.categoryType]" correlationIdHeader="#[correlationId]"/>
     </flow>
@@ -2047,22 +497,6 @@ output application/json
                 <ee:set-variable variableName="meetingId">attributes.uriParams.'meetingId'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  id: 0,
-  meetingId: "string",
-  userId: "string",
-  status: "Absent",
-  modifiedByUserId: "string",
-  createdTime: "2025-09-16T09:30:27.257Z",
-  modifiedTime: "2025-09-16T09:30:27.257Z"
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="7fc38f8b-6f12-471f-bfc8-29fd06d8e5ae" name="accesstoken_Flow"/>
 		<blackboard:post-v1-courses-course-id-meetings-meeting-id-users doc:name="Attendance - Create Attendance Record" doc:id="be6ecae4-d493-438a-beca-b47fc6f8b6a1" meetingIdUriParam="#[vars.meetingId]" config-ref="Blackboard_Config" courseIdUriParam="#[vars.courseId]" correlationIdHeader="#[correlationId]"/>
     </flow>
@@ -2072,196 +506,18 @@ output application/json
                 <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  id: 0,
-  courseId: "string",
-  title: "string",
-  description: "string",
-  start: "2025-09-16T05:58:12.959Z",
-  end: "2025-09-16T05:58:12.959Z",
-  externalLink: "string"
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="6f144168-6dde-4204-9e67-1bfa137383a1" name="accesstoken_Flow"/>
 		<blackboard:post-v1-courses-course-id-meetings doc:name="Attendance - Create Course Meeting" doc:id="d3822753-e72f-4013-a346-93888f5b7b14" config-ref="Blackboard_Config" courseIdUriParam="#[vars.courseId]" correlationIdHeader="#[correlationId]"/>
     </flow>
 	<flow name="post:\v1\terms:application\json:blackboard-rest-api-config">
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  id: "string",
-  externalId: "string",
-  dataSourceId: "string",
-  name: "string",
-  description: "<!-- {\"bbMLEditorVersion\":1} --><div data-bbid=\"bbml-editor-id_9c6a9556-80a5-496c-b10d-af2a9ab22d45\"> <h4>Header Large</h4>  <h5>Header Medium</h5>  <h6>Header Small</h6>  <p><strong>Bold&nbsp;</strong><em>Italic&nbsp;<span style=\"text-decoration: underline;\">Italic Underline</span></em></p> <ul>   <li><span style=\"text-decoration: underline;\"><em></em></span>Bullet 1</li>  <li>Bullet 2</li> </ul> <p>  <img src=\"@X@EmbeddedFile.requestUrlStub@X@bbcswebdav/xid-1217_1\">   <span>\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"</span> </p>  <p><span>&lt;braces test=\"values\" other=\"strange things\"&gt;</span></p> <p>Header Small</p> <ol>   <li>Number 1</li>   <li>Number 2</li> </ol>  <p>Just words followed by a formula</p>  <p><img align=\"middle\" alt=\"3 divided by 4 2 root of 7\" class=\"Wirisformula\" src=\"@X@EmbeddedFile.requestUrlStub@X@sessions/EA5F7FF3DF32D271D0E54AF0150D924A/anonymous/wiris/49728c9f5b4091622e2f4d183d857d35.png\" data-mathml=\"«math xmlns=¨http://www.w3.org/1998/Math/MathML¨»«mn»3«/mn»«mo»/«/mo»«mn»4«/mn»«mroot»«mn»7«/mn»«mn»2«/mn»«/mroot»«/math»\"></p> <p><a href=\"http://www.blackboard.com\">Blackboard</a></p> </div>",
-  availability: {
-    available: "Yes",
-    duration: {
-      "type": "Continuous",
-      start: "2025-09-16T11:20:13.339Z",
-      end: "2025-09-16T11:20:13.339Z",
-      daysOfUse: 0
-    }
-  }
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="7d0e3b0e-d705-4b6f-b8f5-47c953dd918f" name="accesstoken_Flow"/>
 		<blackboard:post-v1-terms doc:name="Terms - Create Term" doc:id="54ee7980-57e4-4d80-8fba-087be5442704" config-ref="Blackboard_Config" correlationIdHeader="#[correlationId]"/>
     </flow>
     <flow name="post:\v1\users:application\json:blackboard-rest-api-config">
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  id: "string",
-  uuid: "string",
-  externalId: "string",
-  dataSourceId: "string",
-  userName: "string",
-  studentId: "string",
-  educationLevel: "K8",
-  gender: "Female",
-  pronouns: "string",
-  birthDate: "2025-09-16T11:29:57.287Z",
-  created: "2025-09-16T11:29:57.287Z",
-  modified: "2025-09-16T11:29:57.287Z",
-  lastLogin: "2025-09-16T11:29:57.287Z",
-  institutionRoleIds: [
-    "string"
-  ],
-  systemRoleIds: [
-    "SystemAdmin"
-  ],
-  availability: {
-    available: "Yes"
-  },
-  name: {
-    given: "string",
-    family: "string",
-    middle: "string",
-    other: "string",
-    suffix: "string",
-    title: "string",
-    preferredDisplayName: "GivenName"
-  },
-  job: {
-    title: "string",
-    department: "string",
-    company: "string"
-  },
-  contact: {
-    homePhone: "string",
-    mobilePhone: "string",
-    businessPhone: "string",
-    businessFax: "string",
-    email: "string",
-    institutionEmail: "string",
-    webPage: "string"
-  },
-  address: {
-    street1: "string",
-    street2: "string",
-    city: "string",
-    state: "string",
-    zipCode: "string",
-    country: "string"
-  },
-  locale: {
-    id: "string",
-    calendar: "Gregorian",
-    firstDayOfWeek: "Sunday"
-  },
-  avatar: {
-    viewUrl: "string",
-    source: "Default",
-    uploadId: "string",
-    resourceId: "string"
-  },
-  pronunciation: "string",
-  nodes: [
-    {
-      id: "string",
-      externalId: "string",
-      title: "string",
-      description: "string",
-      parentId: "string"
-    }
-  ],
-  pronunciationAudio: {
-    viewUrl: "string",
-    uploadId: "string"
-  }
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="479fea8e-9045-4ae1-b89a-44ef441ff98a" name="accesstoken_Flow"/>
 		<blackboard:post-v1-users doc:name="Users - Create User" doc:id="b9c6807d-a2cf-49cb-af1a-dfa16246caa7" config-ref="Blackboard_Config" correlationIdHeader="#[correlationId]"/>
     </flow>
     <flow name="post:\v3\courses:application\json:blackboard-rest-api-config">
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  id: "string",
-  uuid: "string",
-  externalId: "string",
-  dataSourceId: "string",
-  courseId: "string",
-  name: "string",
-  description: "string",
-  created: "2025-09-16T09:49:40.120Z",
-  modified: "2025-09-16T09:49:40.120Z",
-  organization: true,
-  ultraStatus: "Undecided",
-  allowGuests: true,
-  allowObservers: true,
-  closedComplete: true,
-  termId: "string",
-  availability: {
-    available: "Yes",
-    duration: {
-      "type": "Continuous",
-      start: "2025-09-16T09:49:40.120Z",
-      end: "2025-09-16T09:49:40.120Z",
-      daysOfUse: 0
-    }
-  },
-  enrollment: {
-    "type": "InstructorLed",
-    start: "2025-09-16T09:49:40.120Z",
-    end: "2025-09-16T09:49:40.120Z",
-    accessCode: "string"
-  },
-  locale: {
-    id: "string",
-    force: true
-  },
-  hasChildren: true,
-  parentId: "string",
-  externalAccessUrl: "string",
-  guestAccessUrl: "string",
-  copyHistory: [
-    {
-      uuid: "string"
-    }
-  ]
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="952dfaa1-006e-4a08-8cae-e16b7f265b3a" name="accesstoken_Flow"/>
 		<blackboard:post-v3-courses doc:name="Courses - Create Course" doc:id="9f304ac8-9da7-46e1-b067-22e2b93c83c3" config-ref="Blackboard_Config" correlationIdHeader="#[correlationId]"/>
     </flow>
@@ -2270,22 +526,6 @@ output application/json
             <ee:variables>
                 <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
             </ee:variables>
-        </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  id: 12345,
-  courseId: "_123_1",
-  title: "Weekly Math Meeting",
-  description: "Discussion about upcoming assignments",
-  start: "2025-09-17T06:59:14.305Z",
-  end: "2025-09-17T07:59:14.305Z",
-  externalLink: "https://example.com/meeting-link"
-} as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
         </ee:transform>
 		<flow-ref doc:name="blackboard-token-subFlow" doc:id="810fde61-fb88-465a-8163-0bb45ab0b06e" name="accesstoken_Flow"/>
 		<blackboard:patch-v1-courses-course-id-meetings doc:name="Attendance - Update Course Meeting" doc:id="e6edde8b-2739-4095-8370-6d17e118c69d" config-ref="Blackboard_Config" courseIdUriParam="#[vars.courseId]" correlationIdHeader="#[correlationId]"/>
