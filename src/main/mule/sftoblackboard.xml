@@ -105,9 +105,9 @@ payload.Term_ID__c]]></ee:set-variable>
 				<fixed-frequency frequency="1"/>
 			</scheduling-strategy>
 		</salesforce:deleted-object-listener>
-		<logger level="INFO" doc:name="Logger" doc:id="e6741b95-5916-4334-9ded-9a3422d397cf" message="salesforceToBlackboardDeleteTermsFlowStarted"/>
-		<logger level="INFO" doc:name="Logger" doc:id="2e5ac470-7ff8-44d0-9640-a99807be472e" message="#[payload]"/>
-		<ee:transform doc:name="Transform Message" doc:id="0d0a7428-e9bb-40c9-b5d5-f987f405fd80" >
+		<logger level="INFO" doc:name="Salesforce to Blackboard Delete Term Flow Started" doc:id="e6741b95-5916-4334-9ded-9a3422d397cf" message="salesforceToBlackboardDeleteTermsFlowStarted"/>
+		<logger level="INFO" doc:name="SF Request Logger" doc:id="2e5ac470-7ff8-44d0-9640-a99807be472e" message="#[%dw 2.0&#10;output application/json&#10;---&#10;payload]"/>
+		<ee:transform doc:name="deleteTermsRequest" doc:id="0d0a7428-e9bb-40c9-b5d5-f987f405fd80" >
 			<ee:message >
 			</ee:message>
 			<ee:variables >
@@ -117,8 +117,9 @@ output application/json
 payload.Term_ID__c]]></ee:set-variable>
 			</ee:variables>
 		</ee:transform>
-		<logger level="INFO" doc:name="Logger" doc:id="8e182f48-87e3-4646-be51-a7ba84e38f3e" message="#[payload]"/>
-		<logger level="INFO" doc:name="Logger" doc:id="62f074da-1291-4274-ab4c-1e0f08c65b88" message="#[payload]"/>
-		<logger level="INFO" doc:name="Logger" doc:id="8fd42cda-ec97-4eae-863f-c10e53d171b5" message="salesforceToBlackboardDeleteTermsFlowEnded"/>
+		<flow-ref doc:name="accesstoken_Flow" doc:id="9e55a46a-d13f-4bc3-aaaf-9c997b6a1783" name="accesstoken_Flow"/>
+		<blackboard:delete-v1-terms-term-id doc:name="Terms - Delete Term" doc:id="9a628fea-c1b1-455f-a79c-c6a25698ab62" config-ref="Blackboard_Config" termIdUriParam="#[vars.termId]" correlationIdHeader="#[correlationId]"/>
+		<logger level="INFO" doc:name="deleteTerms Response Payload Logger" doc:id="62f074da-1291-4274-ab4c-1e0f08c65b88" message="#[payload]"/>
+		<logger level="INFO" doc:name="Salesforce to Blackboard Delete Term Flow Ended" doc:id="8fd42cda-ec97-4eae-863f-c10e53d171b5" message="salesforceToBlackboardDeleteTermsFlowEnded"/>
 	</flow>
 </mule>
