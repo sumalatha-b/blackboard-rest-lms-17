@@ -64,9 +64,9 @@ output application/json
 				<fixed-frequency frequency="1"/>
 			</scheduling-strategy>
 		</salesforce:modified-object-listener>
-		<logger level="INFO" doc:name="Logger" doc:id="715336ed-e43d-4bea-b337-57761d5b1be4" message="salesforceToBlackboardUpdateTermsFlowStarted"/>
-		<logger level="INFO" doc:name="Logger" doc:id="59ebdb78-dd70-4a83-b996-9d47c9207811" message="#[payload]"/>
-		<ee:transform doc:name="blackboardRequest" doc:id="4d1d3289-42f7-45f6-bf44-1623a7ceb587" >
+		<logger level="INFO" doc:name="Salesforce to Blackboard Update Term Flow Started" doc:id="715336ed-e43d-4bea-b337-57761d5b1be4" message="Salesforce to Blackboard Update Term Flow Started"/>
+		<logger level="INFO" doc:name="SF Request Logger" doc:id="59ebdb78-dd70-4a83-b996-9d47c9207811" message="#[%dw 2.0&#10;output application/json&#10;---&#10;payload]"/>
+		<ee:transform doc:name="updateTerms Request" doc:id="4d1d3289-42f7-45f6-bf44-1623a7ceb587" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
 output application/json
@@ -94,9 +94,10 @@ output application/json
 payload.Term_ID__c]]></ee:set-variable>
 			</ee:variables>
 		</ee:transform>
-		<logger level="INFO" doc:name="Logger" doc:id="3eaeb1c7-5149-498a-abdc-52e1ef964be2" message="#[payload]"/>
-		<logger level="INFO" doc:name="Logger" doc:id="00105560-08fe-4e0a-9d7e-fb92d6fd9bbf" message="#[payload]"/>
-		<logger level="INFO" doc:name="Logger" doc:id="d1812b39-1b66-44d7-9d7e-c080df66ffaa" message="salesforceToBlackboardUpdateTermsFlowEnded"/>
+		<flow-ref doc:name="accesstoken_Flow" doc:id="8e27f68f-eb9c-4d5f-b279-6a90900835a1" name="accesstoken_Flow"/>
+		<blackboard:patch-v1-terms-term-id doc:name="Terms - Update Term" doc:id="8147ce44-d056-4cb7-baf7-9eef209fa985" config-ref="Blackboard_Config" termIdUriParam="#[vars.termId]" correlationIdHeader="#[correlationId]"/>
+		<logger level="INFO" doc:name="updateTerms Response Payload Logger" doc:id="3eaeb1c7-5149-498a-abdc-52e1ef964be2" message="#[%dw 2.0&#10;output application/json&#10;---&#10;payload]"/>
+		<logger level="INFO" doc:name="Salesforce to Blackboard Update Term Flow Ended" doc:id="d1812b39-1b66-44d7-9d7e-c080df66ffaa" message="salesforceToBlackboardUpdateTermsFlowEnded"/>
 	</flow>
 	<flow name="salesforceToBlackboardDeleteTermsFlow" doc:id="96fe2b4a-3505-4c4f-b4d8-c1eecfc3e51a" >
 		<salesforce:deleted-object-listener doc:name="On Deleted Object" doc:id="a0277161-b25b-4d62-b4f7-a7bf06dab514" config-ref="Salesforce_Config" objectType="Blackboard_Term__c">
