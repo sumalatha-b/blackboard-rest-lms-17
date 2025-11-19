@@ -14,8 +14,8 @@ http://www.mulesoft.org/schema/mule/blackboard http://www.mulesoft.org/schema/mu
 				<fixed-frequency frequency="1"/>
 			</scheduling-strategy>
 		</salesforce:new-object-listener>
-		<logger level="INFO" doc:name="Salesforce to Blackboard Create Term Flow Started" doc:id="d5ab758d-2a7c-4c33-99ac-5a980a1a8f70" message="Salesforce to Blackboard Create Term Flow Started"/>
-		<logger level="INFO" doc:name="SF Request Logger" doc:id="9714a63e-97ee-4886-9e65-4d12e188cacd" message="#[%dw 2.0&#10;output application/json&#10;---&#10;payload]"/>
+		<logger level="INFO" doc:name="Salesforce to Blackboard Create Term Flow Started" doc:id="6dd3c338-855c-42bc-a869-88233368817d" message="Salesforce to Blackboard Create Term Flow Started" category="com.blackboard"/>
+		<logger level="INFO" doc:name="SF Request Logger" doc:id="d0674a52-f33d-4fe9-bba7-3477be966432" message="#[%dw 2.0&#10;output application/json&#10;---&#10;payload]" category="com.blackboard"/>
 		<ee:transform doc:name="createTermsRequest" doc:id="b3123b9d-6eef-4bb8-8ea5-a17e2c323f04" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
@@ -41,7 +41,7 @@ output application/json
 		</ee:transform>
 		<flow-ref doc:name="accesstoken_Flow" doc:id="95f35367-4032-46a0-9382-11c92a6e1c1c" name="accesstoken_Flow"/>
 		<blackboard:post-v1-terms doc:name="Terms - Create Term" doc:id="aaba6c5e-53de-4b2d-8afd-0ea50122b348" config-ref="Blackboard_Config" correlationIdHeader="#[correlationId]" target="createTermsResponse"/>
-		<logger level="INFO" doc:name="createTerms Response Payload Logger" doc:id="25dbe2ce-4381-4c24-82ac-e0ec7f41ccbc" message="#[vars.createTermsResponse]"/>
+		<logger level="INFO" doc:name="createTerms Response Payload Logger" doc:id="0515b9a2-7d97-4543-8010-a9f8958a210d" message="#[vars.createTermsResponse]" category="com.blackboard"/>
 		<ee:transform doc:name="SF Update Request" doc:id="77ed9fc7-dddd-4b34-b022-65d9393e10f5" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
@@ -53,10 +53,10 @@ output application/json
 }]]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-		<logger level="INFO" doc:name="SF Update Request Payload Logger" doc:id="3e0d20b4-c372-4553-a087-901fd09d592d" message="#[payload]"/>
+		<logger level="INFO" doc:name="SF Update Request Payload Logger" doc:id="ac4ebe59-a839-4226-b875-c96b3bc10d1c" message="#[payload]" category="com.blackboard"/>
 		<salesforce:upsert doc:name="Update Termid" doc:id="ad8ad5e9-36b0-468a-a85a-d236be019031" config-ref="Salesforce_Config" objectType="Blackboard_Term__c" externalIdFieldName="Name"/>
-		<logger level="INFO" doc:name="Update SF Response Logger" doc:id="804728a3-3d7d-4fcc-9edc-452eea72f1ef" message="#[%dw 2.0&#10;output application/json&#10;---&#10;payload]" />
-		<logger level="INFO" doc:name="Salesforce to Blackboard Create Term Flow Ended" doc:id="f3937f3f-9637-4c09-bf99-635112916db2" message="Salesforce to Blackboard Create Term Flow Ended" />
+		<logger level="INFO" doc:name="Update SF Response Logger" doc:id="b75184f8-0fd5-45c1-8746-3c021000000f" message="#[%dw 2.0&#10;output application/json&#10;---&#10;payload]" category="com.blackboard"/>
+		<logger level="INFO" doc:name="Salesforce to Blackboard Create Term Flow Ended" doc:id="9c011476-bc25-4c6d-96a7-3bfee3e91dba" message="Salesforce to Blackboard Create Term Flow Ended" category="com.blackboard"/>
 	</flow>
 	<flow name="salesforceToBlackboardUpdateTermsFlow" doc:id="70818c34-3678-4429-a8b8-f013649f9909" >
 		<salesforce:modified-object-listener doc:name="On Modified Object" doc:id="9382edb8-35f2-4c46-b0f6-00c6fb80b133" config-ref="Salesforce_Config" objectType="Blackboard_Term__c">
@@ -87,6 +87,12 @@ output application/json
     }
   }]]></ee:set-payload>
 			</ee:message>
+			<ee:variables >
+				<ee:set-variable variableName="termId" ><![CDATA[%dw 2.0
+output application/json
+---
+payload.Term_ID__c]]></ee:set-variable>
+			</ee:variables>
 		</ee:transform>
 		<flow-ref doc:name="accesstoken_Flow" doc:id="8e27f68f-eb9c-4d5f-b279-6a90900835a1" name="accesstoken_Flow"/>
 		<blackboard:patch-v1-terms-term-id doc:name="Terms - Update Term" doc:id="8147ce44-d056-4cb7-baf7-9eef209fa985" config-ref="Blackboard_Config" termIdUriParam="#[vars.termId]" correlationIdHeader="#[correlationId]"/>
