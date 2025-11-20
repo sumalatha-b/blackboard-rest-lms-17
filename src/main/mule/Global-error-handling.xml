@@ -3,8 +3,16 @@
 output application/json
 ---
 {
-  status: vars.httpStatus,
-  errorType: (error.errorType.identifier default "INTERNAL_SERVER_ERROR"),
+  status: if(error.description  == "409 ") 409 else vars.httpStatus,
+  errorType: if(error.description  == "409 ") "Conflict" else (error.errorType.identifier default "INTERNAL_SERVER_ERROR"),
   message: (error.description default "Unexpected error occurred")
 }
-]]></ee:set-payload> </ee:message> </ee:transform> </sub-flow> <!-- Global Error Handler: call the common subflow; no per-route set-variable --> <error-handler name="Global-Error-Handler"> <on-error-propagate enableNotifications="true" logException="true" when='error.errorType.namespace == "APIKIT"'> <flow-ref name="common-error-message" doc:name="Flow Reference-APIKIT"/> </on-error-propagate> <on-error-propagate enableNotifications="true" logException="true" when='error.errorType.namespace == "BLACKBOARD"'> <flow-ref name="common-error-message" doc:name="Flow Reference-BLACKBOARD"/> </on-error-propagate> <on-error-propagate enableNotifications="true" logException="true" when='error.errorType.namespace == "ANY"'> <flow-ref name="common-error-message" doc:name="Flow Reference-ANY"/> </on-error-propagate> </error-handler> <!-- Example in HTTP Listener: <error-response statusCode="#[vars.httpStatus]"> <body><![CDATA[#[payload]]]></body> </error-response> --> </mule>
+]]></ee:set-payload> </ee:message>
+			<ee:variables >
+				<ee:set-variable variableName="httpStatus " ><![CDATA[%dw 2.0
+output application/json
+---
+if(error.description  == "409 ") 409 else vars.httpStatus]]></ee:set-variable>
+			</ee:variables> 
+</ee:transform> 
+</sub-flow> <!-- Global Error Handler: call the common subflow; no per-route set-variable --> <error-handler name="Global-Error-Handler"> <on-error-propagate enableNotifications="true" logException="true" when='error.errorType.namespace == "APIKIT"'> <flow-ref name="common-error-message" doc:name="Flow Reference-APIKIT"/> </on-error-propagate> <on-error-propagate enableNotifications="true" logException="true" when='error.errorType.namespace == "BLACKBOARD"'> <flow-ref name="common-error-message" doc:name="Flow Reference-BLACKBOARD"/> </on-error-propagate> <on-error-propagate enableNotifications="true" logException="true" when='error.errorType.namespace == "ANY"'> <flow-ref name="common-error-message" doc:name="Flow Reference-ANY"/> </on-error-propagate> </error-handler> <!-- Example in HTTP Listener: <error-response statusCode="#[vars.httpStatus]"> <body><![CDATA[#[payload]]]></body> </error-response> --> </mule>
