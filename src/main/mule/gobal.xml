@@ -29,7 +29,7 @@ http://www.mulesoft.org/schema/mule/blackboard http://www.mulesoft.org/schema/mu
     </http:listener-config>
     <apikit:config name="blackboard-rest-api-config" api="blackboard-rest-api.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
 	<blackboard:config name="Token_Blackboard_Config" doc:name="Blackboard Config" doc:id="31e6d35a-767a-4453-bed9-fa8d597745ca" >
-		<blackboard:authorization-connection baseUri="${blackboard.tokenUri}" authorizationHeader='Basic MThhZjI0MjUtYjRmMi00N2NhLWE3NzMtZTMyYTYwNGU1Zjk2OllZUjhObWh0SGlIRVgzNzVjT1lrMFBxc1FvN3ZQRDZi' />
+		<blackboard:authorization-connection baseUri="${blackboard.tokenUri}" authorizationHeader='Basic NWJiZjNiODUtYzY0OS00NjNkLTg5YTEtMjY1OGFkMWM4YWI0OlM5d3lCUEFlRE80QVdSMVF2bmIyRVdGc2dROTFia3h5' />
 	</blackboard:config>
 	<blackboard:config name="Blackboard_Config" doc:name="Blackboard Config" doc:id="8bcec14d-6fe5-403d-9a84-dd95cdc615c0" >
 		<blackboard:authorization-connection authorizationHeader='#["Bearer " ++ vars.blackboardToken.access_token]' baseUri="${blackboard.baseUri}"/>
