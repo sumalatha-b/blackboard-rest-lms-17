@@ -143,6 +143,7 @@
         </ee:transform>
         <flow-ref doc:name="blackboard-token-subFlow" doc:id="b7ef129f-c1a4-463a-be24-a3bd8898cf45" name="accesstoken_Flow" />
         <blackboard:delete-v1-users-user-id doc:name="Users - Delete User" doc:id="e6006200-2963-494a-8346-360ff865ce6e" config-ref="Blackboard_Config" userIdUriParam="#[vars.userId]" correlationIdHeader="#[correlationId]" />
+		<set-variable value="#[attributes.statusCode]" doc:name="httpStatus" doc:id="0fefee55-aedd-4909-b769-259d6c68ed62" variableName="httpStatus" />
     </flow>
     <flow name="delete:\v3\courses\(courseId):blackboard-rest-api-config">
         <ee:transform doc:name="Transform Message">
@@ -152,6 +153,7 @@
         </ee:transform>
         <flow-ref doc:name="blackboard-token-subFlow" doc:id="cc368fd6-5c0f-417f-a7e0-a9adb5882687" name="accesstoken_Flow" />
         <blackboard:delete-v3-courses-course-id doc:name="Courses - Delete Course" doc:id="a3546141-b7ec-4e46-bc15-b4e50d03c342" config-ref="Blackboard_Config" courseIdUriParam="#[vars.courseId]" correlationIdHeader="#[correlationId]" />
+		<set-variable value="#[attributes.statusCode]" doc:name="httpStatus" doc:id="d8e87b21-2fb6-4494-8cad-31c305788cb1" variableName="httpStatus"/>
     </flow>
     <flow name="patch:\v1\catalog\categories\(categoryType)\(categoryId):application\json:blackboard-rest-api-config">
         <ee:transform doc:name="Transform Message">
