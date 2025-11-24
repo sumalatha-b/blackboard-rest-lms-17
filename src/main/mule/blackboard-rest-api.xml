@@ -143,7 +143,7 @@
         </ee:transform>
         <flow-ref doc:name="blackboard-token-subFlow" doc:id="b7ef129f-c1a4-463a-be24-a3bd8898cf45" name="accesstoken_Flow" />
         <blackboard:delete-v1-users-user-id doc:name="Users - Delete User" doc:id="e6006200-2963-494a-8346-360ff865ce6e" config-ref="Blackboard_Config" userIdUriParam="#[vars.userId]" correlationIdHeader="#[correlationId]" />
-		<set-variable value="#[attributes.statusCode]" doc:name="httpStatus" doc:id="0fefee55-aedd-4909-b769-259d6c68ed62" variableName="httpStatus" />
+        <set-variable value="#[attributes.statusCode]" doc:name="httpStatus" doc:id="0fefee55-aedd-4909-b769-259d6c68ed62" variableName="httpStatus" />
     </flow>
     <flow name="delete:\v3\courses\(courseId):blackboard-rest-api-config">
         <ee:transform doc:name="Transform Message">
@@ -153,7 +153,7 @@
         </ee:transform>
         <flow-ref doc:name="blackboard-token-subFlow" doc:id="cc368fd6-5c0f-417f-a7e0-a9adb5882687" name="accesstoken_Flow" />
         <blackboard:delete-v3-courses-course-id doc:name="Courses - Delete Course" doc:id="a3546141-b7ec-4e46-bc15-b4e50d03c342" config-ref="Blackboard_Config" courseIdUriParam="#[vars.courseId]" correlationIdHeader="#[correlationId]" />
-		<set-variable value="#[attributes.statusCode]" doc:name="httpStatus" doc:id="d8e87b21-2fb6-4494-8cad-31c305788cb1" variableName="httpStatus"/>
+        <set-variable value="#[attributes.statusCode]" doc:name="httpStatus" doc:id="d8e87b21-2fb6-4494-8cad-31c305788cb1" variableName="httpStatus" />
     </flow>
     <flow name="patch:\v1\catalog\categories\(categoryType)\(categoryId):application\json:blackboard-rest-api-config">
         <ee:transform doc:name="Transform Message">
@@ -187,6 +187,7 @@
         <blackboard:patch-v1-courses-course-id-users-user-id doc:name="Course Membership - Update Course User Membership" doc:id="ea848535-adae-46e0-a813-d55a6be7afa0" courseIdUriParam="#[vars.courseId]" config-ref="Blackboard_Config" userIdUriParam="#[vars.userId]" correlationIdHeader="#[correlationId]" />
     </flow>
     <flow name="patch:\v1\terms\(termId):application\json:blackboard-rest-api-config">
+        <http:listener doc:name="Listener" doc:id="81f41024-5e12-4bd9-a0af-2122b3b7a5b6" config-ref="blackboard-rest-api-httpListenerConfig" path="/v1/terms/{termId}" />
         <ee:transform doc:name="Transform Message">
             <ee:variables>
                 <ee:set-variable variableName="termId">attributes.uriParams.'termId'</ee:set-variable>
@@ -393,7 +394,7 @@
             </ee:variables>
         </ee:transform>
         <flow-ref doc:name="blackboard-token-subFlow" doc:id="a79650e1-e81f-46d7-b43c-16da67f570a1" name="accesstoken_Flow" />
-        <blackboard:get-v1-users-user-id doc:name="Users - Get User" doc:id="acd0d94b-3907-4e73-a50d-1f2dd7a595ec" config-ref="Blackboard_Config" userIdUriParam="#[vars.userId]" fieldsQueryParam="#[correlationId]" />
+        <blackboard:get-v1-users-user-id doc:name="Users - Get User" doc:id="acd0d94b-3907-4e73-a50d-1f2dd7a595ec" config-ref="Blackboard_Config" userIdUriParam="#[vars.userId]" correlationIdHeader="#[correlationId]" />
     </flow>
     <flow name="get:\v1\users\(userId)\courses:blackboard-rest-api-config">
         <ee:transform doc:name="Transform Message">
@@ -531,6 +532,6 @@ output application/json
             </ee:variables>
         </ee:transform>
         <flow-ref doc:name="blackboard-token-subFlow" doc:id="cb33da39-cf57-4124-b01b-94948612cbe0" name="accesstoken_Flow" />
-		<blackboard:patch-v1-courses-course-id-meetings-meeting-id doc:name="Attendance - Update Course Meeting" doc:id="b1e851fc-a2b6-4352-9c57-e05f303027d5" config-ref="Blackboard_Config" courseIdUriParam="#[vars.courseId]" meetingIdUriParam="#[vars.meetingId]" correlationIdHeader="#[correlationId]"/>
+        <blackboard:patch-v1-courses-course-id-meetings-meeting-id doc:name="Attendance - Update Course Meeting" doc:id="b1e851fc-a2b6-4352-9c57-e05f303027d5" config-ref="Blackboard_Config" courseIdUriParam="#[vars.courseId]" meetingIdUriParam="#[vars.meetingId]" correlationIdHeader="#[correlationId]" />
     </flow>
 </mule>
