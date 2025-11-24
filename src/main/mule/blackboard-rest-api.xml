@@ -521,13 +521,14 @@ output application/json
         <blackboard:post-v3-courses doc:name="Courses - Create Course" doc:id="9f304ac8-9da7-46e1-b067-22e2b93c83c3" config-ref="Blackboard_Config" correlationIdHeader="#[correlationId]" />
         <logger level="INFO" doc:name="Logger" doc:id="bcf68f20-bc86-445d-9065-b726bebeb907" />
     </flow>
-    <flow name="patch:\v1\courses\(courseId)\meetings:application\json:blackboard-rest-api-config">
+    <flow name="patch:\v1\courses\(courseId)\meetings\(meetingId):application\json:blackboard-rest-api-config">
         <ee:transform doc:name="Transform Message">
             <ee:variables>
                 <ee:set-variable variableName="courseId">attributes.uriParams.'courseId'</ee:set-variable>
+                <ee:set-variable variableName="meetingId">attributes.uriParams.'meetingId'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-        <flow-ref doc:name="blackboard-token-subFlow" doc:id="810fde61-fb88-465a-8163-0bb45ab0b06e" name="accesstoken_Flow" />
-        <blackboard:patch-v1-courses-course-id-meetings doc:name="Attendance - Update Course Meeting" doc:id="e6edde8b-2739-4095-8370-6d17e118c69d" config-ref="Blackboard_Config" courseIdUriParam="#[vars.courseId]" correlationIdHeader="#[correlationId]" />
+        <flow-ref doc:name="blackboard-token-subFlow" doc:id="cb33da39-cf57-4124-b01b-94948612cbe0" name="accesstoken_Flow" />
+		<blackboard:patch-v1-courses-course-id-meetings-meeting-id doc:name="Attendance - Update Course Meeting" doc:id="b1e851fc-a2b6-4352-9c57-e05f303027d5" config-ref="Blackboard_Config" courseIdUriParam="#[vars.courseId]" meetingIdUriParam="#[vars.meetingId]" correlationIdHeader="#[correlationId]"/>
     </flow>
 </mule>
