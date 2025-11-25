@@ -1,0 +1,10 @@
+%dw 2.0
+
+type auto_882a51ef_aefd_47b1_8a55_f51e0274c4e2_Output_Variables_blackboardToken = {-
+  access_token: String, 
+  token_type: String, 
+  expires_in: Number, 
+  scope: String, 
+  _?: Any
+-}
+
