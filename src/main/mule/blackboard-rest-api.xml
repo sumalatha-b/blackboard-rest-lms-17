@@ -34,6 +34,7 @@
         </ee:transform>
         <flow-ref doc:name="blackboard-token-subFlow" doc:id="2eac07d6-a722-48ef-96df-c77f9f3a3a2c" name="accesstoken_Flow" />
         <blackboard:put-v1-catalog-categories-category-type-category-id-courses-course-id doc:name="Course Category - Create Category Membership" doc:id="48a4c104-8d25-42f5-a932-3fb4dffb7484" config-ref="Blackboard_Config" categoryTypeUriParam="#[vars.categoryType]" categoryIdUriParam="#[vars.categoryId]" courseIdUriParam="#[vars.courseId]" correlationIdHeader="#[correlationId]" />
+		<set-variable value="#[attributes.statusCode]" doc:name="httpStatus" doc:id="d86b2351-7374-4a43-b193-2e6c96d5517d" variableName="httpStatus" />
     </flow>
     <flow name="put:\v1\courses\(courseId)\children\(childCourseId):blackboard-rest-api-config">
         <ee:transform doc:name="Transform Message">
