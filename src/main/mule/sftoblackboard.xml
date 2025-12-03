@@ -9,9 +9,9 @@ http://www.mulesoft.org/schema/mule/blackboard-rest-lms http://www.mulesoft.org/
 http://www.mulesoft.org/schema/mule/blackboard http://www.mulesoft.org/schema/mule/blackboard/current/mule-blackboard.xsd">
 
 	<flow name="salesforceToBlackboardCreateTermsFlow" doc:id="24798430-5f03-43c1-b316-c861ffddea72" >
-		<salesforce:new-object-listener doc:name="On New Object" doc:id="5697d03e-d5b4-4db8-9ca4-7c45abe39dc3" config-ref="Salesforce_Config" objectType="Blackboard_Term__c">
+		<salesforce:new-object-listener objectType="Blackboard_Term__c" doc:name="On New Object" doc:id="bb905d0c-97be-4409-a20d-960a03becbe5" config-ref="Salesforce_Config">
 			<scheduling-strategy >
-				<fixed-frequency frequency="1"/>
+				<fixed-frequency />
 			</scheduling-strategy>
 		</salesforce:new-object-listener>
 		<logger level="INFO" doc:name="Salesforce to Blackboard Create Term Flow Started" doc:id="6dd3c338-855c-42bc-a869-88233368817d" message="Salesforce to Blackboard Create Term Flow Started" category="com.blackboard"/>
@@ -58,10 +58,10 @@ output application/json
 		<logger level="INFO" doc:name="Update SF Response Logger" doc:id="b75184f8-0fd5-45c1-8746-3c021000000f" message="#[%dw 2.0&#10;output application/json&#10;---&#10;payload]" category="com.blackboard"/>
 		<logger level="INFO" doc:name="Salesforce to Blackboard Create Term Flow Ended" doc:id="9c011476-bc25-4c6d-96a7-3bfee3e91dba" message="Salesforce to Blackboard Create Term Flow Ended" category="com.blackboard"/>
 	</flow>
-	<flow name="salesforceToBlackboardUpdateTermsFlow" doc:id="70818c34-3678-4429-a8b8-f013649f9909" >
-		<salesforce:modified-object-listener doc:name="On Modified Object" doc:id="9382edb8-35f2-4c46-b0f6-00c6fb80b133" config-ref="Salesforce_Config" objectType="Blackboard_Term__c">
+	<flow name="salesforceToBlackboardUpdateTermsFlow" doc:id="70818c34-3678-4429-a8b8-f013649f9909" initialState="started">
+		<salesforce:modified-object-listener objectType="Blackboard_Term__c" doc:name="On Modified Object" doc:id="ecb8cb5f-aa17-4669-a2bd-ec35523333bf" config-ref="Salesforce_Config">
 			<scheduling-strategy >
-				<fixed-frequency frequency="2"/>
+				<fixed-frequency />
 			</scheduling-strategy>
 		</salesforce:modified-object-listener>
 		<logger level="INFO" doc:name="Salesforce to Blackboard Update Term Flow Started" doc:id="715336ed-e43d-4bea-b337-57761d5b1be4" message="Salesforce to Blackboard Update Term Flow Started"/>
@@ -77,7 +77,7 @@ output application/json
     "name": payload.Name,
     "description": payload.Description__c,
     "availability": {
-      "available": payload.Availability_Status__c,
+      "available": payload.Availability_Status__c default "Yes",
       "duration": {
         "type": payload.Duration_Type__c,
         "start": payload.Start_Date__c,
@@ -100,9 +100,9 @@ payload.Term_ID__c]]></ee:set-variable>
 		<logger level="INFO" doc:name="Salesforce to Blackboard Update Term Flow Ended" doc:id="d1812b39-1b66-44d7-9d7e-c080df66ffaa" message="salesforceToBlackboardUpdateTermsFlowEnded"/>
 	</flow>
 	<flow name="salesforceToBlackboardDeleteTermsFlow" doc:id="96fe2b4a-3505-4c4f-b4d8-c1eecfc3e51a" >
-		<salesforce:deleted-object-listener doc:name="On Deleted Object" doc:id="810733a4-962c-43c7-b92d-3a1d1a6d13db" config-ref="Salesforce_Config" objectType="Blackboard_Term__c">
+		<salesforce:deleted-object-listener objectType="Blackboard_Term__c" doc:name="On Deleted Object" doc:id="b41ca4b4-c8ce-46d3-9c2e-e1f3b9e73220" config-ref="Salesforce_Config">
 			<scheduling-strategy >
-				<fixed-frequency frequency="3"/>
+				<fixed-frequency />
 			</scheduling-strategy>
 		</salesforce:deleted-object-listener>
 		<logger level="INFO" doc:name="Salesforce to Blackboard Delete Term Flow Started" doc:id="e6741b95-5916-4334-9ded-9a3422d397cf" message="salesforceToBlackboardDeleteTermsFlowStarted"/>

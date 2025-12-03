@@ -7,6 +7,8 @@ blackboard:
   tokenUri: "https://blackboard.poc.nexturn.com/learn/api/public/v1"
 
 sf:
-  username: "aurosmit.sahoo@nexturn.comauro.edu"
+  #username: "aurosmit.sahoo@nexturn.comauro.edu"
+  username: "aurosmit.sahoo@nexturn.com.lms.educloud"
   password: "Aurosmit@2001"
-  securityToken: "mlXoqVnVqAN6ciAVNNYyGG9Xz"
+  #securityToken: "mlXoqVnVqAN6ciAVNNYyGG9Xz"
+  securityToken: "wEpfQlYMXv8VvhsNwrGqlptQl"
